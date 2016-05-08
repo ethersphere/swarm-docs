@@ -23,12 +23,12 @@ Storage Incentives
   pair: receipt; storage
 
 
+Storage incentives refer to the ability of a system to encourage/enforce preservation of content,
+especially if the user explicitly requires that in the fashion of 'upload and disappear' discussed in the introduction.
+
 Compensation for storage and guarantees for long-term data preservation
 ===========================================================================
 
-
-Storage incentives refer to the ability of a system to encourage/enforce preservation of content,
-especially if the user explicitly requires that in the fashion of 'upload and disappear' discussed in the introduction.
 
 ..
     One proposed solution to this is Filecoin (:cite:`filecoin2014`), which can be earned (mined) through replicating other people's content and spent on having one's content replicated.
@@ -74,7 +74,7 @@ in the design of the incentive system to make the failure to store every last bi
 receives some payment upon successfully passing a probabilistic audit. Such audits are structured in such a way that the storer always
 passes the audit, if she indeed has the entire data set, but there is also some non-zero probability of passing the audit if some data
 is lost. This probability, of course, depends on what data is lost, but in any design there is a maximum to it, typically attained by
-losing some very small portion of data. In case of systems that break up the date into chunks with a fixed maximum size, the probability
+losing some very small portion of data. In case of systems that break up the data into chunks with a fixed maximum size, the probability
 of passing the audit with incomplete data is maximized in the case when only one chunk is lost.
 
 Let us denote this maximum probability by :math:`p`. To keep failure to store all data unprofitable, the expected payout :math:`E` of subjecting
@@ -186,7 +186,7 @@ while in the tree structure, the 32 bytes stored at the node represent the hash 
     :alt: a generic node in the tree has 128 children
     :figclass: align-center
 
-  A generic node in the tree has 128 children.
+    A generic node in the tree has 128 children.
 
 Recall also that during normal swarm lookups, a swarm client performs a lookup for a hash value and receives a chunk in return. This chunk in turn constitutes another 128 hashes to be looked up in return for another 128 hashes and so on until the chunks received belong to the actual document. Here is a schematic: (:numref:`figure %s <fig:tree2>`):
 
@@ -198,7 +198,7 @@ Recall also that during normal swarm lookups, a swarm client performs a lookup f
     :alt: the swarm tree
     :figclass: align-center
 
-    The swarm tree is the data structure encoding how a document is split into chunks.
+     The swarm tree is the data structure encoding how a document is split into chunks.
 
 ..  index::
 
@@ -318,7 +318,7 @@ If deposits are substantial, we can get away with paying out compensation for in
 Litigation on loss of content (SWINDLE)
 ========================================
 
-If a node fails to observe the rules of the swarm they 'swear' to keep, the punitive measures need to be enforced which is preceded by a litigation procedure. The implementation of this process is called :abbr:`SWINDLE (SWarm INsurance Driven Litigation Engine)`.
+If a node fails to observe the rules of the swarm they 'swear' to keep, the punitive measures need to be enforced which is preceded by a litigation procedure. The implementation of this process is called :abbr:`SWINDLE (Secured With INsurance Deposit Litigation and Escrow)`.
 
 
 Submitting a challenge
@@ -332,7 +332,7 @@ Submitting a challenge
 Nodes provide signed receipts for stored chunks which they are allowed to charge arbitrary amounts for. The pricing and deposit model is discussed in detail in section :ref:`sec:accounting`. If a promise is not kept and a chunk is not found in the swarm anyone can report the loss by putting up a :dfn:`challenge`. The response to a challenge is a :dfn:`refutation`. Validity of the challenge as well as its refutation need to be easily verifyable by the contract.
 For now, we can just assume that the litigation is started by the challenge after a user attempts to retrieve insured content and fails to find a chunk. Litigation will be discussed below in the wider context of regular integrity audits of content in the swarm.
 
-The challenge takes the form of a transaction sent to the :dfn:`SWINDLE` (SWarm INsurance Driven Litigation Engine) relevant swarm contract in which the challenger presents the receipt(s) of the lost chunk. Any node is allowed to send a challenge for a chunk as long as they have a valid receipt for it (not necessarily issued to them).
+The challenge takes the form of a transaction sent to the :dfn:`SWINDLE` (Secured With INsurance Deposit Litigation and Escrow) relevant swarm contract in which the challenger presents the receipt(s) of the lost chunk. Any node is allowed to send a challenge for a chunk as long as they have a valid receipt for it (not necessarily issued to them).
 
 This is analogous to a court case in which the issuers of the receipts are the defendants who are guilty until proven innocent. Similarly to a court procedure public litigation on the blockchain should be a last resort when the rules are abused despite the deterrents and positive incentives.
 
@@ -452,7 +452,7 @@ First of all, forwarding back receipts creates a lot of network traffic. The onl
 Secondly, since availability of a storer node cannot always be guaranteed, getting receipts back from storers may incur indefinite delays. The owner (who submits the request) needs a receipt that can be used for litigation later. If this receipt needs to come from the storer, then the process requires an entire roundtrip.
 
 Furthermore, deciding on storers at the time the promise is made has a major drawback.
-If the storage period is long enough the network may grow and new registered nodes come online in the proximity of the chunk. It can happen that routing at retrieval will bypass this storer. Though syncing makes sure that even in these cases the chunk is passed along and reaches theclosest nodes, their accountability regarding this old chunk cannot be guaranteed without further complications.
+If the storage period is long enough the network may grow and new registered nodes come online in the proximity of the chunk. It can happen that routing at retrieval will bypass this storer. Though syncing makes sure that even in these cases the chunk is passed along and reaches the closest nodes, their accountability regarding this old chunk cannot be guaranteed without further complications.
 
 To summarize, explicit transparent contracts between owner and storer necessitate forwarding back receipts which has the following caveats:
 
@@ -491,7 +491,7 @@ This will likely be the receipt(s) that the owner received directly from the gua
 .. [#] There is no measure to prevent double receipting, i.e., the same node can sell storage insurance about the same chunks to different parties.
 
 If a node is unable to produce either the refutation or the receipts, it is considered a proof that the node had the chunk, should have kept it but deleted it. This process will end up blaming the custodians for the loss. If syncronisation was correctly followed and all the nodes forwarding kept their receipt, then eventually the blame will point to the node that was closest to the chunk to be stored at the time the request was received.
-if an audit request for a chunk is not responded to, the audit request is delegated to the guardian, and travels the same trajectory as that the original store request  (see :numref:`figure %s <fig:normaloperations>`). Analogously, if
+If an audit request for a chunk is not responded to, the audit request is delegated to the guardian, and travels the same trajectory as that the original store request  (see :numref:`figure %s <fig:normaloperations>`). Analogously, if
 a chunk is not found and the case is escalated to litigation on the blockchain, then finger pointing will also follow the same path (see :numref:`figure %s <fig:failure-and-audit>`) [#]_ .
 
 .. rubric:: Footnotes
@@ -519,7 +519,7 @@ a chunk is not found and the case is escalated to litigation on the blockchain, 
 
 When the network grows, it can happen that a custodian finds a new registered node closer to its chunk. This means they need to forward the original store request, the moment they obtain a receipt they can use it in finger pointing, they cease to be custodians and the ball is in the new custodian's court. Such change of custodian can also happen if you buy receipts from a node whose membership expires before the storage period of the insurance ends or simply suspended. In these cases the chunk will have a new custodian. It turns out that chained receipting very elegantly solves the problem of dynamic functional roles that is necessitated by dropouts, new nodes as well as variable membership terms. With the direct owner--storer contracting scheme discussed above this would still need to be solved.
 
-.. _sec:localreplication
+..  _sec:localreplication:
 
 Multiple receipts and local replication
 ----------------------------------------------
@@ -601,7 +601,7 @@ To conclude the section on storage incentives we summarize the various modes of 
 
 The owner does not need to be a registered, guardians, auditors, forwarders and custodians do.
 On all levels (chunk, document, collection), an owner can choose to take on the role of auditor and (therefore no need for guardian) and store whatever metadata they need for the proof of custody. If the content is of public (dis)interest, the owner can publish the receipt with the content hash so that third party consumers can litigate in case of chunk loss. Owners may wish to preserve content for long periods of time without retrieving the content but for reasons of increased liquidity allow the storer to withdraw in installments. Similarly, if an owner wishes to renew a storage agreement after it  expired, payout needs to happen without the owner wanting to see the data.
-To prevent collect-and-run storers, all these cases payout need to be tied to proof of custody as an escrow condition. Simple merkle proof challenge is available, infinitely repeatable, only needs to remember the root hash and are logarithmic in network traffic.
+To prevent collect-and-run storers, in all these cases payout need to be tied to proof of custody as an escrow condition. Simple merkle proof challenge is available, infinitely repeatable, only needs to remember the root hash and are logarithmic in network traffic.
 Auditing with simple Merkle proofs is not outsourceable in the strict sense, if the owner want to upload and disappear, the only way the auditor can prove the audits retrospectively to the owner is by recording them on the blockchain. If repeated this ends up paying at least twice the price of storage on the blockchain losing on transaction costs as well on the way.
 The solution is to pregenerate seeds and precalculate a secret by applying some irreversible function of the seed and the proof of custody.
 The network traffic can be reduced to constant per chunk at the cost of storing precalculated audit secrets.

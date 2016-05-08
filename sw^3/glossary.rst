@@ -55,7 +55,7 @@ Glossary
     special form of litigation where possession of a chunk is proved by proof of custody. The litigation does not stop but forces node to iteratively prove they synced according to the rules.
 
   SWINDLE
-    swarm insurance driven litigation engine
+    Secured With INsurance Deposit Litigation and Escrow
     the module in the client code that drives the iterative litigation procedure, initiates litigation in case loss of a chunk is detected and respond with refutation if the node itself is challenged.
 
   proof of custody
