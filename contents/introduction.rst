@@ -20,12 +20,21 @@ This document presents @value{SWARM} which is being developed as part
 of the crypto 2.0 vision for web 3.0.
 
 Swarm is a decentralised document storage solution. It is deeply integrated within
-ethereum and provides one of the most prominent base layer services: data storage
+ethereum and provides one of the most prominent base layer service: data storage
 and content distribution. It is free and self-sustaining via its incentive structure
 implemented as ethereum smart contracts.
 
 This document provides you with:
 
+* information on how to run and configure a local swarm node
+* how to connect to the test network
+* how to store and access content on swarm
+* basic intro to the swarm architecture and basic concepts like swarm hash and swarm manifest
+* command line tools relevant to swarm
+* API documentation for the http swarm proxy
+* API documentation for the bzz RPC module
+* how to register swarm domains with the Ethereum Name Service
+* how to debug and report issues
 
 Background
 =================
@@ -33,7 +42,7 @@ Background
 The primary objective of Swarm is to provide a sufficiently
 decentralized and redundant store of Ethereum's public record, in
 particular to store and distribute Đapp code and data as well as
-block chain data.
+block chain data. [Note that the latter is not part of the current release]
 
 From an economic point of view, it allows participants to efficiently
 pool their storage and bandwidth resources in order to provide the
@@ -48,9 +57,9 @@ These objectives entail the following design requirements:
 * no single point of failure, fault and attack resilience
 * censorship resistance, permanent public record
 * self-managed sustainability via incentive system
-* efficient market driven pricing. tradeable trade off of memory, persistent storage, bandwidth (and later computation)
+* efficient market driven pricing. tradeable trade off of memory, persistent storage, bandwidth
 * efficient use of the blockchain by swarm accounting protocol
-* deposit-challenge based guaranteed storage
+* deposit-challenge based guaranteed storage [not implemented yet]
 
 About
 ===================
@@ -66,8 +75,9 @@ The most uptodate swarm book in various formats is available on the old web
 Status
 ---------------
 
-The status of swarm is proof of concept vanilla prototype tested on toy network.
+The status of swarm is proof of concept vanilla prototype tested on a toy network.
 It is highly experimental code and untested in the wild.
+Use with extreme care.
 
 License
 -------------

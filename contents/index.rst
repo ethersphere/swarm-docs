@@ -11,12 +11,11 @@ Contents:
 .. toctree::
    :maxdepth: 4
 
-   introductions
+   introduction
    runninganode
    usage
    api
    architecture
-   specifications
 ..   related_projects
 
 
