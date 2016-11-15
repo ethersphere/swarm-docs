@@ -11,7 +11,7 @@ The source code is found on github: https://github.com/ethereum/go-ethereum/tree
 Supported Platforms
 =========================
 
-Geth runs on all major platforms (linux, MacOSX, Windows, also raspberry pie, android OS, iOS).
+Geth runs on all major platforms (linux, MacOSX, Windows, also raspberry pi, android OS, iOS).
 
 ..  note::
   This package has not been tested on platforms other than linux and OSX.
@@ -19,7 +19,7 @@ Geth runs on all major platforms (linux, MacOSX, Windows, also raspberry pie, an
 Prerequisites
 ================
 
-building :command:`geth` equires the following packages:
+building :command:`geth` requires the following packages:
 
 * [Go](https://golang.org)
 * [Git](http://git.org)
@@ -28,9 +28,11 @@ building :command:`geth` equires the following packages:
 
 Grab the relevant prerequisites and build from source.
 
-    apt-get install libgmp32-dev golang git
+    ``apt-get install libgmp32-dev golang git``
 
 On Mac OSX, using :command:`brew`
+
+.. code-block:: none
 
     brew install go git
     go get http://github.com/gotools/godep
@@ -43,7 +45,9 @@ Now set your environment variables:
 Building from source
 ========================
 
-Clone the repository (or better, your fork of it) to a directory of your choosing and switch to the working directory of the repo. Now checkout to the ``bzz`` branch, pull the latest version and build the binary:
+Clone the repository to a directory of your choice and switch to the working directory of the repo. Now checkout to the ``swarm`` branch, pull the latest version and build the binary:
+
+.. code-block:: none
 
   clone git@github.com:ethereum/go-ethereum.git
   cd go-ethereum
