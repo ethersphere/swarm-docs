@@ -50,6 +50,9 @@ aforementioned services to all participants.
 
 These objectives entail the following design requirements:
 
+.. this list is confusing. what is it a list of? what do "inclusivity" or "self-managed sustainability" mean? does the reader know?
+.. TODO: reformulate?
+
 * distributed storage, inclusivity, long tail of power law
 * flexible expansion of space without hardware investment decisions, unlimited growth
 * zero downtime
@@ -59,7 +62,7 @@ These objectives entail the following design requirements:
 * self-managed sustainability via incentive system
 * efficient market driven pricing. tradeable trade off of memory, persistent storage, bandwidth
 * efficient use of the blockchain by swarm accounting protocol
-* deposit-challenge based guaranteed storage [not implemented yet]
+* deposit-challenge based guaranteed storage [planned for future release]
 
 Basics
 ========================
@@ -78,23 +81,26 @@ Nodes running the same network id are supposed to connect to the same blockchain
 Such a swarm network is identified by its network id which is an arbitrary integer.
 
 Swarm allows for 'upload and disappear' which means that any node can just upload content to the swarm and
-then is allowed to go offline. As long as nodes do not drop out or become available, the content will still
-be accessible due to syncronisation between nodes.
+then is allowed to go offline. As long as nodes do not drop out or become unavailable, the content will still
+be accessible due to 'syncronisation' procedure in which node continuously pass along available data between each other.
 
 .. note::
   Uploaded content is not guaranteed to persist until storage insurance is implemented (expected in POC 0.4). All participating nodes should be considered to contribute voluntary service with no formal obligation whatsoever and should be expected to delete content at their will. Therefore, users should under no circumstances regard swarm as safe storage.
 
 .. note::
-  Swarm POC 0.2 uses no ecryption. Upload of sensitive and private data is highly discouraged as there is no way to undo an upload. Users should refrain from uploading sensitive data, in other words
+  Swarm POC 0.2 uses no encryption. Upload of sensitive and private data is highly discouraged as there is no way to undo an upload. Users should refrain from uploading unencrypted sensitive data, in other words
 
   * no valuable personal content
   * no illegal, controversial or unethical content
 
+Data structure and naming
+-------------------------
+
 Swarm defines 3 crucial notions
 
-* chunks
-* hash
-* manifests
+* chunks - pieces of data in the swarm
+* hash - cryptographic hash of data that serves as its unique identifier and address
+* manifests - allow for higher-level collections of data that are semantic to the user
 
 In this guide, content is understood very broadly in a technical sense denoting any blob of data.
 Swarm defines a specific identifier for a piece of content. This identifier serves as the retrieval address of the content.
@@ -106,17 +112,19 @@ Identifiers need to be
 
 The choice of identifier in swarm POC0.3 is the hierarchical swarm hash described in :ref:`swarm hash`.
 The properties above let us view the identifiers as addresses at which content is expected to be found.
-Since hashes are collision free, they are bound to one specific version of a content, i.e. Hash addressing therefore is immutable in the strong sense that you cannot even express mutable content.
+Since hashes can be assumed to be collision free, they are bound to one specific version of a content, i.e. Hash addressing therefore is immutable in the strong sense that you cannot even express mutable content: "changing the content, changes the hash".
 
 Users however usually use some discovery and or semantic access to data, which is implemented by the ethereum name service (ENS).
 The ENS enables content retrieval based on mnemonic (or branded) names, much like the DNS of WWW, but without servers.
 
-Swarm nodes participating in the network also have a base address which define a location in the same address space as the home of chunks. When content is uploaded to swarm it is chopped up into pieces called chunks. Each chunk is accessed at the address defined by its swarm hash. The hashes of data chunks themselves are packaged into a chunk, hence the content maps to a chunk tree. This hierarchical swarm hash construct allows for merkle proofs for chunks within a piece of content, thus providing swarm with integrity protected random access into (large) files.
+Swarm nodes participating in the network also have their own base address. These node addresses define a location in the same address space as the data. 
 
-The current version of swarm implements a strictly content addressed distributed hash table. Strictly content addressed here means that the node(s) closest to the address of a chunk do not only serve information about the content but actually host the data. (Note that although it is part of the protocol, we cannot have any sort of guarantee that it will be preserved. this is a caveat worth stating again: no permanence and persistence). In other words, in order to retrieve a piece of content (as a part of a larger collection/document) a chunk must reach its destination from initiator to the storer after upload as well must be served back to the rewquester at download.
+When content is uploaded to swarm it is chopped up into pieces called *chunks*. Each chunk is accessed at the address defined by its *swarm hash*. The hashes of data chunks themselves are packaged into a chunk which in turn has its own hash. In this way the content gets maps to a chunk tree. This hierarchical swarm hash construct allows for merkle proofs for chunks within a piece of content, thus providing swarm with integrity protected random access into (large) files.
+
+The current version of swarm implements a strictly content addressed distributed hash table. Here 'strictly content addressed' means that the node(s) closest to the address of a chunk do not only serve information about the content but actually host the data. (Note that although it is part of the protocol, we cannot have any sort of guarantee that it will be preserved. this is a caveat worth stating again: no guarantee of permanence and persistence). In other words, in order to retrieve a piece of content (as a part of a larger collection/document) a chunk must reach its destination from initiator to the storer after upload as well must be served back to the requester at download.
 The viability of both hinges on the assumption that any node (requester) can 'reach' any other node (storer). This assumption is guaranteed with a special network topology (called kademlia), which offers (very low) constant time for lookup usually logarithmic to the network size.
 
-Swarm content access is centered around the notion of a manifest. A manifest file describe a document collection, e.g.,
+Swarm content access is centred around the notion of a manifest. A manifest file describes a document collection, e.g.,
 
 * a filesystem directory
 * an index of a database
@@ -136,7 +144,7 @@ This document
 ---------------------
 
 This document source code is found at @url{https://github.com/ethersphere/swarm/tree/master/book}
-The most uptodate swarm book in various formats is available on the old web
+The most up-to-date swarm book in various formats is available on the old web
 @url{http://ethersphere.org/swarm/docs} as well as on swarm @url{bzz://swarm/docs}
 
 
