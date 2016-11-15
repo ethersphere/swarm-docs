@@ -4,10 +4,7 @@ Running a node
 
 Installation
 =======================
-Swarm is part of the Ethereum stack and currently only supports running on the ethereum network as a subprotocol of the go client nodes.
-
-Installation instructions for manual build are identical to those for the ethereum go implementation.
-See https://github.com/ethereum/go-ethereum/wiki/Developers'-Guide
+Swarm is part of the Ethereum stack, the reference implementation is currently at POC (proof of concept) version 0.2.
 
 The source code is found on github: https://github.com/ethereum/go-ethereum/tree/swarm/
 
