@@ -31,7 +31,7 @@ On linux (ubuntu/debian variants) use ``apt`` to install go and git
 
 .. code-block:: none
 
-  sudo apt install go git
+  sudo apt install golang git
 
 while on Mac OSX you'd use :command:`brew`
 
@@ -61,14 +61,15 @@ Once all prerequisites are met, download the go-ethereum source code
   git checkout develop
   go get github.com/etherem/go-ethereum
 
-and finally compile 
+and finally compile the swarm daemon ``bzzd`` and the main go-ethereum client ``geth``
 
 .. code-block:: none
 
   go build ./cmd/bzzd
+  go build ./cmd/geth
 
 
-You can now run :command:`./bzzd` to start your node. 
+You can now run :command:`./bzzd` to start your swarm node. 
 
 Running your swarm client
 ===========================
@@ -86,33 +87,46 @@ then make a new account using this directory
 
 .. code-block:: none
 
- PASSWORD="mypassword"
- ./geth --datadir $DATADIR --password  `echo -n $PASSWORD` account new
+  ./geth --datadir $DATADIR account new
 
-The output of this command will be the base address of the swarm node. We save it under the name ``BZZKEY``
+You will be prompted for a password:
 
 .. code-block:: none
 
-  BZZKEY=0x1234567890abcdef1234567890abcdef12345678
+  Your new account is locked with a password. Please give a password. Do not forget this password.
+  Passphrase: 
+  Repeat passphrase: 
+
+and the output will be an address - the base address of the swarm node.
+
+.. code-block:: none
+
+  Address: {2f1cd699b0bf461dcfbf0098ad8f5587b038f0f1}
+
+
+We save it under the name ``BZZKEY``
+
+.. code-block:: none
+
+  BZZKEY=2f1cd699b0bf461dcfbf0098ad8f5587b038f0f1
 
 and finally, launch geth on a private network (id 322)
 
 .. code-block:: none
 
-    ./geth --datadir $DATADIR \
-           --bzzaccount $BZZKEY
-           --port 30301 \
-           --unlock primary \
-           --password `echo $PASSWORD` \
-           --verbosity 6 \
-           --rpc \
-           --rpcport 8101 \
-           --rpccorsdomain '*' \
-           --bzz \
-           --networkid 322 \
-           --nodiscover \
-           --maxpeers 0 \
-           console   2>> $DATADIR/bzz.log
+  ./geth --datadir $DATADIR \
+         --unlock 0 \
+         --verbosity 6 \
+         --networkid 322 \ 
+         --nodiscover \ 
+         --maxpeers 0 \ 
+         console 2>> $DATADIR/bzz.log
+
+and launch the bzzd
+
+  ./bzzd --bzzaccount $BZZKEY \
+         --datadir $DATADIR \
+         --ethapi $DATADIR/geth.ipc
 
 At this verbosity level you should see plenty of output accumulating in the logfile. You can keep en eye on it using the command ``tail -f $DATADIR/bzz.log``.
 
