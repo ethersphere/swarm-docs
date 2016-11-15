@@ -9,13 +9,13 @@ Running your client
 ------------------------------
 To start a swarm node we must start geth with an empty data directory on a private network. First set aside an empty temporary directory to be the data store
 
-.. code-block:: js
+.. code-block:: none
 
    DATADIR=/tmp/BZZ/`date +%s`
 
 then make a new account using this directory
 
-.. code-block:: js
+.. code-block:: none
 
  PASSWORD="mypassword"
  ./geth --datadir $DATADIR --password  `echo -n $PASSWORD` account new
@@ -23,7 +23,7 @@ then make a new account using this directory
 
 and finally, launch geth on a private network (id 322)
 
-.. code-block:: js
+.. code-block:: none
 
     ./geth --datadir $DATADIR \
            --bzzaccount $BZZKEY
@@ -40,7 +40,7 @@ and finally, launch geth on a private network (id 322)
            --maxpeers 0 \
            console   2>> $DATADIR/bzz.log
 
-At this verbosity level you should see plenty of output accumulating in the logfile. You can keep en eye on it using the command @command{tail -f $DATADIR/bzz.glog}.
+At this verbosity level you should see plenty of output accumulating in the logfile. You can keep en eye on it using the command ``tail -f $DATADIR/bzz.glog``.
 
 
 Uploading a file or directory to your local swarm instance
@@ -48,13 +48,13 @@ Uploading a file or directory to your local swarm instance
 
 Included in the swarm repository is a shell script that makes it easy to upload a file to a local swarm node using http port 8500.
 
-.. code-block:: js
+.. code-block:: none
 
    bash bzz/bzzup/bzzup.sh /path/to/myFileOrDirectory
 
 If this command is successful, the output will be a hash
 
-.. code-block:: js
+.. code-block:: none
 
    65b2a32ab2230d7d2bad2616e804d374921be68758009491cd52c727e37b4979
 
@@ -62,7 +62,7 @@ If unsuccessful (for example if no local node is running) the output will simply
 
 It is also possible to upload a file or directory from the console like this
 
-.. code-block:: js
+.. code-block:: none
 
     hash = bzz.upload("/path/to/myFileOrDirectory", "index.html")
 
@@ -73,13 +73,13 @@ Downloading a file from your local swarm instance
 
 Your local swarm instance has an http interface running on port 8500 (by default). To download a file is thus a simple matter of pointing your browser to
 
-.. code-block:: js
+.. code-block:: none
 
     http://localhost:8500/65b2a32ab2.. .7b4979
 
 or, if you prefer, you can use the console
 
-.. code-block:: js
+.. code-block:: none
 
     bzz.get(hash)
 
@@ -94,7 +94,7 @@ A Manifest example - directory trees
 
 Suppose we had used @command{bzzup.sh} (as described above) to upload a directory to swarm instead of just a file:
 
-.. code-block:: js
+.. code-block:: none
 
     bash bzz/bzzup/bzzup.sh /path/to/directory
 
@@ -104,7 +104,7 @@ The raw Manifest
 -----------------------
 We can see the raw Manifest by prepending @code{raw/} to the URL like so
 
-.. code-block:: js
+.. code-block:: none
 
     wget -O - "http://localhost:8500/raw/HASH"
 
