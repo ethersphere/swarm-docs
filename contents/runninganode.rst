@@ -74,10 +74,9 @@ You can now run :command:`./bzzd` to start your swarm node.
 Running your swarm client
 ===========================
 
-..  note::
-  TODO: This is out of date and needs to be re-written.
+To start a basic swarm node we must start geth with an empty data directory on a private network and then connect the swarm daemon to this instance of geth.
 
-To start a swarm node we must start geth with an empty data directory on a private network. First set aside an empty temporary directory to be the data store
+First set aside an empty temporary directory to be the data store
 
 .. code-block:: none
 
@@ -120,13 +119,14 @@ and finally, launch geth on a private network (id 322)
          --networkid 322 \ 
          --nodiscover \ 
          --maxpeers 0 \ 
-         console 2>> $DATADIR/bzz.log
+         console 2>> $DATADIR/geth.log
 
-and launch the bzzd
+and launch the bzzd; connecting it to the geth node
 
   ./bzzd --bzzaccount $BZZKEY \
          --datadir $DATADIR \
-         --ethapi $DATADIR/geth.ipc
+         --ethapi $DATADIR/geth.ipc \
+         --bzznoswap 2>> $DATADIR/bzz.log
 
 At this verbosity level you should see plenty of output accumulating in the logfile. You can keep en eye on it using the command ``tail -f $DATADIR/bzz.log``.
 
@@ -136,13 +136,18 @@ Configuration options
 
 This section lists all the options you can set in the swarm configuration file.
 
-The swarm configuration file can be found at
+The default location for the swarm configuration file is `<datadir>/bzzd/bzz-<baseaccount>/config.json`. Thus continuing from the previous section, the configuration file would be
 
 .. code-block:: none
 
-  <datadir>/bzz/<baseaccount>/config.json
+  $DATADIR/bzzd/bzz-$BZZKEY/config.json
 
-By default the swarm data directory is nested under the ethereum's data directory, using a different subdirectoryfor each swarm node base address. This is important if you run multiple swarm nodes since storage, configuration, connected peers will all be distinct depending on the base address.
+It is possible to specify a different config file when launching bzzd by using the `--bzzconfig` flag.
+
+..  note::
+  TODO: This is out of date and needs to be re-written.
+
+By default the swarm data directory is nested under the ethereum's data directory, using a different subdirectoryfor each swarm node base address. This is important if you run muliple swarm nodes since storage, configuration, connected peers will all be distinct depending on the base address.
 
 Main parameters
 -----------------------
