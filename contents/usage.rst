@@ -5,43 +5,7 @@ Usage
 Using a local Swarm Instance
 ================================
 
-Running your client
-------------------------------
-To start a swarm node we must start geth with an empty data directory on a private network. First set aside an empty temporary directory to be the data store
-
-.. code-block:: none
-
-   DATADIR=/tmp/BZZ/`date +%s`
-
-then make a new account using this directory
-
-.. code-block:: none
-
- PASSWORD="mypassword"
- ./geth --datadir $DATADIR --password  `echo -n $PASSWORD` account new
- BZZKEY=0x1234567890abcdef1234567890abcdef12345678
-
-and finally, launch geth on a private network (id 322)
-
-.. code-block:: none
-
-    ./geth --datadir $DATADIR \
-           --bzzaccount $BZZKEY
-           --port 30301 \
-           --unlock primary \
-           --password `echo $PASSWORD` \
-           --verbosity 6 \
-           --rpc \
-           --rpcport 8101 \
-           --rpccorsdomain '*' \
-           --bzz \
-           --networkid 322 \
-           --nodiscover \
-           --maxpeers 0 \
-           console   2>> $DATADIR/bzz.log
-
-At this verbosity level you should see plenty of output accumulating in the logfile. You can keep en eye on it using the command ``tail -f $DATADIR/bzz.glog``.
-
+.. moved the 'running your client' section to runninganode.rst where it belongs.
 
 Uploading a file or directory to your local swarm instance
 ---------------------------------------------------------------
