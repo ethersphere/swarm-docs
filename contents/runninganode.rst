@@ -11,7 +11,7 @@ The source code is found on github: https://github.com/ethereum/go-ethereum/tree
 Supported Platforms
 =========================
 
-Geth runs on all major platforms (linux, MacOSX, Windows, also raspberry pie, android OS, iOS).
+Geth runs on all major platforms (linux, MacOSX, Windows, also raspberry pi, android OS, iOS).
 
 ..  note::
   This package has not been tested on platforms other than linux and OSX.
@@ -19,54 +19,116 @@ Geth runs on all major platforms (linux, MacOSX, Windows, also raspberry pie, an
 Prerequisites
 ================
 
-building :command:`geth` equires the following packages:
+building the swarm daemon :command:`bzzd` requires the following packages:
 
 * [Go](https://golang.org)
 * [Git](http://git.org)
-* [Godep](http://github.com/gotools/godep)
 
 
 Grab the relevant prerequisites and build from source.
 
-    apt-get install libgmp32-dev golang git
+On linux (ubuntu/debian variants) use ``apt`` to install go and git
 
-On Mac OSX, using :command:`brew`
+.. code-block:: none
+
+  sudo apt install go git
+
+while on Mac OSX you'd use :command:`brew`
+
+.. code-block:: none
 
     brew install go git
-    go get http://github.com/gotools/godep
 
-Now set your environment variables:
+Then you must prepare your go environment as follows
 
-  PATH=$GOPATH/bin:$PATH
-  GOPATH=`godep path`:$GOPATH
+.. code-block:: none
 
-Building from source
-========================
+  mkdir ~/go
+  export GOPATH=~/go
+  echo 'GOPATH=~/go' >> ~/.profile 
 
-Clone the repository (or better, your fork of it) to a directory of your choosing and switch to the working directory of the repo. Now checkout to the ``bzz`` branch, pull the latest version and build the binary:
+Installing from source
+=======================
 
-  clone git@github.com:ethereum/go-ethereum.git
+Once all prerequisites are met, download the go-ethereum source code
+
+.. code-block:: none
+
+  mkdir -p $GOPATH/src/github.com/ethereum
+  cd $GOPATH/src/github.com/ethereum
+  git clone https://github.com/ethereum/go-ethereum
   cd go-ethereum
-  git checkout swarm
-  git pull
-  godep go build -v ./cmd/geth
+  git checkout develop
+  go get github.com/etherem/go-ethereum
 
-..  index::
-  pair: make; swarm installation
-  pair: Makefile; swarm installation
+and finally compile 
 
-You can now run :command:`./geth` to start your node. See :ref:`Running a node` to learn how to operate a swarm node.
+.. code-block:: none
 
-  $ make && sudo make install
+  go build ./cmd/bzzd
 
-in the toplevel directory of the unpacked distribution.
+
+You can now run :command:`./bzzd` to start your node. 
+
+Running your swarm client
+===========================
+
+..  note::
+  TODO: This is out of date and needs to be re-written.
+
+To start a swarm node we must start geth with an empty data directory on a private network. First set aside an empty temporary directory to be the data store
+
+.. code-block:: none
+
+   DATADIR=/tmp/BZZ/`date +%s`
+
+then make a new account using this directory
+
+.. code-block:: none
+
+ PASSWORD="mypassword"
+ ./geth --datadir $DATADIR --password  `echo -n $PASSWORD` account new
+
+The output of this command will be the base address of the swarm node. We save it under the name ``BZZKEY``
+
+.. code-block:: none
+
+  BZZKEY=0x1234567890abcdef1234567890abcdef12345678
+
+and finally, launch geth on a private network (id 322)
+
+.. code-block:: none
+
+    ./geth --datadir $DATADIR \
+           --bzzaccount $BZZKEY
+           --port 30301 \
+           --unlock primary \
+           --password `echo $PASSWORD` \
+           --verbosity 6 \
+           --rpc \
+           --rpcport 8101 \
+           --rpccorsdomain '*' \
+           --bzz \
+           --networkid 322 \
+           --nodiscover \
+           --maxpeers 0 \
+           console   2>> $DATADIR/bzz.log
+
+At this verbosity level you should see plenty of output accumulating in the logfile. You can keep en eye on it using the command ``tail -f $DATADIR/bzz.log``.
+
 
 Configuration options
 ============================
 
-This section lists all the options you can set in the config file:    :file:`<datadir>/bzz/<baseaccount>/config.json`
+This section lists all the options you can set in the swarm configuration file.
 
-By default the swarm data directory is under the ethereum's data directory but different depending on the base address. This is important if you run multiple swarm nodes since storage, configuration, connected peers will all be distinct depending on the base address.
+The swarm configuration file can be found at
+
+.. code-block:: none
+
+  <datadir>/bzz/<baseaccount>/config.json
+
+By default the swarm data directory is nested under the ethereum's data directory, using a different subdirectoryfor each swarm node base address. This is important if you run multiple swarm nodes since storage, configuration, connected peers will all be distinct depending on the base address.
 
 Main parameters
 -----------------------
