@@ -19,70 +19,62 @@ Geth runs on all major platforms (linux, MacOSX, Windows, also raspberry pi, and
 Prerequisites
 ================
 
-building :command:`geth` requires the following packages:
+building the swarm daemon :command:`bzzd` requires the following packages:
 
 * [Go](https://golang.org)
 * [Git](http://git.org)
-* [Godep](http://github.com/gotools/godep)
 
 
 Grab the relevant prerequisites and build from source.
 
-On linux (ubuntu/debian variants) use ``apt-get`` to install go and git
+On linux (ubuntu/debian variants) use ``apt`` to install go and git
 
 .. code-block:: none
 
-    apt-get install libgmp32-dev golang git
+  sudo apt install go git
 
-On Mac OSX, using :command:`brew`
+while on Mac OSX you'd use :command:`brew`
 
 .. code-block:: none
 
     brew install go git
 
-Now set your environment variables:
+Then you must prepare your go environment as follows
 
 .. code-block:: none
 
-  GOPATH=`godep path`:$GOPATH
+  mkdir ~/go
+  export GOPATH=~/go
+  echo 'GOPATH=~/go' >> ~/.profile 
 
-Then use go to install godep
+Installing from source
+=======================
 
-.. code-block:: none
-
-    go get http://github.com/gotools/godep
-
-Building from source
-========================
-
-Clone the repository to a directory of your choice and switch to the working directory of the repo. Now checkout to the ``swarm`` branch, pull the latest version and build the binary:
+Once all prerequisites are met, download the go-ethereum source code
 
 .. code-block:: none
 
-  git clone git@github.com:ethereum/go-ethereum.git
+  mkdir -p $GOPATH/src/github.com/ethereum
+  cd $GOPATH/src/github.com/ethereum
+  git clone https://github.com/ethereum/go-ethereum
   cd go-ethereum
-  git checkout swarm
-  git pull
-  godep go build -v ./cmd/geth
+  git checkout develop
+  go get github.com/etherem/go-ethereum
 
-..  index::
-  pair: make; swarm installation
-  pair: Makefile; swarm installation
+and finally compile 
 
-You can now run :command:`./geth` to start your node. See :ref:`Running a node` to learn how to operate a swarm node.
-.. that reference doesn't work. Also, shouldn't it refer to 'usage.rst'?
+.. code-block:: none
 
-.. do we need this?
-..  $ make && sudo make install
+  go build ./cmd/bzzd
 
-.. in the toplevel directory of the unpacked distribution.
 
+You can now run :command:`./bzzd` to start your node. 
 
 Running your swarm client
 ===========================
 
 ..  note::
-  TODO: THis is out of date and needs to be re-written.
+  TODO: This is out of date and needs to be re-written.
 
 To start a swarm node we must start geth with an empty data directory on a private network. First set aside an empty temporary directory to be the data store
 
