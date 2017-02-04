@@ -1,0 +1,180 @@
+\documentclass{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage{default}
+\input{preamble-devcon.tex}
+
+
+\title{devp2p network simulation, testing and monitoring framework}
+\author{Viktor Trón}
+
+\AtBeginSection[]
+{
+\begin{frame}<beamer>
+\frametitle{Outline}
+\tableofcontents[currentsection,sectionstyle=show/shaded,subsectionstyle=show/show/hide,subsubsectionstyle=show/show/show/hide]
+\end{frame}
+}
+
+\begin{document}
+
+\begin{frame}
+ \titlepage
+\end{frame}
+
+\begin{frame}
+\begin{block}{}
+\begin{itemize}
+\item motivation and context
+\item scope and status
+\item features and design
+\item demo and code dive
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{section}{motivation and context}
+
+
+\begin{frame}{}
+\begin{block}{swarm network layer rewrite}
+ \begin{itemize}
+    \item syncing rewrite
+    \item testing and fixing edge cases with kademlia overlay topology bootstrapping
+    \item integration whisper/pss in status/raiden
+    \item testing smash/crash proof of custody
+    \item testing receipt passing, storage insurance logic, litigation
+    \item retrieval using erasure coded chunk, scan and repair for erasure coding
+\end{itemize}
+\end{block}
+\end{frame}
+
+
+\plainblockslide{}{\textsc{pss}: \textbf{p}ostal \textbf{s}ervices \textbf{s}uite (bzz whispered)}
+
+\end{section}
+
+\begin{section}{scope and status}
+
+
+\begin{frame}{}
+\begin{block}{status}
+ \begin{itemize}
+    \item basic skeleton
+    \item inprocess adapter
+    \item remote in the making
+    \item a bunch of volunteers contributing
+    \item whisper simulation
+\end{itemize}
+\end{block}
+\end{frame}
+
+\end{section}
+
+\begin{section}{features and design}
+
+\begin{frame}{}
+\begin{block}{network model and basic concepts}
+ \begin{itemize}
+    \item generic network model abstract out underlay connectivity
+    \item nodes and connections
+    \item trigger events: startup/shutdown node, connect node to another, etc
+    \item underlay adapters
+    \item output events
+    \item journals, snapshots
+    \item controllers
+    \item test drivers
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}{}
+\begin{block}{underlay adapters for network/transport types}
+ \begin{itemize}
+    \item plain rlpx
+    \item rlpx with output event reporting for test docker container
+    \item inprocess adaptor for simulations using simulated message pipe
+    \item inprocess adaptor using p2p server instance (and discovery)
+    \item remote node using ssh (kubernetes)
+\end{itemize}
+\end{block}
+\end{frame}
+
+
+\begin{frame}{}
+\begin{block}{events and the journal}
+ \begin{itemize}
+
+\item  event logged as entries in a journal, can be replayed (on a different network type)
+\item  connectivity journal, message passing journal
+\item  dynamic network visualisation using the REST Api (example with mocked journal)
+\item  journal can be replayed to get a snapshot (connectivity or storage/msg passing)
+\item  snapshots are portable across network types so can setup/bootstrap simulations
+\end{itemize}
+\end{block}
+\end{frame}
+
+
+\begin{frame}{}
+\begin{block}{events control}
+ \begin{itemize}
+\item  run history as a journal subscribing to events
+\item  reset, record
+\item  Read: without constraints, it reads all the events in the buffer,
+\item  TimedRead: replay with acceleration (for simulation/visualisation) faithful to intervals
+\item  Scheduler: play waiting for actual or fake event time
+\item  UI to manually construct test setups
+\item  mockers mock event generation
+
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}{}
+\begin{block}{test drivers and benchmark tools}
+\begin{itemize}
+
+\item  snapshots are used to setup initial states
+\item  journal can be used to schedule drive network scenarios
+\item  trigger/expect testing pattern for p2p message exchange for protocol unit testing
+\item  trigger/expect pattern for unicast and multicast overlay routing (how pss and whisper will be tested)
+\item  suite of controllers provide a resourceful REST API to query and dynamically change the network, trigger events and query metrics (using the metrics package)
+\item  The messengers can be used to meter bandwidth, throughput
+\item  latency benchmarks could be simulated using parameters based on a real network measurements
+
+\end{itemize}
+\end{block}
+\end{frame}
+
+
+
+
+
+
+\end{section}
+
+\begin{section}{demo and code dive}
+
+\begin{frame}{}
+\begin{block}{UX}
+ \begin{itemize}
+\item  connectivity and message passing visualisations using cytoscape.js http://js.cytoscape.org/
+\item  cluster management and monitoring dashboard
+\item  UI for simulation and aggregate stats
+\item dynamic connectivity
+\end{itemize}
+\end{block}
+
+\begin{block}{backend}
+ \begin{itemize}
+\item  local http server exposing a resourceful REST API
+\item  hierarchical embedded resuorce controllers
+\item REST API routes map to resource controllers and CRUD actions
+\item dynamic network visualisation
+\end{itemize}
+\end{block}
+\end{frame}
+
+
+\end{section}
+\end{document}

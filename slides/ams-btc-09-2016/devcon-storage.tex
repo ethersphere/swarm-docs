@@ -1,0 +1,156 @@
+\subsection[pay-as-you-store]{Deferred payments and proof-of-custody}
+\begin{frame}{}
+While SWAP allows for speedy retrieval of popular content, there is no guarantee that less popular content will remain available. Whatever is not accessed for a long time is likely to be garbage collected.\\
+The first strategy to overcome this problem is deceptively simple: change the swarm's incentives by paying nodes to \emph{store} your content.
+\end{frame}
+\begin{frame}{Payment for proof-of-custody}
+The basic idea:
+\begin{enumerate}
+ \item Commit in advance to paying for data to be available in the swarm.
+ \item Over time, challenge the swarm to provide proof that the data is still available: request \emph{proof-of-custody}.
+ \item Every successful proof-of-custody releases the next payment installment to the storing nodes.
+\end{enumerate}
+\begin{block}{Remember:}
+ The \textbf{proof-of-custody} here is a small message - a single hash - which cryptographically proves that the issuer has access to the data.
+\end{block}
+\end{frame}
+\begin{frame}{POC + Payment Channel}
+ These deferred payments constitute a \textbf{conditional escrow}: payment must be made up-front for the storage, payment is held (escrow) and is only released when a successful proof-of-custody message is received (condition).\\[5mm]
+ This procedure can be handled off-chain and can be directly \textbf{integrated into the payment channels.}\\[5mm]
+ What this requires is that the payment channel has the ability to call a \emph{judge contract} that can understand and verify promisory payments and proof-of-custody challenge/response messages.
+\end{frame}
+
+
+\subsection[insurance]{Storage Insurance and Negative Incentives}
+\begin{frame}{If data goes missing...}
+ The problem of using only positive incentives is that data loss has only limited consequences for the storing nodes. A node will lose potential revenue for no longer being able to generate proofs-of-custody, but there are no further consequences. \\[5mm]
+ Therefore, to complete the storage incentive scheme, we introduce an \emph{insurance system} the can punish offending nodes for not keeping their storage promises.
+\end{frame}
+\wholeslide{\textbf{SWEAR}: \textbf{SW}arm \textbf{E}nforcement of \textbf{A}rchiving \textbf{R}ules}
+\begin{frame}{SWEAR to store}
+ SWEAR is a smart contract that allows nodes to register as long-term storage nodes by posting a security deposit.\\[5mm]
+ Registered nodes can sell promisory notes guaranteeing long-term data availablilty -- essentially insurance against garbage collection. \\[5mm]
+ Implementation: Swarm + Receipts.
+\end{frame}
+
+\begin{frame}{The syncing process.}
+\begin{columns}[T]
+\begin{column}{0.4\textwidth}
+\alt<1-10>{
+  \small{The normal process of getting chunks of data to their storage destination is called \alert<1>{syncing}.}
+
+  \begin{itemize}
+  \item<3-> \alt<5->{\tiny}{} Chunks are to be stored at\alt<4->{\alert<4>{ the node whose address is closest to}}{} the chunk ID.
+  \item<5-> \alt<7->{\tiny}{} Instead of directly connecting to that node and giving it the chunk in question, we pass the chunk along to one of our connected peers who is a little closer to the chunk ID than we are. \uncover<6->{``Syncing".}
+  \item<7-> \alt<10->{\tiny}{} This peer will repeat the process, thus the data is passed on \uncover<8->{from node}\uncover<9->{ to node.}
+  \item<10->[] %dummy. I needed this to get line spacing to work in the point above.
+  \end{itemize}
+}
+{
+\uncover<11>{\frametitle{Save-to-swarm}}
+\only<11>{
+\small{``Saving data to the swarm'', i.e. \emph{insured storage}, uses the same basic mechanism as syncing, except that it involves only registered nodes and that every step is receipted.}
+}
+\uncover<12->{Insured storage:}
+\begin{itemize}
+ \item<12->{\alt<12->{\small}{} Owner passes data to a registered peer and receives an insurance receipt.}
+ \item<12->{\alt<12->{\small}{} This process is repeated until closest registered node has the data.}
+ \item<12->{\alt<12->{\small}{} All receipts are accounted and paid for. }
+\end{itemize}
+}
+\end{column}
+
+\begin{column}{0.6\textwidth}
+\begin{tikzpicture}
+ \node[scale=0.7,visible on=<1-10>] at (0,0) {
+    \begin{tikzpicture}
+	\node[invisible] at (0,-9) (dummy){};
+	\node[invisible] at (5,-5) (dummy2){};
+	\node[peer,visible on=<2->] at (-2,0) (owner){Owner};
+
+	\node[visible on=<3->] (chunk) at (4,-5) {$\bullet$};
+	\node[visible on=<3->] (chunklabel) at (5,-4) {chunk address} edge[point,->,visible on =<3->] (chunk);
+
+	\node[peer,visible on=<5->] at (0.5,-0.5) (connectedpeer){peer}
+	    (owner.east) edge[point, ->,visible on=<6->, bend left=15]
+		    node[above=2pt,visible on=<6->] {sync}
+			    (connectedpeer.150);
+
+	\node[node,visible on=<7->] at (1,-2) (firstnode){some node}
+		(connectedpeer.-70) edge[point,->,visible on=<7->,bend left=10]
+		    node[right of=2pt,visible on=<7->] {sync}
+			    (firstnode.north);
+
+	\node[node,visible on=<8->] at (0.5,-4.5) (secondnode){other node}
+		(firstnode.-70) edge[point,->,dashed,visible on=<8->,bend left=10]
+		    node[right of=2pt,visible on=<8->] {syncing...}
+			    (secondnode.70);
+
+	\node[peer,visible on=<4->] at (4,-6) (closestnode){closest node}
+		(secondnode.-110) edge[point,->,visible on=<9->,out=-110,in=180]
+		    node[above=2pt,visible on=<9->] {sync}
+			    (closestnode.west);
+    \end{tikzpicture}
+    };
+ \node[scale=0.7,visible on=<12->] at (0,0) {
+    \begin{tikzpicture}
+	\node[invisible] at (0,-9) (dummy){};
+	\node[invisible] at (5,-5) (dummy2){};
+	\node[peer,visible on=<11->] at (-2,0) (owner){Owner};
+
+	\node[visible on=<12->] (chunk) at (4,-5) {$\bullet$};
+	\node[visible on=<12->] (chunklabel) at (5,-4) {chunk address} edge[point,->,visible on =<11->] (chunk);
+
+	\node[peer,visible on=<12->] at (0.5,-0.5) (connectedpeer){peer}
+	    (owner.east) edge[point, ->,visible on=<12->, bend left=15]
+		    node[above=2pt,visible on=<12->] {store}
+			    (connectedpeer.150)
+	    (connectedpeer.-170) edge[point,->,visible on=<12->,thick,bend right=15]  (owner.-20);
+
+	\node[node,visible on=<12->] at (1,-2) (firstnode){some node}
+		(connectedpeer.-70) edge[point,->,visible on=<12->,bend left=10]
+		    node[right of=2pt,visible on=<12->] {store}
+			    (firstnode.north)
+	    (firstnode.140) edge[point,->,visible on=<12->,thick,bend right=10] node[left of=2pt,visible on=<12->] {receipts} (connectedpeer.-140);
+
+	\node[node,visible on=<12->] at (0.5,-4.5) (secondnode){other node}
+		(firstnode.-70) edge[point,->,dashed,visible on=<12->,bend left=10]
+		    node[right of=2pt,visible on=<12->] {store...}
+			    (secondnode.70)
+	    (secondnode.110) edge[point,->,visible on=<12->,dashed,thick,bend right=10] node[left of=2pt,visible on=<12->] {receipts} (firstnode.-110);
+
+	\node[peer,visible on=<12->] at (4,-6) (closestnode){closest node}
+		(secondnode.-110) edge[point,->,visible on=<12->,out=-110,in=180]
+		    node[above=2pt,visible on=<12->] {store}
+			    (closestnode.west)
+	    (closestnode.-160) edge[point,->,visible on=<12->,thick,out=180,in=-110] node[left of=2pt,visible on=<12->] {receipt} (secondnode.-130);
+    \end{tikzpicture}
+    };
+\end{tikzpicture}
+\end{column}
+\end{columns}
+\end{frame}
+
+\wholeslide{\textbf{SWINDLE}: \textbf{S}ervice \textbf{W}ith \textbf{IN}surance \textbf{D}eposit \textbf{L}itigation and \textbf{E}scrow }
+\blockslide[SWINDLE]{TL;DR}{If insured data is lost, the storers lose their deposit.}
+
+\begin{frame}{Litigation upon data loss}
+If insured data is lost, anyone holding a valid receipt can launch the litigation procedure.\\
+A node so challenged may defend itself by presenting
+\begin{enumerate}
+ \item the data itself
+ \item proof-of-custody of the data
+ \item a storage receipt for the data, passing the blame and implicating another node as the culprit.
+\end{enumerate}
+Only at the time of litigation is the chain from owner to storer explicitly determined. This is an important feature -- litigation may take time but inital storage can be fast allowing you to `upload and disappear'.
+\end{frame}
+
+\begin{frame}
+ \begin{center}
+  SWAP $\bullet$ SWEAR $\bullet$ SWINDLE
+ \end{center}
+
+\end{frame}
+
+
+

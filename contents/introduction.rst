@@ -214,15 +214,18 @@ You can also find the (first 2) ethersphere orange papers there.
 
 Public gateways are:
 
-* http://swarm-gateways.net/
-* http://web3.download/
+* http://swarm-gateways.net
+* http://web3.download,
 * http://ethereum-swarm.net/
+* http://localhost:8500/bzzr:/some/path
 
-Swarm testnet monitor: http://stats.ens.domains/
+Drain():
+  Swarm testnet monitor: http://stats.ens.domains/
 
+Source:
+  Source code is at https://github.com/ethereum/go-ethereum/
 
-Source code is at https://github.com/ethereum/go-ethereum/
-
-Example dapps are at https://github.com/ethereum/swarm-dapps
+Dapps:
+  Example dapps are at https://github.com/ethereum/swarm-dapps
 
 

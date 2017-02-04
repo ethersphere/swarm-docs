@@ -1,0 +1,77 @@
+\documentclass{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage{default}
+\input{preamble-devcon.tex}
+
+
+\title{The rise of the third web}
+\author{Viktor Tron and Aron Fischer}
+
+\AtBeginSection[]
+{
+\begin{frame}<beamer>
+\frametitle{Outline}
+\tableofcontents[currentsection,sectionstyle=show/shaded,subsectionstyle=show/show/hide,subsubsectionstyle=show/show/show/hide]
+\end{frame}
+}
+
+\begin{document}
+
+\begin{frame}
+ \titlepage
+\end{frame}
+
+\blankslide{\includegraphics[width=0.8\textwidth]{ecosystem0.jpg}} 
+
+\begin{frame}
+ \tableofcontents[subsectionstyle=shaded/shaded,subsubsectionstyle=hide/hide]
+\end{frame}
+
+\begin{frame}
+ Combining the power of the blockchain with a decentralised content storage and delivery network.
+\end{frame}
+
+\begin{section}{Content Delivery}
+\input{devcon-cdn.tex}
+\end{section}
+
+\begin{section}{Content Storage}
+ \input{devcon-storage.tex}
+\end{section}
+
+\begin{section}{Chunks, manifests, documents and collections}
+ \input{devcon-tech.tex}
+\end{section}
+
+\begin{section}{Dynamic data}
+ \input{devcon-uses.tex}
+\end{section}
+
+\begin{frame}[plain]{Join us}
+
+\begin{block}<1->{Contact and contribute}
+\begin{itemize}
+\item swarm channel: \texttt{https://gitter.im/ethereum/swarm}
+\item orange papers \texttt{http://web3.download/bzz:/swarm/}
+\item join our research channel, reading group and write the orange papers \texttt{https://gitter.im/ethersphere/orange-lounge}
+\end{itemize}
+\end{block}
+\begin{block}{The Team}
+\begin{itemize}
+\footnotesize
+\item Daniel A. Nagy, Nick Johnson, Viktor Trón (Zsolt Felföldi) (core team)
+\item Ram Devish, Bas van Kervel, Alex van der Sande (Mist integration)
+\item Felix Lange (integration, devp2p)
+\item Igor Shadurin (file manager dapp)
+\item Aron Fischer \& Ethersphere orange lounge group
+\item Nick Johnson, Alex van der Sande (Ethereum Name Service)
+\item Gavin Wood, Vitalik Buterin, Jeffrey Wilcke (visionaries)
+\end{itemize}
+\end{block}
+
+\end{frame}
+
+
+
+\end{document}
