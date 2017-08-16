@@ -1,0 +1,47 @@
+\documentclass{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage{default}
+\input{preamble-devcon.tex}
+
+\title{Swarm: web3 on ether}
+\author{Viktor Trón}
+
+\AtBeginSection[]
+{
+\begin{frame}<beamer>
+\frametitle{Outline}
+\tableofcontents[currentsection,sectionstyle=show/shaded,subsectionstyle=show/show/hide,subsubsectionstyle=show/show/show/hide]
+\end{frame}
+}
+
+\begin{document}
+
+\begin{frame}
+ \titlepage
+\end{frame}
+
+\section{the 1, 2, 3 of the WWW}
+\input{web3.tex}
+
+\section{Scalable inftrastructure for web3}
+\subsection{Data}
+\subsubsection{Chunks, manifests, documents and collections}
+\input{chunks.tex}
+\subsubsection{Decentralised database service}
+\input{pot.tex}
+
+\subsection{Internode communication}
+\subsubsection{Content delivery}
+\input{devcon-cdn.tex}
+\subsubsection{Routing with kademlia}
+\input{pss.tex}
+
+\subsection{Scalable micropayments}
+% \input{incentives.tex}
+\input{sw3.tex}
+
+\section{Status}
+ \input{status.tex}
+
+\end{document}

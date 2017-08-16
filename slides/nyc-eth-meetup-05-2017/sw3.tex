@@ -1,0 +1,148 @@
+
+% \begin{section}{Incentivisation/payments}
+
+
+\begin{frame}{SW3}
+\begin{block}{swap}
+swarm accounting protocol - transaction
+\end{block}
+\begin{block}{swear}
+service with enforced account registration - commitment
+\end{block}
+\begin{block}{swindle}
+secured with insurance, litigation and escrow - enforcement
+\end{block}
+\end{frame}
+
+
+%
+% \wholeslide{SWAP: \textbf{Sw}arm \textbf{A}ccounting \textbf{P}rotocol}
+%
+% \begin{frame}{SWAP: Swarm Accounting Protocol}
+% \textbf{The Swarm Accounting Protocol}
+% \begin{itemize}
+%  \item<2-> Keeps track of chunks provided/received (per peer)
+%  \item<3-> Can trade chunk-for-payment\alt<3>{}{ and chunk-for-chunk}
+% \end{itemize}
+% \uncover<5->{\textbf{Payments}}
+% \uncover<6->{use the swarm chequebook smart contract.}
+% \uncover<7->{Cheques are \textit{cumulative} and are sent off-chain. Only the last cheque needs to be cashed. This saves transaction costs and blockchain bloat.\\[5pt]}
+% \uncover<8->{\textbf{\alert{Soon:} Raiden payment-channel integration!}}
+% \end{frame}
+
+\begin{frame}{SWAP: \textbf{Sw}arm \textbf{A}ccounting \textbf{P}rotocol}
+\begin{block}{}
+swarm accounting protocol
+\end{block}
+\begin{block}{}
+service with automatic payments
+\end{block}
+\begin{block}{}
+settling with any peer
+\end{block}
+\end{frame}
+
+
+\wholeslide{SWAP: \textbf{Sw}arm \textbf{A}ccounting \textbf{P}rotocol}
+
+\begin{frame}{SWAP: Swarm Accounting Protocol}
+\begin{columns}[T]
+\begin{column}{0.5\textwidth}
+\small
+The \textbf{Swarm Accounting Protocol} keeps track of all data retrieved via the swarm retrieval process. It is used to facilitate automated payments between peers for the bandwidth they provide.\\
+\uncover<2->{Note: Bandwidth accounting \alt<2>{\alert{has to be}}{is} per-peer.\\[5mm]}
+
+\uncover<9->{When the peer connection becomes too imbalanced, a \emph{payment} is initiated.}
+\end{column}
+
+\begin{column}{0.5\textwidth}
+ \begin{center}
+  \begin{tikzpicture}
+   \node[peer,visible on=<3->] at (-2,0) (node1) {Me};
+   \node[peer,visible on=<4->] at (2,0) (node2) {Peer}
+   (node1.50) edge[point,->,dashed,visible on=<5->,bend right=30,out=50,in=130] node[below=10pt,visible on=<7->,scale=0.8] (sup){data delivered} (node2.130)
+   (node2.-130) edge[point,->,dashed,visible on=<6->,bend left=30,in=130,out=50] node[above=10pt,visible on=<9->,scale=0.8]{data received} (node1.-50)
+   ;
+   \node[visible on=<8->,below= 2mm of sup]{\Large{-}};
+  \end{tikzpicture}
+ \end{center}
+\end{column}
+
+\end{columns}
+\end{frame}
+
+\begin{frame}{The chequebook and the channel}
+ \begin{itemize}
+  \item It is \emph{impossible} to pay for every chunk of data delivered.
+  \item<2-> Even batch payments would constitute unacceptable blockchain bloat (and transaction cost).
+ \end{itemize}
+ \uncover<3->{Instead of processing every payment on-chain, SWAP employs a \emph{chequebook} smart contract:}
+  \begin{itemize}
+  \item<4-> Cheques are passed between connected swarm nodes (peers) off-chain.
+  \item<4-> Peers can cash in (process on-chain) the received cheques at any time.
+  \item<4-> Issued cheques are \emph{cumulative} and \textbf{only the last cheque has to be cashed}.
+ \end{itemize}
+ \uncover<5>{SWAP will soon also be usable via \emph{payment channels} (Raiden).}
+\end{frame}
+
+\begin{frame}{The chequebook and the channel}
+\begin{overlayarea}{\textwidth}{5.2cm}
+\setbeamercovered{transparent}% Dim out "inactive" elements
+\begin{columns}[t]
+  \column{0.5\textwidth}
+    \begin{block}{Chequebook}
+      \textbf{Pro:}
+      \begin{enumerate}
+       \item<1>{Offchain payments}
+       \item<2>{Low barrier to entry (pay anyone)}
+      \end{enumerate}
+      \textbf{Con:}
+      \begin{enumerate}
+       \item<3>{Cheques can bounce (payment not guaranteed)}
+      \end{enumerate}
+    \end{block}
+  \column{0.5\textwidth}
+    \begin{block}{Channel}
+      \textbf{Pro:}
+      \begin{enumerate}
+       \item<1>{Offchain payments}
+       \item<3>{Secure - payments guaranteed}
+      \end{enumerate}
+      \textbf{Con:}
+      \begin{enumerate}
+       \item<2>{High barrier to entry (must first join channel network)}
+      \end{enumerate}
+    \end{block}
+\end{columns}
+\end{overlayarea}
+\uncover<4>{
+Regardless of \emph{how} payments are processed, SWAP demonstrates how a swarm can have \textbf{programmable incentives}. In particular, a network of profit-maximising nodes using SWAP results in an automatically scaling content delivery network.
+}
+\end{frame}
+
+
+
+\begin{frame}{scalable off-chain micropayments}
+\begin{block}{sw1, sw2, sw3}
+simple swap with chequebook: tit for tat, service provision
+\end{block}
+\begin{block}{raiden, lightening, thunder}
+payment channels and payment channel relay networks
+\end{block}
+\begin{block}{!?}
+% blind signatures, equal-value coinblocks, transfer statements
+\end{block}
+\end{frame}
+
+
+\begin{frame}{SW3}
+\begin{block}{}
+load balanced (uniform distribution of hashes in kademlia topology)
+\end{block}
+\begin{block}{}
+compensatory insurance or punitive measures against locked collateral
+\end{block}
+\begin{block}{}
+guaranteed service provision, immediate settlement, swappable
+\end{block}
+\end{frame}

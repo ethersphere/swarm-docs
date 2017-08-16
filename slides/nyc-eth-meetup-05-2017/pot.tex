@@ -1,0 +1,194 @@
+
+
+\begin{frame}[plain,c]
+  \includegraphics[width=0.8\textwidth]{basementfiles.jpg}
+\end{frame}
+
+\begin{frame}{Database services}
+\begin{block}{Where is information (dynamic content) pulled from?}
+\begin{enumerate}
+\item the blockchain, ethereum state and contract storage (expensive and slow)
+\item local storage private to user, cookies (limited to data only client uses)
+\item distributed database on swarm? cheap, resilient, scalable and verifiable, slow?
+\item decentralised database services (indexing, query caching):
+\end{enumerate}
+\end{block}
+\end{frame}
+
+\begin{frame}{POT}
+\begin{block}{}
+proximity order trie
+\end{block}
+\begin{block}{}
+persistable, obfuscable, tamperproof
+\end{block}
+\begin{block}{}
+provable object traversal
+\end{block}
+\end{frame}
+
+
+\begin{frame}{Knowledge representation}
+\begin{columns}[t]
+  \column{.5\textwidth}
+  \begin{block}{FS}
+  attribute--value structures, vectors\\
+  object representation
+  \end{block}
+  \column{.5\textwidth}
+    \begin{block}{JSON}
+    \begin{semiverbatim}
+\{
+"Artist": "Pink Floyd",
+"Album": "Wish You Were Here",
+"Released": 1975,
+"Genre": "Classic rock",
+\}
+    \end{semiverbatim}
+    \end{block}
+
+\end{columns}
+\end{frame}
+
+\begin{frame}{Knowledge representation}
+\begin{columns}[t]
+  \column{.5\textwidth}
+  \begin{block}{types}
+  schemas, signatures
+  validation, scope
+  \end{block}
+  \column{.5\textwidth}
+  \begin{block}{typed AVSs}
+  \begin{semiverbatim}
+\{:schema:creative-work:
+"Artist": "Pink Floyd",
+"Album": "Wish You Were Here",
+"Released": 1975,
+"Genre": "Classic rock",
+\}
+  \end{semiverbatim}
+  \end{block}
+\end{columns}
+\end{frame}
+
+
+\begin{frame}{Knowledge representation}
+\begin{columns}[t]
+  \column{.5\textwidth}
+
+  \begin{block}{links}
+  context, uri,   Resource Description Framework\\
+  taxonomy, ontology, triple store, semantic web
+  \end{block}
+  \column{.5\textwidth}
+  \begin{block}{JSON-LD schemas}
+  \begin{semiverbatim}
+\{
+"@context": "http://json-ld.org/contexts/album.jsonld",
+"Artist": "Pink Floyd",
+"Album": "Wish You Were Here",
+"Released": 1975,
+"Genre": "Classic rock",
+\}
+  \end{semiverbatim}
+  \end{block}
+
+\end{columns}
+\end{frame}
+
+
+\begin{frame}{Knowledge representation}
+\begin{columns}[t]
+  \column{.5\textwidth}
+
+
+    \begin{block}{hash ties}
+    unambiguous serialisation, merkle links \\
+    integrity protection, deduplication
+    \end{block}
+
+      \begin{block}{distributed storage}
+      content addressing, and traversal\\
+      distributed storage of scalable
+      \end{block}
+  \column{.5\textwidth}
+  \begin{block}{IPLD/swarm manifest}
+  \begin{semiverbatim}
+\{
+"@context": "sdb:9c60b9....c3b744ec",
+"Artist": "Pink Floyd",
+"Album": "sdb:9c60b9....c3b744ec",
+"Released": 1975,
+"Genre": "Classic rock",
+\}
+  \end{semiverbatim}
+  \end{block}
+
+\end{columns}
+\end{frame}
+
+
+\begin{frame}{Knowledge representation}
+\begin{columns}[t]
+  \column{.5\textwidth}
+
+
+    \begin{block}{proofs}
+    merkle proofs of segment inclusion\\
+    (blockchain-)provable object transformations
+    \end{block}
+
+  \column{.5\textwidth}
+
+  \begin{block}{POT}
+    \begin{tikzpicture}
+     \node[scale=0.4] {
+     \input{devcon-merkle-proof.tex}
+     };
+    \end{tikzpicture}
+  \end{block}
+
+\end{columns}
+\end{frame}
+
+
+%
+% \begin{frame}{knowledge representation}
+% \begin{block}{JSON}
+% basic attribute, value structures
+% \end{block}
+% \begin{block}{TFS = JSON + schemas}
+% typed AVS, signatures, taxonomy, ontology
+% \end{block}
+% \begin{block}{JSON-LD = JSON + schemas + links}
+% Resource Description Framework, context, URI
+% \end{block}
+% \end{frame}
+%
+% \begin{frame}{POT}
+% \begin{block}{JSON/TFS + Merkle Tree}
+% secure trie, integrity protection
+% \end{block}
+% \begin{block}{IPLD = JSON-LD + Merkle links}
+% Merkle-DAG, links are IP-d by content addressing
+% \end{block}
+% \begin{block}{POT = IPLD + indexes and proofs }
+% blockchain-provable object transformations
+% \end{block}
+% \end{frame}
+%
+% \begin{frame}{POT}
+% \begin{block}{retrieval optimisation}
+% access count/popularity optimised retrieval
+% \end{block}
+% \begin{block}{serialisation}
+% (IPLD uses canonicalized CBOR with tags)
+% arbitrary atomic types with RLP - uint64-packed offset ties
+% deterministic length type representations, unambiguous
+% \end{block}
+% \begin{block}{indexing, provable queries}
+% provable object transformations/traversal
+% \end{block}
+% \end{frame}
+%
+%

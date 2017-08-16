@@ -1,0 +1,99 @@
+
+
+\begin{frame}[plain,c]
+  \includegraphics[width=0.8\textwidth]{commsapps.jpg}
+\end{frame}
+
+\begin{frame}{pss}
+\begin{block}{}
+pss...  bzz + shh = whispered
+\end{block}
+\begin{block}{}
+postal services suite
+\end{block}
+\begin{block}{}
+p2p-protocol secure socket
+\end{block}
+\end{frame}
+
+
+\begin{frame}
+ \begin{block}{vision}
+ comprehensive communications infrastructure
+ \end{block}
+ \begin{block}<2->{Tools at our disposal}
+  \begin{itemize}
+   \item kademlia overlay topology for deterministic message routing
+   \item incentivised message relay (store requests sent towards non-content address must be paid for)
+   \item deterministic routing and message delivery
+   \item priority queues
+   \item insured storage
+   \item certified delivery by receipts
+   \item multicast broadcast
+  \end{itemize}
+ \end{block}
+\end{frame}
+
+
+\begin{frame}
+\begin{block}{How does information (dynamic content) move around?}
+Using the same routing and incentive system as storage and retrieval.
+\end{block}
+\end{frame}
+
+
+\begin{frame}{Internode communication}
+\begin{block}{What kinds of interactions are we used to?}
+ \begin{itemize}
+    \item status updates (public or restricted)
+    \item chatroom, discussion forum, QnA forum
+    \item pager, fax, phonecall, videocall, voicemail
+    \item audio-video broadcast, tv, radio, podcast (live or recorded)
+    \item rss, subscription, pub/sub, notifications, newsletters
+    \item file transfer, download
+    \item datastreams, feeds, message bus
+ \end{itemize}
+\end{block}
+\begin{block}<2->{Question:}
+ Why are these services provided by private entities and are not part of the basic public infrastructure? After all, everything is just pulling, pushing and storing data.
+\end{block}
+\end{frame}
+
+\begin{frame}
+\setbeamercovered{transparent}% Dim out "inactive" elements
+\begin{overlayarea}{\textwidth}{10cm}
+To replicate services we are used to, specify storage and delivery criteria.
+\begin{block}{}
+ \begin{itemize}
+  \item<2-> Who is it for?
+  \item<3-> How should it be stored and transported?
+  \item<4-> Encryption?
+  \item<5-> What is the context?
+ \end{itemize}
+\end{block}
+ \only<2->{
+\begin{block}<2->{}
+\begin{itemize}
+  \only<2>{
+    \item Is it addressed to specific recipients?
+    \item Should it be (re-)delivered to specific recipients?
+    }
+ \only<3>{
+    \item Should it be stored (at content address) or is it ephemeral?
+    \item Does it have high priority, is it urgent, is latency a factor?
+    \item Should it be archived? is it insured? expiring?
+    \item Is data access recorded/receipted?
+    }
+ \only<4>{
+    \item Is it confidential? Private?
+    }
+ \only<5>{
+    \item reaction to previous communication, content, topic? Comments, answers, corrections
+    \item Existing asset (reference), streaming data, real time feed?
+    \item How should the data be displayed? Timeline or thematic/threaded view
+    }
+\end{itemize}
+\end{block}
+}
+\end{overlayarea}
+\end{frame}
