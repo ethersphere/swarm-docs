@@ -1,0 +1,158 @@
+
+
+\usepackage{multirow} %for aligning stuff in tables
+
+\usepackage{bbding} %for the smiley face
+
+\usepackage{calc} %calculate spacing \widthof
+
+%tikz stuff
+\usepackage{tikzsymbols}
+\usepackage{tikz}
+\usetikzlibrary{fit,arrows,positioning}
+
+  % Keys to support piece-wise uncovering of elements in TikZ pictures:
+  % \node[visible on=<2->](foo){Foo}
+  % \node[visible on=<{2,4}>](bar){Bar}   % put braces around comma expressions
+  %
+  % Internally works by setting opacity=0 when invisible, which has the
+  % adavantage (compared to \node<2->(foo){Foo} that the node is always there, hence
+  % always consumes space plus that coordinate (foo) is always available.
+  %
+  % The actual command that implements the invisibility can be overriden
+  % by altering the style invisible. For instance \tikzsset{invisible/.style={opacity=0.2}}
+  % would dim the "invisible" parts. Alternatively, the color might be set to white, if the
+  % output driver does not support transparencies (e.g., PS)
+  %
+  \tikzset{
+    invisible/.style={opacity=0},
+    visible on/.style={alt={#1{}{invisible}}},
+    alt/.code args={<#1>#2#3}{%
+      \alt<#1>{\pgfkeysalso{#2}}{\pgfkeysalso{#3}} % \pgfkeysalso doesn't change the path
+    },
+  }
+  \tikzset{
+    dimmed/.style={opacity=0.2},
+    dimmed on/.style={alt={#1{dimmed}{}}},
+    alt/.code args={<#1>#2#3}{%
+      \alt<#1>{\pgfkeysalso{#2}}{\pgfkeysalso{#3}} % \pgfkeysalso doesn't change the path
+    },
+  }
+\tikzset{
+    %Define standard arrow tip
+    >=stealth',
+    %Define style for boxes
+    peer/.style={
+           rectangle,
+           rounded corners,
+           draw=black, thin,
+           text width=3.5em,
+           minimum height=2em,
+           text centered},
+    node/.style={
+           rectangle,
+           rounded corners,
+           draw=black,
+           text width=4.5em,
+           minimum height=2em,
+           text centered,
+           fill={rgb:black,1;white,3}},
+    chunk/.style={
+           rectangle,
+           rounded corners,
+           draw=black,
+           text width=2.5em,
+           minimum height=1em,
+           text centered,
+           fill=block title bg},
+    % Define arrow style
+    point/.style={
+           ->,
+           thick,
+           shorten <=2pt,
+           shorten >=2pt,}
+every node/.style={align=center}
+}
+
+\newcommand{\wholeslide}[2][]{
+\begin{frame}{#1}
+% \transboxout<1>[duration=0.5]
+\setbeamercolor{bgcolor}{fg=black,bg=white}
+\begin{tikzpicture}[overlay, remember picture]
+\node[anchor=center] at (current page.center) {
+  \begin{beamercolorbox}[center]{bgcolor}
+     #2
+  \end{beamercolorbox}};
+\end{tikzpicture}
+
+\end{frame}
+}
+
+\newcommand{\blankslide}[2][]{
+\begin{frame}[plain]{#1}
+% \transboxout<1>[duration=0.5]
+\setbeamercolor{bgcolor}{fg=black,bg=white}
+\begin{tikzpicture}[overlay, remember picture]
+\node[anchor=center] at (current page.center) {
+  \begin{beamercolorbox}[center]{bgcolor}
+     #2
+  \end{beamercolorbox}};
+\end{tikzpicture}
+
+\end{frame}
+}
+
+\newenvironment<>{varblock}[2][.9\textwidth]{%
+  \setlength{\textwidth}{#1}
+  \begin{actionenv}#3%
+    \def\insertblocktitle{#2}%
+    \par%
+    \usebeamertemplate{block begin}}
+  {\par%
+    \usebeamertemplate{block end}%
+  \end{actionenv}}
+
+\newlength{\mywidth}
+\newcommand{\blockslide}[3][]{
+\settowidth{\mywidth}{#3}
+\begin{frame}[c]{#1}
+\begin{center}
+\begin{minipage}{1.1\mywidth}
+ \begin{varblock}[1.1\mywidth]{#2}
+  #3
+ \end{varblock}
+\end{minipage}
+\end{center}
+\end{frame}
+}
+
+\newcommand{\plainblockslide}[2]{
+\settowidth{\mywidth}{#2}
+\begin{frame}[c]
+\begin{center}
+\begin{minipage}{1.1\mywidth}
+ \begin{varblock}[1.1\mywidth]{#1}
+  #2
+ \end{varblock}
+\end{minipage}
+\end{center}
+\end{frame}
+}
+
+\mode<presentation>{
+\usetheme{Warsaw}\usecolortheme{crane}
+\setbeamertemplate{items}[square]
+\setbeamertemplate{section in toc}[square]
+\setbeamertemplate{subsection in toc}[square]
+% \setbeamertemplate{subsection in toc}[subsections numbered]
+\setbeamertemplate{subsubsection in toc}[square]
+% \setbeamercolor{items}{fg=black,bg=yellow}
+\usebeamercolor{block title}
+\definecolor{block title bg}{named}{bg}
+\setbeamercolor{item projected}{fg=black,bg=block title bg}
+\setbeamercolor{itemize item}{fg=block title bg,bg=block title bg}
+}
+
+
+
+
