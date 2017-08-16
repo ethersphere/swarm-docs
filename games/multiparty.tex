@@ -1,0 +1,29 @@
+\section{Multi-Party Channels and channel state}
+\subsection{Consensus Issues in multi-party channels}
+Describe what is a three+ person channel.
+Describe consensus issues... the need for in-channel consensus mechanisms.
+
+Talk about the network as being a 'global channel' and introduce the idea that there can be a difference between on-chain and offchain rules for updating balances.
+How we could have one set of rules in channel for determining the channel state but another set of rules for how to update the state onchain.
+
+
+\subsection{Multi-party State Channels}
+\subsubsection*{On-chain state logic}
+The idea of a state channel where the state transition function is on-chain directly; where any and all transactions can be relayed to the blockchain as desired and the channel contract will update the state.
+
+\subsubsection*{Off-chain state logic}
+The idea of a state channel with complicated software for processing state (written not for EVM and not is solidity!) ... or just a state channel where the state transitions would hit the gas limit.... 
+
+...the idea that there is a consensus mechanism (like Casper) whose logic is on-chain (and maybe there is a yellow paper on-chain too specifying what the 'correct' state transitions should be) ... but where the implementation of state transition is offchain in the clients while only the consensus protocol is able to update the state on-chain.
+
+\subsubsection*{Forking a Dapp?}
+Discussion of what a fork means in this context -- dapp hard fork without platfrom hard fork for example. Discussion on intent vs implementation -- consensus algorithm could be based on intent - how this might have averted the Daosaster... How the Dao theft would just turn into a channel exit/close proposal that gets rejected by the channel consensus algorithm.
+
+
+
+\subsection{Sidechains, Sharding and Nested Casper}
+Mentions of nested Casper, sharding, sidechains and general governance issues.
+
+Report on conensus algorithm research, the universality / modularity of Casper protocols. The benefits to security of moving sensistive logic off the main chain.
+
+Speculative - how could you do all the swindle type logic offchain (in the swarm clients) while having an on chain swarm-casper protocol updating the state of the swarm channel?
