@@ -1,0 +1,98 @@
+\section{Basic two-person payment channels}
+
+
+\subsection{Basic theory and Direct Payments}
+% the most simple example of a two person channel to introduce the idea.
+
+\textbf{notes}\\
+the most simple example of a two person channel to introduce the idea. Two people lock funds in a channel. They send payments back and forth which consist of a new balance signed by the payer. These updates are ordered and so we can always indentify which balance is newer.
+
+How we set up a two person channel. \\
+Send funds into escrow. \\
+How we update our balance between ourselves off chain. How we gain speed and privacy doing so, avoid blockchain bloat.\\
+\textbf{end-notes}\\[2cm]
+
+A two person payment channel allows two parties to exchange payments quickly, cheaply, privately and securely without the need to pay for and wait for the blockchain to process the payments. Conceptually, the channel has two part: the on-chain channel logic and the off-chain communication channel.
+\subsubsection*{Channel Logic 1: Opening a channel}
+Two open a two-party payment channel, Alice and Bob each send some tokens (let's say 10 ether each) to a channel creation contract. After successfully being created on-chain, the channel will hold all funds (20 ether) locked in escrow. Neither Alice nor Bob have immediate access to these funds on the blockchain itself. They can however spend the funds `in channel', i.e. in the off-chain part:
+\subsubsection*{The off-chain communication channel}
+Alice and Bob can send each other payments using any communication medium they desire, be it email, sms, whisper, fax or carrier pigeon. The basic operation is as follows: 
+\begin{itemize}
+ \item There are 20 ether locked in the channel and Alice and Bob each own 10.
+ \item Bob wants to pay Alice 1 ether. Bob sends Alice a signed message stating that after one transaction the balances are 9 ether for Bob and 11 for Alice.
+ \item {[}Optional: Alice countersigns the message and returns a copy to Bob]
+ \item On the blockchain nothing changes.
+ \item To send Alice another 4 ether, Bob sends another message stating that after two transacitons the balances are Bob: 5 and Alice 15.
+ \item {[}Optional: Alice countersigns the message and returns a copy to Bob]
+ \item On the blockchain nothing changes.
+ \item Alice wants to pay Bob 8 ether and so she sends a signed message stating that after three transactions the balances are Bob: 13, Alice: 7.
+ \item {[}Optional: Bob countersigns the message and returns a copy to Alice]
+ \item On the blockchain nothing changes.
+\end{itemize}
+These payments can go back and forth in quick succession. Hundreds or even thousands of bilateral payments could be made in this way without any changes needed to the blockchain. 
+\subsubsection*{Channel Logic 2: Updating the balances}
+No changes are needed to the on-chain part of the channel, but it is possible for either Alice or Bob to submit the latest state to the blockchain. In our example above, if Alice had chosen to do so she could have submitted to the blockchain the message (signed by both Bob and Alice) that after two transactions, the balances were Bob: 5 and Alice 15. \\
+After receiving such a transaction, the channel logic updates the internal balances of the two parties. There are still 20 ether locked in the channel, but now 5 are attributed to Bob and 15 to Alice.\\
+Note also that Alice and Bob could have chosen to update the on-chain channel only after 10 000 transactions. All that we need to know is the final balance. This gives a huge boost to privacy and speed.\\
+It is only when Alice and Bob wish to move ether out of the channel contract into another ethereum account that anything \textit{has to} be processed on the blockchain at all. To extract all the locked funds from the channel and pay out the correct amounts to Alice and Bob, they have to invoke the channel closing procedure.
+
+\subsection{Closing a Basic Channel}
+\textbf{Notes}\\
+channel exit criteria - again as a model for all that comes later: the time delay during which we can prove that there was a newer state etc..\\
+How we exit the channel - the need for exit period to avoid theft. Proof of malfeasance is a newer balance signed by the counterparty.\\
+\textbf{end-notes}\\[2cm]
+
+Exit procedures are a critical part of the payment channel machinery. It is at closing time that all the implicit in-channel payment promises are explicitly realisable. Channel closing procedures always have the following three phases:
+\begin{enumerate}
+ \item Initiation
+ \item Delay
+ \item Execution
+\end{enumerate}
+
+\begin{description}
+ \item[Initiation] Channel closing procedures can be initiated by either party by sending a special request to the channel-logic informing it of their intent to exit the channel. If the channel state has not been updated recently, the exit request shall also include the latest balances. Let us assume Alice wishes to close the channel with Bob.
+ \item[Delay] After a request has been made to close the channel, the delay period is initiated. This delay is vitally important as it gives the other participant in the channel (Bob) a chance to respond and could be as long as a week or more. The delay period ends when one of three things happens:
+      \begin{enumerate}
+       \item[(i)] Bob agrees to the final balances as declared by Alice in the exit request.
+       \item[(ii)] Bob disagrees with Alice and submits a \textit{newer} balance than Alice had included in her exit request.
+       \item[(iii)] Bob takes no action during the delay period.
+      \end{enumerate}
+ \item[Execution] The channel is closed and all funds held by the channel are sent to the two participants. In case (i) and (iii) the balances from the exit request are used but in case (ii) the balances from the updated balance are used as a base on top of which the offending party has to pay a penalty.
+\end{description}
+We look at four exemplary scenarios in detail
+ \begin{enumerate}
+  \item[1] {[Initiation] Alice asks to close the channel after three transactions with a balance of Bob: 13, Alice 7. \\
+	   {[}Delay] Bob sees Alice's exit request and immediately sends a transaction signalling his agreement. \\
+	   {[}Execution] The channel is closed and Bob recieves 13 while Alice recieves 7.}
+  \item[2] {[Initiation] Alice asks to close the channel after two transactions with a balance of Bob: 5, Alice 15.\\
+	   {[}Delay] During the delay Bob notices that Alice is attempting to cheat becase there had been a third transaction made. Bob send an update balance to the channel logic Bob: 13, Alice: 7.\\
+	   {[}Execution] Bob is sent the 13 ether he own while the remaining 7 are split up (depending on the channel in question) 50/50 between Alice and Bob; Alice pays a 50\% penalty for attempting to cheat.}
+  \item[3] {[Initiation] Alice asks to close the channel after three transactions with a balance of Bob: 13, Alice 7.\\
+	   {[}Delay] Bob is offline and does not react. \\
+	   {[}Execution] The channel is closed and Bob recieves 13 while Alice recieves 7.}
+  \item[4] {[Initiation] Alice asks to close the channel after two transactions with a balance of Bob: 5, Alice 15.\\
+	   {[}Delay] Bob is offline and does not react.\\
+	   {[}Execution] The channel is closed and Bob recieves 5 while Alice recieves 15.}
+ \end{enumerate}
+
+ The purpose of the delay period is to avoid the last scenario.
+ 
+\subsection{Negative Balances, Debt and other in-channel games}
+a note on the possibility of debt in-channel even if not realisable on-chain.
+
+A note about how we can allow debt in-channel even if it can never be realised on chain... We can agree to have a channel in which I have 120 and you have -60. It is the exit condition that will tell me that I can only withdraw 60.
+
+
+\subsection{Example: Swapping chunks of data for payments in Swarm}
+%4. example of two-party chunk swap in swarm -- the baby case.
+
+Swap as primary use-case for pairwise channels. Pairwise by design. Many small transactions between same two peers expected.
+
+transaction ordering, cumulative accounting\\
+smart transfer: escrow conditions and expiries\\
+exit or withdrawal conditions\\
+incentivisation of forwarding, transaction fees vs deposit-challenge\\
+
+Explain how multiple channels need multiple deposits.. \\
+contrast this with chequebook payments in current implementation.\\
+pooled collaterals, and insurance cover for insolvency

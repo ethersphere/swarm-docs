@@ -1,0 +1,117 @@
+\documentclass{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage{default}
+\input{preamble-devcon.tex}
+
+\title{Swarm: web3 on ether}
+\author{Viktor Trón}
+
+\AtBeginSection[]
+{
+\begin{frame}<beamer>
+\frametitle{Outline}
+\tableofcontents[currentsection,sectionstyle=show/shaded,subsectionstyle=show/show/hide,subsubsectionstyle=show/show/show/hide]
+\end{frame}
+}
+
+\begin{document}
+
+\begin{frame}
+ \titlepage
+\end{frame}
+
+
+\section{Status}
+ \input{status.tex}
+
+
+
+ \begin{frame}{swarm}
+\begin{block}{}
+testnet, dapps on swarm, basic stats
+\end{block}
+\begin{block}{}
+ network testing and simulation framework, network monitoring and swarm visualisation
+ \end{block}
+ \begin{block}{}
+pss : messaging
+\end{block}
+\begin{block}{}
+FUSE : cross-device syncronisation, swarm filesystem, dropbox
+ \end{block}
+ \begin{block}{}
+Plausible deniability via shannonian obfuscation
+\end{block}
+\begin{block}{}
+livepeer, swatch, streaming with adaptive transmission channels, video/audio over swarm
+\end{block}
+ \end{frame}
+
+\begin{frame}{swarm}
+\begin{block}{}
+storage for web3: archival and retrieval monetized
+\end{block}
+\begin{block}{}
+serving web applications with routed messaging
+\end{block}
+\begin{block}{}
+silly world of acronyms, riddles and mnemonics
+\end{block}
+\end{frame}
+
+\section{Scalable inftrastructure for web3}
+
+\subsection{Internode communication: pss}
+\begin{frame}{pss}
+\begin{block}{}
+pss...  bzz + shh = whispered
+\end{block}
+\begin{block}{}
+postal services suite
+\end{block}
+\begin{block}{}
+p2p-protocol secure socket
+\end{block}
+\end{frame}
+
+\subsection{Decentralised database services}
+\begin{frame}{Database services}
+\begin{block}{Where is information (dynamic content) pulled from?}
+\begin{enumerate}
+\item the blockchain, ethereum state and contract storage (expensive and slow)
+\item local storage private to user, cookies (limited to data only client uses)
+\item distributed database on swarm? cheap, resilient, scalable and verifiable, slow?
+\item decentralised database services (indexing, query caching):
+\end{enumerate}
+\end{block}
+\end{frame}
+
+\begin{frame}{POT}
+\begin{block}{}
+proximity order trie
+\end{block}
+\begin{block}{}
+persistable, obfuscable, tamperproof
+\end{block}
+\begin{block}{}
+provable object traversal
+\end{block}
+\end{frame}
+\subsection{Internode communication}
+
+
+\subsection{Scalable payment systems and incentivisation}
+
+\begin{frame}{SW3}
+\begin{block}{swap}
+swarm accounting protocol - transaction
+\end{block}
+\begin{block}{swear}
+service warranty enforced account registration - commitment
+\end{block}
+\begin{block}{swindle}
+secured with insurance, litigation and escrow - enforcement
+\end{block}
+\end{frame}
+\end{document}

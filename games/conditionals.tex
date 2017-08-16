@@ -1,0 +1,39 @@
+\section{Combining 2-person channels to a payment network}
+
+This is the section about how to string channels together.
+
+\subsection{Basic Conditional Payments}
+ A conditional payment: A payment is sent A->B but can only be unlocked by *something*. A has to regard the money as already spent; B has certainty that if *something* happens, B will be paid.
+ 
+Basic example: A sends to B a payment intended for Z - payment is unlocked with signed receipt from Z including payment reference and all intermediate nodes.
+
+how we can use a 'standard' release condition -- namely a signed receipt by some entity. [also mention HashLock example Raiden/Lightening]\\
+How we can use the standard method to string together pairwise payment channels. 
+
+Also discuss hashlock and other variants here if desired.
+
+\subsection{Example: The Swarm Storage Network}
+
+patterns of route selection (concurrently running parallel transfers)
+
+unspecified (task-defined) recipients = routing as market making
+
+\subsection{General Conditional Payments}
+How we could use Judge contracts for more complex conditionl transfers. %Looking ahead, include a teaser about Swear and long term storage. 
+
+How we could use general judge contracts to string together pairwise channels as long as all parties recognise the judge in question.
+
+\subsection{Exiting a General Payment Channel}
+On exit request, proof of malfeasance is a newer state signed by the counterparty. 
+Judge contract must OK the exit request.
+How judges must work. Security implications.
+
+
+
+\subsection{Example: Long Term Storage in Swarm}
+Swear and the implications for the in-channel state of affairs. Receipts as conditionals.
+
+Swindle and conditional payments based on proof of custody. How proof of custody can act as a hashlock to unlock an entire chain of payments. How the channel exit logic must know about store promises and timeframes.\\
+payment in installments
+
+settlement guarantees - swear to accept systems with guardians - upload and disappear
