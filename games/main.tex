@@ -163,8 +163,8 @@ Nonetheless, even in this simple form, the chequebook proves quite useful.
 \gloss{swap} is a tit-for-tat accounting scheme that scales microtransactions by
 allowing service for service exchange between connected peers
 (\emph{swap = swarm accounting protocol for service wanted and provided}).
-In case of equal consumption with low variance over time, bidirectional services
-can be accounted for without any payments. Data relaying is such a service, making swap
+
+In case of equal consumption with low variance over time, bidirectional services can be accounted for without any payments. Data relaying is such a service, making swap
 ideally suited for implementing bandwidth incentives in content delivery or mesh networks.
 
 \begin{center}
@@ -206,25 +206,19 @@ debt sends a cheque to its peer, if it reaches the disconnect threshold, the pee
 \end{figure}
 \end{center}
 
-Extended with a delayed payment instrument
-like the chequebook, swap also offers a way to deal with unequal consumption
+
+Extended with a delayed payment instrument like the chequebook, swap also offers a way to deal with unequal consumption
 as well as high variance.
-If the balance tilts too much toward one peer, the indebted
-party issues a cheque to return the balance to zero.
-This process is automatic and justifies swap as \emph{settle (the balance) with automated payments}
+In the presence of high variance, or unequal consumption of services, the balance will eventually tilt significantly toward one peer. In this situation, the indebted
+party issues a cheque to the creditor, to return the nominal balance to zero. This process is automatic and justifies swap as \emph{settle (the balance) with automated payments}
 (see figure \ref{fig:swap}).
 
-A valid cheque can be cashed directly by sending it
-in a transaction to the issuer's chequebook contract. Alternatively, cheques can also be withheld.
-Withholding a cheque is effectively lending on credit, which enables the parties to save on
-transaction costs.
-While, strictly speaking, there are no strong solvency guarantees,
-a bounced cheque will affect the issuer's reputation (as the chequebook contract records it).
-On the premise that
-cheques are swapped in the context of repeating dealings, peers will refrain from
-issuing cheques beyond their balance.
-In other words, interest in keeping good reputation is a strong incentive for
-solvency.
+Such cheques can be cashed immediately by being sent to the issuer's chequebook contract. Alternatively, cheques can also be withheld
+%. Withholding a cheque is effectively lending on credit, 
+which enables the parties to save on transaction costs.
+While, strictly speaking, there are no solvency guarantees, a bounced cheque will affect the issuer's reputation (as the chequebook contract records it).
+On the premise that cheques are swapped in the context of repeating dealings, peers will refrain from
+issuing cheques beyond their balance. In other words, interest in keeping good reputation with their peers is an incentive for maintaining solvency.
 
 \begin{center}
 \begin{figure}
