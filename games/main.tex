@@ -123,46 +123,38 @@ generic off-chain payments.
 
 \section{Swap channels}
 
-One of the major issues with direct onchain payments is that each transaction is processed
-by each node participating in the public network incurring high transaction costs.
-If a beneficiary is willing to trade off the risk of settlement and delay for decreased transaction costs
- they should be able to hold out redeeming a payment at their discretion.
+One of the major issues with direct ``onchain'' payments in a blockchain network, is that each transaction must be processed
+by each and every node participating in the network, resulting in high transaction costs.
+One strategy to mitigate transaction costs is to defer payments and process them in bulk. 
+In exchange for reduced cost, the beneficiary must be willing to incur higher risk of settlement failure.
 
 \subsection{A simple chequebook}
 
-A stunningly simple smart contract that does exactly that was introduced in \cite{ethersphere2016sw3}
-The \gloss{chequebook} is a wallet that can process cheques issued by its owner. The cheques work
-exactly as real-world ones: the issuer signs a cheque specifying a beneficiary, a date and an amount,
+A very simple smart contract that does allows the beneficiary to choose when payments are to be processed, was introduced in \cite{ethersphere2016sw3}
+This \gloss{chequebook} contract is a wallet that can process cheques issued by its owner. The cheques work
+analgously as real-world ones: the issuer signs a cheque specifying a beneficiary, a date and an amount,
 gives it to the recipient as a token of promise to pay at a later date. The smart contract plays the
-role of the bank, after validating the signature, date and the balance, the amount gets transferred
-to the beneficiary's account. Analogously to the person taking the cheque to the bank to cash it,
-anyone can send the digital cheque as part of the data in a transaction to the owner's
-chequebook account and thus trigger the transfer.
+role of the bank. When the recipient wishes to get paid, the ``cash the cheque'' by submitting it to the smart contract. The contract, after validating the signature, date and the amount specified on the cheque, transfers the amount to the beneficiary's account.
+%Analogously to the person taking the cheque to the bank to cash it, anyone can send the digital cheque as part of the data in a transaction to the owner's chequebook account and thus trigger the transfer.
 
-Double cashing could be prevented by signing an additional field, say a serial number,
-storing it in the contract and enforcing sequential
-application. Alternatively, instead of using the payable amount, issuers sign on the cumulative
-total amount ever credited to the beneficiary. This total cumulative cashed amount is stored
-in the contract for each beneficiary. The contract ignores cheques with amount equal or less
-than the current balance, but transfer the difference if it receives a cheque with a higher
+Since these digital cheques are copyable files, care must be taken that the same cheque cannot be casehd twice. Such ``double cashing'' can be prevented by giving each cheque given to a particular beneficiary a serial number which the contract will store when the cheque is cashed. Perhaps the chequebook contract would enforce cashing of cheques in sequential order, thus needing to store only a single serial number per beneficiary.
+An alternative strategy to prevent double cashing, when repeated payments are made to the same beneficiary, the cheques contain the \emph{cumulative} total amount ever credited to the beneficiary. The total cumulative amount that has been cashed out is stored in the contract for each beneficiary. When a new cheque is submitted, the contract ignores cheques with amount equal or less than the stored total, but it will transfer the difference if it receives a cheque with a higher
 total.
-This simple trick also makes it possible to cash cheques in bulk by sending only the last one in
-thereby further reducing transaction costs. Incidentally, the cumulative amount
-directly represents the total of all outgoing payments and serves as a credit history for the owner.
 
-The amount deposited in the chequebook (\gloss{global balance})
-serves as collateral pooled over the beneficiaries of all outstanding cheques.
-In this simplest form the chequebook has the same liability as real-world cheques: none.
-Since funds can be freely moved out of the chequebook wallet, solvency cannot be guaranteed
-at the time of cashing.
+This simple trick also makes it possible to cash cheques in bulk, because only the current `last cheque' must ever be processed. This achieves the reduction of transaction costs alluded to above.
 
-Parts of this deposit can be locked (\gloss{global deposit}).
-If the frequency of issuing and the amount promised are limited,
-the global balance can be informational about the likelihood of insolvency.
-If, however, there is no restrictions on issuing and paying out cheques,
-the owner can issue cheques totalling more than what is backed
-by the chequebook's global balance. Locking, by itself, provides no further guarantees, so accepting
-cheques constitutes a risk to the beneficiary.
+Incidentally, the cumulative amount stored in the contract, represents the total of all outgoing payments that have been honoured and thus it serves as a credit history for the owner.
+
+The amount deposited in the chequebook (\gloss{global balance}) serves as collateral for the cheques. It is pooled over the beneficiaries of all outstanding cheques.
+In this simplest form the chequebook has the same guarantee as real-world cheques: none. When a chequebook contract has zero balance, and cheque that is submitted will bounce. Since funds can be freely moved out of the chequebook wallet at any time, solvency at the time of cashing can never be guaranteed. This is the trade off between transaction costs and risk of settlement failure.
+
+% Parts of this deposit can be locked (\gloss{global deposit}).
+% If the frequency of issuing and the amount promised are limited,
+% the global balance can be informational about the likelihood of insolvency.
+% If, however, there is no restrictions on issuing and paying out cheques,
+% the owner can issue cheques totalling more than what is backed
+% by the chequebook's global balance. Locking, by itself, provides no further guarantees, so accepting
+% cheques constitutes a risk to the beneficiary.
 
 \subsection{SWAP accounting with chequebook}
 
