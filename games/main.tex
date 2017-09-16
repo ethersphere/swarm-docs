@@ -64,47 +64,36 @@ settle (the balance) with automated payments; setting up a wallet as payment; se
 \tableofcontents
 
 \section{Introduction}
-Public proof-of-resource blockchains implement decentralised consensus on the validity and ordering of
-transactions in a state machine. Clients run a virtual machine to calculate state transitions by calling
-functions of programs sitting on accounts triggered by transactions. Given the expressive power of
-these programs called smart contracts, the blockchain can
-govern rules of interaction, enforce agreements, verify facts.
-Economic incentive systems driven by transparent smart contracts can regulate data flow
-so that emergent properties of peer-to-peer services are beneficial to users.
-It can act as a decentralised application platform running services potentially
-disintermediating trusted third parties traditionally needed for most domains of human interaction.
+Public proof-of-resource blockchains implement a decentralised consensus mechanism. Consensus is reached on the validity and ordering of
+transactions in a state machine. State transitions are triggered by transactions, and clients run a virtual machine to calculate these state transitions. In this process, transactions refer to specific accounts which store programs - called ``smart contracts'' - and the clients trigger functions of these programs to calculate the state transition. Limited only by the expressive power of these smart contracts, the blockchain can govern a myriad of rules of interaction, and enforce agreements.
 
-While Turing-complete blockchain is the final missing piece of the puzzle to bring the cypherpunk vision
-of decentralisation to its completion, scalability has been repeatedly brought up as the major bottleneck
-in their mass adoption to real-world problems. Transaction costs for micropayments,
-speed and volume limitations are likely problematic even for evolved blockchains
-implementing sharding and proof of stake consensus.
+In the context of data storage and provision, we can imagine carefully designed economic incentive systems that are driven by transparent smart contracts, which regulate the peer-tp-peer data flow in such a way that the emergent properties of the network are beneficial to all of its users.
+Such a system can act as a fully decentralised application platform, providing useful services while potentially
+disintermediating trusted third parties on which such services had to rely in the past.
 
-Side chains and state channels have been proposed to remedy these shortcomings.
-While inspired by these approaches, in this paper we take a different approach.
-The framework to support incentive systems for decentralised services
-was first conceived of in the context of designing storage incentives
-for a decentralised content delivery network.
+While the Turing-complete blockchain is sometimes refered to as ``the final missing piece'' of the puzzle to bring the cypherpunk vision
+of decentralisation to its completion, problems with their scalability are still a major bottleneck preventing mass adoption to real-world problems. These scalability issues include the high transaction costs for micropayments, the inherent speed and volume limitations in current blockchain designs, and are likely to remain problematic even for blockchains implementing more avanced technologies such as ``sharding'' and ``proof of stake''.
 
-Peers engage in local exchange of data, promises, requests, deliveries (swap).
-Nodes organise in a network, use relaying
-to extend the scope of local interactions, and register with a deposit
-(swear) to offer service guarantees enforced by a courtroom contract
-making them accountable in case of non-compliance (swindle).
+In recent years, ``Side chains'' and ``state channels'' have been proposed as technologies that could remedy these shortcomings.
+While inspired by these approaches, in this paper we take a different approach. %no we don't. we're really just describing one version of a state channel, but who cares, right?
+We introduce a framework to support generic incentive systems for decentralised services. Our framework was first conceived of in the context of designing storage incentives for the ``swarm'' decentralised content delivery network, but has since been generalised.
+
+As with any state channel, the system relies on the three pillars of communication, registration and enforcement.
+\begin{enumerate}
+ \item Peers engage in local exchange (p2p communication) of data, promises, payments, messages, requests, deliveries etc. We call this the \textbf{SWAP} network. Furthermore, peers will relay data between disjoint peers to extend the scope of the network.
+ \item All nodes in the network pay a security deposit to a smart contract. This is the \textbf{SWEAR} registration. This allows them to offer more complex services to their peers.
+ \item The rules of these service provisions are enforced by a courtroom - the \textbf{SWINDLE} contract - making nodes accountable in case of non-compliance.
+\end{enumerate}
+
 Such a system is playfully called a \emph{swap, swear and swindle} game.
 
-In this paper we present the generalised version of this idea and show how the paradigm
-can serve as the base layer infrastructure driving decentralised service economies.
-The tools presented here provide a platform to implement digital services that are
-cheap and scalable without compromising security offered by the public blockchain.
+In this paper we present the generalised version of this idea and show how the paradigm can serve as the base layer infrastructure driving decentralised service economies.
+The tools presented here provide a platform to implement digital services that are cheap and scalable without compromising security offered by the public blockchain.
 The claim is that virtually any digital service can be reinterpreted as a swap, swear and swindle game.
 
-The solutions presented are built up in a piecemeal fashion from very simple and intuitive
-modules. Various errors in smart contracts revealed that turing completeness while expressive, can
-be dangerous and prompted many to call for solutions with less expressive power.
-Our modular approach as well as real world analogues of the components has the added
-advantage that reasoning about complex systems is easier
-and enable less error-prone implementations.
+The solutions presented are built up in a step-by-step fashion from very simple and intuitive
+modules.% Various errors in smart contracts revealed that turing completeness while expressive, can be dangerous and prompted many to call for solutions with less expressive power.
+Our modular approach, combined with the fact that many of the modules have clear real world analogues, has the advantage that reasoning about this (undeniably complex) system becomes a lot easier easier, and enables less error-prone implementations.
 
 In section 2 we introduce swap channels, an off-chain peer-to-peer accounting and
 payment solution for bidirectional services. We start from an off-chain protocol to
