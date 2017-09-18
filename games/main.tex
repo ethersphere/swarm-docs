@@ -67,15 +67,14 @@ settle (the balance) with automated payments; setting up a wallet as payment; se
 Public proof-of-resource blockchains implement a decentralised consensus mechanism. Consensus is reached on the validity and ordering of
 transactions in a state machine. State transitions are triggered by transactions, and clients run a virtual machine to calculate these state transitions. In this process, transactions refer to specific accounts which store programs - called ``smart contracts'' - and the clients trigger functions of these programs to calculate the state transition. Limited only by the expressive power of these smart contracts, the blockchain can govern a myriad of rules of interaction, and enforce agreements.
 
-In the context of data storage and provision, we can imagine carefully designed economic incentive systems that are driven by transparent smart contracts, which regulate the peer-tp-peer data flow in such a way that the emergent properties of the network are beneficial to all of its users.
+In the context of data storage and provision, we can imagine carefully designed economic incentive systems that are driven by transparent smart contracts, which regulate the peer-to-peer data flow in such a way that the emergent properties of the network are beneficial to all of its users.
 Such a system can act as a fully decentralised application platform, providing useful services while potentially
 disintermediating trusted third parties on which such services had to rely in the past.
 
 While the Turing-complete blockchain is sometimes refered to as ``the final missing piece'' of the puzzle to bring the cypherpunk vision
 of decentralisation to its completion, problems with their scalability are still a major bottleneck preventing mass adoption to real-world problems. These scalability issues include the high transaction costs for micropayments, the inherent speed and volume limitations in current blockchain designs, and are likely to remain problematic even for blockchains implementing more avanced technologies such as ``sharding'' and ``proof of stake''.
 
-In recent years, ``Side chains'' and ``state channels'' have been proposed as technologies that could remedy these shortcomings.
-While inspired by these approaches, in this paper we take a different approach. %no we don't. we're really just describing one version of a state channel, but who cares, right?
+In recent years, ``Side chains'' and ``state channels'' have been proposed as technologies that could remedy these shortcomings, and they directly inspired some of the approaches taken in this paper.
 We introduce a framework to support generic incentive systems for decentralised services. Our framework was first conceived of in the context of designing storage incentives for the ``swarm'' decentralised content delivery network, but has since been generalised.
 
 As with any state channel, the system relies on the three pillars of communication, registration and enforcement.
@@ -130,14 +129,14 @@ In exchange for reduced cost, the beneficiary must be willing to incur higher ri
 
 \subsection{A simple chequebook}
 
-A very simple smart contract that does allows the beneficiary to choose when payments are to be processed, was introduced in \cite{ethersphere2016sw3}
-This \gloss{chequebook} contract is a wallet that can process cheques issued by its owner. The cheques work
-analgously as real-world ones: the issuer signs a cheque specifying a beneficiary, a date and an amount,
+A very simple smart contract that allows the beneficiary to choose when payments are to be processed, was introduced in \cite{ethersphere2016sw3}
+This \gloss{chequebook} contract is a wallet that can process cheques issued by its owner. The cheques are
+analgous to those in the real-world: the issuer signs a cheque specifying a beneficiary, a date and an amount,
 gives it to the recipient as a token of promise to pay at a later date. The smart contract plays the
-role of the bank. When the recipient wishes to get paid, the ``cash the cheque'' by submitting it to the smart contract. The contract, after validating the signature, date and the amount specified on the cheque, transfers the amount to the beneficiary's account.
+role of the bank. When the recipient wishes to get paid, they ``cash the cheque'' by submitting it to the smart contract. The contract, after validating the signature, date and the amount specified on the cheque, transfers the amount to the beneficiary's account.
 %Analogously to the person taking the cheque to the bank to cash it, anyone can send the digital cheque as part of the data in a transaction to the owner's chequebook account and thus trigger the transfer.
 
-Since these digital cheques are copyable files, care must be taken that the same cheque cannot be casehd twice. Such ``double cashing'' can be prevented by giving each cheque given to a particular beneficiary a serial number which the contract will store when the cheque is cashed. Perhaps the chequebook contract would enforce cashing of cheques in sequential order, thus needing to store only a single serial number per beneficiary.
+Since these digital cheques are files and can therefore be copied, care must be taken that the same cheque cannot be cashed twice. Such ``double cashing'' can be prevented by giving each cheque given to a particular beneficiary a serial number which the contract will store when the cheque is cashed. Perhaps the chequebook contract would enforce cashing of cheques in sequential order, thus needing to store only a single serial number per beneficiary.
 An alternative strategy to prevent double cashing, when repeated payments are made to the same beneficiary, the cheques contain the \emph{cumulative} total amount ever credited to the beneficiary. The total cumulative amount that has been cashed out is stored in the contract for each beneficiary. When a new cheque is submitted, the contract ignores cheques with amount equal or less than the stored total, but it will transfer the difference if it receives a cheque with a higher
 total.
 
@@ -268,7 +267,7 @@ B sends a cheque to peer A. B keeps the cheque and restores the swap balance to 
 
 \subsection{Waivers}
 
-If the imbalance in the swap channel results from high variance as opposeed to unequal consumption, it will happen that, after a period of accumulating cheques the channel balance starts tilting the other way. Nominally it is now up to the other party to issue cheques to its peer resulting an uncashed cheques accumulating on both sides.
+If the imbalance in the swap channel is the result of high variance as opposeed to unequal consumption, it will happen that, after a period of accumulating cheques the channel balance starts tilting the other way. Nominally it is now up to the other party to issue cheques to its peer resulting in uncashed cheques accumulating on both sides.
 To allow for further savings in transaction costs, it would be desirable to be able to `play the cheques off against each other'.
 
 Such a process is possible, but it requires certain deep changes within the chequebook contract. In particular, cashing cheques can no longer be immediate and must incur a security delay, familiar to anyone who has studied other implementations of state channels.
