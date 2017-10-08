@@ -85,7 +85,7 @@ The only possible scenario when the proof is not conclusive under this simple ve
 ..  math::
     j\equiv\seed \mod 2^\depth
 
-In other words, the last :math:`\depth` bits of the seed map to :math:`j`.
+In other words and the last :math:`\depth` bits of the seed map to :math:`j`.
 
 So given a chunk :math:`{\chunk}`, a seed :math:`{\seed}`, we construct the secret the following way.
 
