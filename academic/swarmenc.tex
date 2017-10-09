@@ -1,0 +1,193 @@
+\documentclass{llncs}
+\usepackage[utf8]{inputenc}
+%\usepackage{graphicx}
+%
+\begin{document}
+
+
+\title{Using Block-Ciphers in ECB Mode for Content-Addressed Storage}
+
+\author{Daniel A. Nagy}
+
+\institute{ePoint Systems, Budapest}
+\maketitle
+
+\begin{abstract}
+
+For the increasingly important use case of distributed content-addressed 
+storage, where large amounts of data are represented as Merkle-trees, 
+encrypting content using a block cipher in ECB mode with the right 
+parameters is shown to be an adequate secruity measure. In particular, 
+if both the leaf nodes and the intermediate nodes of the Merkle tree are 
+represented and independently encrypted as single blocks, an attacker 
+controlling the entire content-addressed storage network cannot 
+distinguish the encryption of a particular plaintext from random data of 
+the same length.
+
+\end{abstract}
+
+\section{Introduction}\label{sec:Introduction}
+
+Content-addressed distributed storage is an increasinly important 
+application for decentralized cloud services. Large data sets that are 
+subject to partial modification, including entire states of virtualized 
+computers can be stored in a distributed fashion using Merkle trees as 
+the underlying data structure\cite{cas}. In many such applications, 
+confidentiality -- storing nodes not being able to decipher the stored 
+information -- is an important requirement.
+
+While the security challenge is very similar to the well-studied case of 
+Full Disk Encryption\cite{fde} (FDE), encrypting content-addressed 
+storage (CAS) is a distinct case, with important differences. In both 
+cases, there is a single secret key $x$ which is both sufficient and 
+necessary for random access. In both cases, uniformly sized small chunks 
+must be encrypted and decrypted independently and in both cases, 
+encryption needs to be done in-place, with the plaintext and the 
+ciphertext having the same length. However, in case of FDE, chunks are 
+organized as an array and their address is their index that can be used 
+as an initialization vector or key derivation salt for encryption and 
+decryption, while in the case of CAS, the addresses of chunks are 
+derived from their content and are therefore not avaiable before 
+encryption.
+
+The arguments of \cite{fde} characterizing ECB encryption as ``poor'' 
+overall security for FDE (``Two plaintext blocks with the same content 
+yield the same encrypted ciphertext. Ciphertext blocks may also be 
+reordered by an adversary.'') are not direcly applicable to CAS: the 
+same plaintext chunk appearing multiple times in a data set is only 
+stored once in CAS, while ordering is determined and protected by the 
+Merkle tree structure\cite{mt}. As shown in this paper, with the right 
+choice of parameters such as key size and block size, ECB encryption 
+actually does provide adequate security in the context of CAS.
+
+\section{Content Addressed Storage Simplified Model}\label{sec:Model}
+
+For the sake of simplicity and clarity, we model the entire content 
+addressed storage network as a key-value database where the values are 
+fixed-size chunks of data stored under the key calculated from the value 
+by an algorithmically collision-free hash function (e.g. SHA-3 from 
+FIPS-202\cite{sha3}). The problems of CAS such as how the actual nodes 
+storing particular values are found and how the value is delivered to 
+the user lie outside of the scope of this paper. It is assumed that any 
+chunk submitted to the network for storage is reliably stored and retrieved 
+upon request. The integrity of the response is protected by the hash function.
+
+The procedure for uploading a file to CAS works as follows:
+\begin{enumerate}
+\item Pad file to integer multiples $k \times b$ of block size $b$.
+\item Encrypt file in ECB mode with key $x$. \label{item:ecb}
+\item Upload each distinct ciphertext block to CAS.
+\item if $k = 1$ then return the hash of the ciphertext as the {\em root hash}.
+\item if $k > 1$ then repeat the procedure on the sequence of ciphertext hashes.
+\end{enumerate}
+
+It only works if the block size $b$ equals the chunk size of CAS and is 
+an integer multiple of the hash size and at least twice as large. For 
+example, for 256 bit hashes, a block cipher with at least 512 bit blocks
+is required, such as Threefish\cite{threefish} with appropriate parameters.
+
+For recovering the plaintext, the user would need to know the {\em root 
+hash}, $x$ and the {\em length} of the plaintext.
+
+Note that changing a single block in the plaintext or appending a single 
+block to the plaintext would require encrypting $O(\log k)$ blocks and
+calculating their hashes, including the new {\em root hash}.
+
+\section{Semantic Security in the Simplified Model}\label{sec:Result}
+
+An attacker that can {\em adaptively} choose plaintexts to encrypt can 
+also distinguish ciphertexts from random data, by first encrypting a 
+plaintext file twice the block length, resulting in three ciphertext 
+chunks and then iterating through all ordered pairs thereof and checking 
+whether a plaintext consisting of the concatenation of their hashes 
+results in a ciphertext identical to the third ciphertext chunk from the 
+first encryption (i.e. does not result in adding another ciphertext 
+chunk to CAS).
+
+However, distinguishing the encryption of a single chosen plaintext file 
+of arbitrary size from random data would imply either the ability to 
+distinguish the block cipher with key $x$ from a random permutation 
+given a number of plaintexts (as the blocks of the file are inputed 
+directly and independently into the block cipher during the first 
+iteration of the procedure) or the ability to find collisions for the 
+hash function, as shown below.
+
+If individual ciphertexts of different blocks are indistinguishable from 
+random data, as implied by the security of the block cipher, the only 
+way to distinguish a set of ciphertext chunks from random data is a 
+deviation of the total number of such chunks from their expected number. 
+Since the input of the block cipher in step \ref{item:ecb} of the 
+procedure is either plaintext or hashes of previously encrypted 
+ciphertexts, which are unavailable for the attacker at the time of 
+choosing the plaintext. Therefore, if an attacker can create identical 
+inputs to the block cipher from non-identical parts of the plaintext, 
+they must have found a hash collision.
+
+\section{Improving the CAS Model}
+
+The reason for the vulnerability of the simplified scheme to an 
+{\em adaptive} attacker is that plaintexts of {\em intermediate nodes} 
+in the Merkle tree come from the same space as the {\em leaf nodes}. 
+Thus, the provided example of distinguishing attack substitutes a leaf 
+nodes for intermediate nodes.
+
+An obvious way to make sure that the two come from different spaces is 
+adding distinguishing metadata to the plaintext. As a bare minimum, one 
+bit which is set for intermediate nodes and reset for leaf nodes.
+
+With this modification, {\em adaptively chosen plaintext distinguishing 
+attacks} become unfeasible, since the {\em root hash} becomes a 
+collision-free hash function itself, as shown in {\cite tth}. The proof 
+presented in {\cite tth} is applicable to any Merkle tree where 
+the plaintexts of intermediate nodes and leaf nodes come from different 
+spaces.
+
+In practice, block ciphers with a block size equalling at least two hash 
+sizes plus metadata are not readily available. However, one  can construct 
+a pseudorandom permutation using a pseudorandom bitstream generator as 
+described in {\cite bigblock}: a Fesitel Network with 4 rounds.
+
+\section{Conclusions}\label{sec:Conclusions}
+
+{\em TODO: This is a placeholder, write something more meaningful.}
+
+It has been shown that for a content-addressed storage of identical-sized 
+chunks addressed by their hash values, a block cipher with a block size 
+identical to the chunk size of CAS provides semantic security against 
+an adversary non-adaptively choosing the plaintext.
+
+\section*{Acknowledgments}\label{sec:Acknowledgments}
+
+I would like to thank the Go Ethereum team and in particular its members 
+working on Swarm for their valuable feedback.
+
+\begin{thebibliography}{1}
+
+\bibitem{cas} SC Rhea, R Cox, A Pesterev, ``Fast, Inexpensive 
+Content-Addressed Storage in Foundation.'', USENIX Annual Technical 
+Conference, 2008
+
+\bibitem{fde} SM Diesburg, AA WANG, ``A survey of confidential data 
+storage and deletion methods'', ACM Computing Surveys (CSUR), Volume 43 
+Issue 1, November 2010
+
+\bibitem{mt} RC Merkle, ``A Digital Signature Based on a Conventional 
+Encryption Function'', Advances in Cryptology -- CRYPTO '87. Lecture 
+Notes in Computer Science. 293.
+
+\bibitem{sha3} MJ Dworkin, ``SHA-3 Standard: Permutation-Based Hash and 
+Extendable-Output Functions'', Federal Inf. Process. Stds. (NIST 
+FIPS)-202, 2015
+
+\bibitem{threefish} N Ferguson, S Lucks, B Schneier, D Whiting, M 
+Bellare, T Kohno, J Callas, J Walker, ``The Skein hash function family'' 
+Submission to NIST, 2008.
+
+\bibitem{bigblock} M Luby, C Rackoff, ``How to construct pseudorandom 
+permutations from pseudorandom functions'', SIAM Journal on Computing, 1988
+
+\bibitem{tth} {\bb TODO: MISSING REFERENCE}
+
+\end{thebibliography}
+
+\end{document}
