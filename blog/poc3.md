@@ -1,11 +1,11 @@
 
 
-POC 3 is running now on the public Testnet. The foundation is running a 50-node strong cluster with a public gateway on http://swarm-gateways.net. This is fast growing as our collaborators switch on their permanent nodes and clusters.
+POC 3 is running now on the public Testnet. The foundation is running a 50-node strong cluster with a public gateway on https://swarm-gateways.net. This is fast growing as our collaborators switch on their permanent nodes and clusters.
 The POC3 code is now merged into the official [go-ethereum repository's master branch](https://github.com/ethereum/go-ethereum).
 It has been a year and a half since the first release of the POC2 series was deployed and [the swarm project launched its public alpha network](https://blog.ethereum.org/2016/12/15/swarm-alpha-public-pilot-basics-swarm/).
-Two [swarm summits](https://swarm-gateways.net/bzz:/swarm-summit.eth), two [orange papers](http://swarm-guide.readthedocs.io/en/resources.html#orange-papers) and [forty thousand lines of code](https://github.com/ethersphere/go-ethereum/pull/171/files) later, it is time to give an update.
+Two [swarm summits](https://swarm-gateways.net/bzz:/swarm-summit.eth), two [orange papers](http://swarm-guide.readthedocs.io/en/resources.html#orange-papers) and [forty thousand lines of code](https://github.com/ethereum/go-ethereum/pull/17041) later, it is time to give an update.
 
-## Basics of swarm
+## Basics of Swarm
 
 Swarm content storage is easiest described to not-so-technical audience as "bittorrent on steroids". Here we venture into a more elaborate technical presentation.
 In an earlier blog post, we introduced the basics of swarm storage and content distribution. To set the scene for a broader scope, here we recap the most important points.
@@ -16,9 +16,9 @@ Each chunk is identified with a unique address deterministically derived from it
 The references of data chunks are themselves packaged into a chunk which in turn has its own hash. In this way the content gets mapped into a merkle tree the root hash of which, called the Swarm hash is used as a reference to a file. When this reference then is used to retrieve the file, the client can recursively unpack the tree by fetching the individual chunks and assemble the original content. This hierarchical merklised swarm hash construct offers integrity protected random access into large files; the thing you do you skip to parts of video or look up a key in a database file.
 
 Most importantly however, this means that on the network layer, swarm only needs to take care of storing and retrieving chunks.
-Swarm is a peer-to-peer network of nodes running the swarm client. The network uses ethereum's devp2p/rlpx networking layer to run the bzz suite of protocols. nodes are identified with a swarm address deterministically derived from the node's ethereum account public key, which can place them in the same address space as the chunks themselves, so we can define proximity between nodes and chunks.
+Swarm is a peer-to-peer network of nodes running the swarm client. The network uses ethereum's devp2p/rlpx networking layer to run the bzz suite of protocols. Nodes are identified with a swarm address deterministically derived from the node's ethereum account public key, which can place them in the same address space as the chunks themselves, so we can define proximity between nodes and chunks.
 The semi-permanent TCP connections between peers define an overlay network where messages can be relayed from node to node.
-The Swarm network implements a :dfn:`distributed preimage archive`, which is essentially a specific type of content addressed distributed chunk store;
+The Swarm network implements a :dfn:`distributed preimage archive` (DPA), which is essentially a specific type of content addressed distributed chunk store;
 node(s) closest to the address of a chunk do not only serve information about the content but actually host the data. This DPA is the underlying distributed component of the Swarm service. When you upload content, the chunks need to reach the nodes that are closest to it (called syncing), so that when you retrieve chunks, nodes can send requests relayed towards the chunk's address via ever closer peers.
 
 The viability of routing hinges on the assumption that any node (uploader/requester) can 'reach' any other node (storer). This can be solved by maintaining a specific :dfn:`network topology`, i.e., connectivity pattern of the overlay network called :dfn:`kademlia`. Kademlia overlay guarantees the existence of a route between retriever and storer relayed through a number of peers logarithmic in network size. This flavour of overlay is called forwarding kademlia.
@@ -60,7 +60,7 @@ In what follows we give an overview of new features in swarm that are available
 ## PSS
 
 The same routing mechanism that is used when relaying retrieve requests, serving deliveries or syncing chunks can be used to do deterministic node-to-node relayed messaging.
-`pss` is a  pss is the sound of swarm whispered as it were, since it combines swarm (bzz) routing with whisper (shh) envelopes and topics (`bzz`+`shh`=`pss`) defining a messaging protocol with strong privacy features (`pss` as in "hush, mum's the word").
+`pss` is the sound of swarm whispered as it were, since it combines swarm (bzz) routing with whisper (shh) envelopes and topics (`bzz`+`shh`=`pss`) defining a messaging protocol with strong privacy features (`pss` as in "hush, mum's the word").
 This messaging infrastrucure can be the foundation of a whole new system of internode communication services (the email, tweet, newsletter of the future). From this systemic perspective PSS is Postal Services over Swarm.
 
 With `pss` you can send messages to any node in the swarm network.
@@ -109,18 +109,18 @@ We mentioned that thanks to manifests, directory trees and collections represent
 Due to the fact that swarm retrieval is on-demand, Swarm FUSE mounts are readable with no latency. Swarm FUSE supports file system write operations (creating, appending, updating files) by maintaining the collection swarm hash as an internal state.
 Combining FUSE with MRU, on each change we can issue a mutable resource update, this makes it possible to think of FUSE to sync your entire home folder between devices, virtually serving as the backend to a decentralised drop box.
 
-Swarm POC3 supports encryption so protecting your private data has never been easier. Once Access Control Trees are implemented, we will have a fully fledged solution for 'sharing' a subdirectory, a feature well known from drop box or google drive. Combining with PSS the 'share' can be sent in a notification to the recipient.
+Swarm POC3 supports encryption so protecting your private data has never been easier. Once Access Control Trees are implemented, we will have a fully fledged solution for 'sharing' a subdirectory, a feature well known from Dropbox or Google Drive. Combining with PSS the 'share' can be sent in a notification to the recipient.
 
-Both [FUSE]() and [encryption]() are fully functional in POC3.
+Both [FUSE](http://swarm-guide.readthedocs.io/en/usage.html#FUSE) and [encryption](http://swarm-guide.readthedocs.io/en/usage.html#Encryption) are fully functional in POC3.
 
 # The year ahead
 
-Just as the past year, these coming 10+ month will be very very exciting and challed. We are on target delivering Swarm POC4 (production beta prerelease) in the first half of 2019.
+Just as the past year, these coming 10+ month will be very very exciting and challenging. We are on target delivering Swarm POC4 (production beta prerelease) in the first half of 2019.
 
 As still part of the POC3 series, we are planning to switch on a revamped SWAP accounting for chunk deliveries.
 Implementing access control and authentication for swarm content is high on our priority list.
 The first few releases will also address some technical debt accumulated as well as optimisations of retrieval and syncing.
-After rounding up [the swap swear and swindle framework for decentralised service economies]() (see the [3rd orange paper]() and a [talk]() and the [implementation]()), we apply it to the storage insurance using the [crash proof of custody scheme]().
+After rounding up [the swap swear and swindle framework for decentralised service economies](https://github.com/ethersphere/swap-swear-and-swindle/tree/master) (see the [3rd orange paper]( https://www.sharelatex.com/1452913241cqmzrpfpjkym) and a [talk](https://youtu.be/Bn65-bI-S1o) and the [implementation](https://github.com/ethersphere/swap-swear-and-swindle/tree/master)), we apply it to the storage insurance using the [crash proof of custody scheme](https://swarm-gateways.net/bzz:/theswarm.eth/ethersphere/orange-papers/1/sw^3.pdf).
 
 We are implementing two layers of erasure coding for redundancy, one is primarily against dropout and network switch issues to guarantee low latency retrieval. Another one is part of the two tiered insurance system, where stakeless farmers get positive rewards for proof of custody while staked insurers continually perform scan and repair on highly redundantly coded chunks potentially suffering punitive measures as well as needing to pay compensatory insurance to users if integrity of insured content is compromised.
 
