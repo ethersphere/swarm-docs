@@ -1,8 +1,8 @@
 
 
-The Swarm Team is pleased to announce the immediate release of Swarm 0.3, the third proof-of-concept releas (POC3) of the Ethereum Swarm client.
+The Swarm Team is pleased to announce the immediate release of Swarm 0.3, the third proof-of-concept release (POC3) of the Ethereum Swarm client.
 
-Swarm 0.3 has been deployed to the public Testnet, and the Ethereum foundation is running a 50-node strong cluster of Swarm nodes, together with a public web gateway on https://swarm-gateways.net. 
+Swarm 0.3 has been deployed to the public Testnet, and the Ethereum foundation is running a 50-node strong cluster of Swarm nodes, together with a public web gateway on https://swarm-gateways.net.
 
 The POC3 code is now merged into the official [go-ethereum repository's master branch](https://github.com/ethereum/go-ethereum).
 
