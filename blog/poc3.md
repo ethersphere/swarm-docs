@@ -63,3 +63,7 @@ We keep on building a community with our allies who champion the values of web3 
 ## Contact Us
 
 We welcome any feedback and any contribution. Come find us in our [gitter channel](https://gitter.im/ethereum/swarm) or our [github repository](https://github.com/ethersphere/go-ethereum).
+
+
+
+![the Swarm team](https://pbs.twimg.com/media/DetPkqZX0AAAsPp.jpg:large)
