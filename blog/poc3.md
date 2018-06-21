@@ -27,7 +27,7 @@ In an [earlier blog post](https://blog.ethereum.org/2016/12/15/swarm-alpha-publi
 
 At its core, Swarm is a service that provides APIs to upload and download content to the crowd, and through url-based addressing offers *virtual hosting of websites* and decentralised applications (dapps) without webservers, using decentralised peer-to-peer distributed infrastructure.  The vision is that of an new internet which is not only fault-tolerant, has zero downtime and offers censorship resistance but is also economically self-sustaining due to a built-in incentive system. By compensating nodes for contributing their bandwidth and disk space, these incentives aim to achieve reliable low-latency scalable retrieval of popular content on the one hand and guarantees persistence of important yet rarely accessed data like archives or backups on the other. For smooth delivery Swarm will use the SWAP protocol (planned for POC3.1) while for storage guarantees it will use a two-tiered insurance system (planned for POC4).
 
-Beyond the basics of data storage and delivery, the POC 3 release includes a new and experimental communications layer as well: the PSS system.
+Beyond the basics of data storage and delivery, the POC 3 release includes some new and experimental features.
 
 ## PSS
 
@@ -38,7 +38,7 @@ PSS is fully featured yet experimental on the new POC3 network and dapps can int
 ## Mutability
 
 Another experimental new feature in POC3 is the Swarm Mutable Resource.
-Typical in p2p storage systems, content as addressed by it digital fingerprint (hash) and any changes to the content radically change this address. Users of the web, however, are accustomed to mutable resources: when visiting URL-s we expect to see the most up to date version of the 'site'. In order to make it easy to access changing content at predictable addresses, Swarm integrates with the Ethereum Name Service [(ENS)](http://swarm-guide.readthedocs.io/en/latest/usage.html#Ethereum) on the Ethereum blockchain. This is what allows us to to reference swarm content by names like [(]bzz://theswarm.eth](https://swarm-gateways.net/bzz:/theswarm.eth/).
+Typical in p2p storage systems, content is addressed by it digital fingerprint (hash) and any changes to the content radically change this address. Users of the web, however, are accustomed to mutable resources: when visiting URL-s we expect to see the most up to date version of the 'site'. In order to make it easy to access changing content at predictable addresses, Swarm integrates with the Ethereum Name Service [(ENS)](http://swarm-guide.readthedocs.io/en/latest/usage.html#Ethereum) on the Ethereum blockchain. This is what allows us to to reference swarm content by names like [(]bzz://theswarm.eth](https://swarm-gateways.net/bzz:/theswarm.eth/).
 
 Swarm POC3 adds another layer in the form of [*Mutable Resource Updates (MRU)*](http://swarm-guide.readthedocs.io/en/latest/usage.html#Mutable). These allow off-chain updates of content associated with an address at a much faster pace than ENS updates on the blockchain could support, and without incurring the cost of on-chain transactions.
 
