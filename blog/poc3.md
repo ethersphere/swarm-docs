@@ -1,4 +1,5 @@
 
+# Announcing Swarm proof-of-concept release 3
 
 The Swarm Team is pleased to announce the immediate release of Swarm client v0.3, the third proof-of-concept release (POC3) of the Ethereum Swarm client.
 
@@ -7,19 +8,16 @@ Swarm 0.3 has been deployed to the public Testnet, and the Ethereum Foundation i
 The POC3 code is now merged into the official [go-ethereum repository's master branch](https://github.com/ethereum/go-ethereum).
 
 
+
+## The past year
+
 It has been a year and a half since the first release of the POC2 series was deployed and [the Swarm project launched its public alpha network](https://blog.ethereum.org/2016/12/15/swarm-alpha-public-pilot-basics-swarm/).
 Two [Swarm summits](https://swarm-gateways.net/bzz:/swarm-orange-summit.eth), two [orange papers](http://swarm-guide.readthedocs.io/en/latest/resources.html#orange-papers) and [forty thousand lines of code](https://github.com/ethereum/go-ethereum/pull/17041) later, it is time to take stock.
-
-
-
-# The past year
 
 In the past year [the Swarm team](https://pbs.twimg.com/media/DetPkqZX0AAAsPp.jpg:large) has grown in size and is now on fire delivering the vision. We have been busy redesigning the network layer, rewriting the retrieval protocol using a stream abstraction, rewriting connectivity management and the overlay network code as well as developed a very sophisticated *network simulation framework*.
 POC3 code was finalised just in time for the [Swarm Orange Summit in Ljubljana](https://swarm-gateways.net/bzz:/2018.swarm-summit.eth), where we had 80 participants and a very inspiring and creative week ([watch this two-minute video hosted on Swarm](https://swarm-gateways.net/bzz:/079b4f4155d7e8b5ee76e8dd4e1a6a69c5b483d499654f03d0b3c588571d6be9/)) of talks and coding. It is inspiring to see a growing number of [contributors](https://github.com/ethersphere/go-ethereum/blob/b14d635539a7fd548bd1fe4fe987f137229ff38e/swarm/AUTHORS) and [companies that want to build on swarm](https://swarm-gateways.net/bzz:/swarm-orange-summit.eth/#mu-sponsors)
 
-
-
-## Basics of Swarm
+# Swarm 0.3
 
 Swarm content storage is a lot more than just "bittorrent on steroids". The technical details can be found in the [chapter on architecture](http://swarm-guide.readthedocs.io/en/latest/architecture.html) in the new and improved [Swarm guide](http://swarm-guide.readthedocs.io/en/latest/).
 
