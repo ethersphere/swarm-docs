@@ -1,25 +1,24 @@
 
 # Announcing Swarm proof-of-concept release 3
 
-The Swarm Team is pleased to announce the immediate release of Swarm client v0.3, the third proof-of-concept release (POC3) of the Ethereum Swarm client.
+The Swarm Team is pleased to announce the immediate release of Swarm client v0.3, the third proof-of-concept release (POC3) of the Ethereum Swarm client. The POC3 code is now merged into the official [go-ethereum repository's master branch](https://github.com/ethereum/go-ethereum).
 
-Swarm 0.3 has been deployed to the public Testnet, and the Ethereum Foundation is running a 50-node strong cluster of Swarm nodes, together with a public web gateway on https://swarm-gateways.net.
 
-The POC3 code is now merged into the official [go-ethereum repository's master branch](https://github.com/ethereum/go-ethereum).
+Swarm 0.3 has been deployed to the public Testnet, and the Ethereum Foundation is running a 50-node strong cluster of Swarm nodes, together with a public web gateway on https://swarm-gateways.net. We welcome you to [try it out](http://swarm-guide.readthedocs.io/en/latest/gettingstarted.html) or commit to operate stable nodes.
 
 
 
 ## The past year
 
 It has been a year and a half since the first release of the POC2 series was deployed and [the Swarm project launched its public alpha network](https://blog.ethereum.org/2016/12/15/swarm-alpha-public-pilot-basics-swarm/).
-Two [Swarm summits](https://swarm-gateways.net/bzz:/swarm-orange-summit.eth), two [orange papers](http://swarm-guide.readthedocs.io/en/latest/resources.html#orange-papers) and [forty thousand lines of code](https://github.com/ethereum/go-ethereum/pull/17041) later, it is time to take stock.
+Two [Swarm summits](https://swarm-gateways.net/bzz:/swarm-orange-summit.eth), two [orange papers](http://swarm-guide.readthedocs.io/en/latest/introduction.html#orange-papers) and [forty thousand lines of code](https://github.com/ethereum/go-ethereum/pull/17041) later, it is time to take stock.
 
-In the past year [the Swarm team](https://pbs.twimg.com/media/DetPkqZX0AAAsPp.jpg:large) has grown in size and is now on fire delivering the vision. We have been busy redesigning the network layer, rewriting the retrieval protocol using a stream abstraction, rewriting connectivity management and the overlay network code as well as developed a very sophisticated *network simulation framework*.
-POC3 code was finalised just in time for the [Swarm Orange Summit in Ljubljana](https://swarm-gateways.net/bzz:/swarm-orange-summit.eth), where we had 80 participants and a very inspiring and creative week ([watch this two-minute video hosted on Swarm](https://swarm-gateways.net/bzz:/079b4f4155d7e8b5ee76e8dd4e1a6a69c5b483d499654f03d0b3c588571d6be9/)) of talks and coding. It is inspiring to see a growing number of [contributors](https://github.com/ethersphere/go-ethereum/blob/b14d635539a7fd548bd1fe4fe987f137229ff38e/swarm/AUTHORS) and [companies that want to build on swarm](https://swarm-gateways.net/bzz:/swarm-orange-summit.eth/#mu-sponsors)
+In the past year [the Swarm team](https://pbs.twimg.com/media/DetPkqZX0AAAsPp.jpg:large) has grown in size and is now on fire delivering the vision. We have been busy redesigning the network layer, rewriting the retrieval protocol using a stream abstraction, rewriting connectivity management and the overlay network code as well as developed a sophisticated *network simulation framework* to test algorithmic correctness, scalability and fault tolerance of various subsystems.
+POC3 code was finalised just in time for the [Swarm Orange Summit in Ljubljana](https://swarm-gateways.net/bzz:/swarm-orange-summit.eth), where we had 80 participants and a very inspiring and creative week ([watch this two-minute video hosted on Swarm](https://swarm-gateways.net/bzz:/079b4f4155d7e8b5ee76e8dd4e1a6a69c5b483d499654f03d0b3c588571d6be9/)) of talks and coding. It is inspiring to see a growing number of [contributors](https://github.com/ethersphere/go-ethereum/blob/b14d635539a7fd548bd1fe4fe987f137229ff38e/swarm/AUTHORS) and [companies that want to build on swarm](https://swarm-gateways.net/bzz:/swarm-orange-summit.eth/#mu-sponsors).
 
 # Swarm 0.3
 
-Swarm content storage is a lot more than just "bittorrent on steroids". The technical details can be found in the [chapter on architecture](http://swarm-guide.readthedocs.io/en/latest/architecture.html) in the new and improved [Swarm guide](http://swarm-guide.readthedocs.io/en/latest/).
+Swarm content storage is a lot more than just "bittorrent on steroids". The technical details can be found in the [chapter on architecture](http://swarm-guide.readthedocs.io/en/latest/architecture.html) in the new and improved [Swarm guide](http://swarm-guide.readthedocs.io/en/latest/). You find a more thorough academic presentation of Swarm's components in the [orange papers](http://swarm-guide.readthedocs.io/en/latest/introduction.html#orange-papers) or learn more about Swarm [watching recorded conference talks](http://swarm-guide.readthedocs.io/en/latest/resources.html).
 
 In an [earlier blog post](https://blog.ethereum.org/2016/12/15/swarm-alpha-public-pilot-basics-swarm/), we introduced the basics of Swarm storage and content distribution.
 
@@ -44,12 +43,14 @@ MRU is an experimental feature in current POC3 testnet and is still undergoing c
 
 ## FUSE support
 
-[FUSE](http://swarm-guide.readthedocs.io/en/latest/usage.html#FUSE), enables users to integrate Swarm data directly into their local file systems (only on Linux and Mac). Using this system, users can "mount a Swarm manifest" as if it were a regular directory. It supports file system read and write operations, in which all content is automatically synced with the Swarm.
+[FUSE](http://swarm-guide.readthedocs.io/en/latest/usage.html#FUSE) enables users to integrate Swarm data directly into their local file systems (only on Linux and Mac). Using this system, users can "mount a Swarm manifest" as if it were a regular directory. It supports file system read and write operations, in which all content is automatically synced with the Swarm.
 In future, combining FUSE with Swarm Mutable Resources, it should be possible, for example, to sync your entire home folder between devices - the backend to a decentralised storage with Dropbox-like functionality.
 
 ## Encryption support
 
-Swarm 0.3 comes with built-in [*encryption*](http://swarm-guide.readthedocs.io/en/latest/usage.html#Encryption) allowing for secure uploads of private data. With the planned implementation of *Access Control Trees*, we will have the ability to upload a directory privately and still 'share' a subdirectory with specific peers.
+Swarm 0.3 comes with built-in [*encryption*](http://swarm-guide.readthedocs.io/en/latest/usage.html#Encryption) allowing for secure uploads of private data. The way encryption works users can upload a directory privately and still 'share' a subdirectory with specific peers.
+
+Access Control Trees (Swarm 0.3.2) will offer an API for users to manage access to content independently of publishing it. Granted access will work across versions of resources.
 
 # The year ahead
 
