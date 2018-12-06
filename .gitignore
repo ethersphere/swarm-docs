@@ -1,0 +1,14 @@
+.DS_Store
+*/**/.DS_Store
+
+*.aux
+*.log
+
+.vscode
+
+#*
+.#*
+*#
+*~
+.project
+.settings
