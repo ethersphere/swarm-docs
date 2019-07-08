@@ -1,8 +1,10 @@
 Compile documentation
 ========================
+On a Debian or derivative:
 
 ..  code-block:: bash
 
+  sudo apt-get install python-sphinx python3-sphinx-rtd-theme
   make html
 
 Incentivisation paper
