@@ -40,7 +40,7 @@ Last updated: 2019 July 06 Created by: Tim Bansemer
 
 | Name | Organisation | Responsibilities | Paid by (Organisation) | Contact |
 |------|--------------|------------------|------------------------|---------|
-| Tim Bansemer |  Swarm  | Strategic support, Partner Managmeent, Organisational Change, Ambassador of Swarm |  Swarm | tim@ethswarm.org |
+| Tim Bansemer |  Swarm  | Fantastic Mr. Fox for Swarm |  Swarm | tim@ethswarm.org |
 | Edina Loves | Swarm | Marketing Support, Event Organisation, PA-Viktor |Swarm | aron@ethereum.org |
 
 ## Former members of the team (in order of their engagement)
