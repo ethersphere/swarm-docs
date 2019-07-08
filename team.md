@@ -1,4 +1,5 @@
-This document lists the activly involved Swarm team members (min. 50% or more of their time)
+This document lists the activly involved Swarm team members (min. 50% or more of their time). 
+Last updated: 2019 July 06 Created by: Tim Bansemer
 
 ## Swarm Core Track	
 
