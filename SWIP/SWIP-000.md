@@ -3,9 +3,9 @@ swip: 0
 title: SWIP Purpose and Guidelines
 status: Active
 type: Meta
-author: Daniel A Nagy <daniel@ethswarm.org>, Tim Bansemer <Tim@ethswarm.org>
-created: 2019-7-08
-updated: 
+author: Daniel A Nagy <daniel@ethswarm.org>, Tim Bansemer <tim@ethswarm.org>
+created: 2019-07-08
+updated: 2019-07-09
 ---
 
 ## What is an SWIP?
@@ -192,9 +192,9 @@ If you are interested in assuming ownership of an SWIP, send a message asking to
 
 The current SWIP editors are
 
-` * Daniel A. Nagy (nagydani@ethswarm.org)`
+` * Daniel A. Nagy <daniel@ethswarm.org>`
 
-` * Elad Nachmias (elad@ethswarm.org)`
+` * Elad Nachmias <elad@ethswarm.org>`
 
 ## SWIP Editor Responsibilities
 
