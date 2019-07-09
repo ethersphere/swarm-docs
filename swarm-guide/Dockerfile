@@ -1,13 +1,9 @@
-FROM golang:1.12-alpine as builder
-RUN apk add --no-cache make gcc musl-dev linux-headers git
-ADD . /swarm
-WORKDIR /swarm
-RUN make swarm
+FROM python:3.7.1
 
-FROM ethereum/client-go:v1.8.27 as geth
+RUN pip install \
+    Sphinx==1.8.2 \
+    sphinx-rtd-theme==0.4.2 \
+    sphinx-tabs==1.1.10
 
-FROM alpine:3.9
-RUN apk --no-cache add ca-certificates && update-ca-certificates
-COPY --from=builder /swarm/build/bin/swarm /usr/local/bin/
-COPY --from=geth /usr/local/bin/geth /usr/local/bin/
-ENTRYPOINT ["/usr/local/bin/swarm"]
+RUN mkdir -p /src
+WORKDIR /src
