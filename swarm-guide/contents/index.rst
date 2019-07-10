@@ -23,8 +23,6 @@ Table of contents:
    :maxdepth: 3
 
    introduction
-   contact
-
    architecture
    new_client_implementation
 

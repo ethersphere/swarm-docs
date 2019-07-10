@@ -1,5 +1,5 @@
 *******************
-Write a new Swarm Client Specification
+Swarm Client Specification
 *******************
 
 Everything you need to write your own Swarm client.

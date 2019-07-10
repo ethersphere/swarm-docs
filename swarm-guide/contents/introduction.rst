@@ -1,9 +1,6 @@
 *******************
 Introduction
 *******************
-Last updated: 2019 July 06 by Tim Bansemer
-
-This guide walks you through understanding, installing, and using Swarm. It also explains how to contribute or ask for help. Swarm is in active development and it is untested in the wild, so use it at your own risk. To interact with Swarm, you will need to use the command line. If you are not comfortable using it, it might be worth to familiarise yourself `here <http://linuxcommand.org/lc3_lts0010.php>`_ first.
 
 Mission of Swarm
 ==============
@@ -17,11 +14,11 @@ Mission of Swarm
    :alt: swarm-logo
    :align: center
   
-Censorship resistant storage and communication infrastructure for a sovereign digital society.
+Swarm - storage and communication infrastructure for a sovereign digital society.
 
 Objective
 ==========
-Swarm augments existing Smart-Contract platform's (e.g. Ethereum) with incentivised permissionless storage- and communication protocols to operate decentrelised network-infrastructure to provide a full Web 3.0 base-layer for DAPP Developers.
+Swarm augments existing Smart-Contract platforms (e.g. Ethereum) with incentivised, censorship resistant, permissionless storage- and communication protocols to operate decentrelised network-infrastructure to provide a full Web 3.0 base-layer for DAPP Developers.
 
 Overview
 ========================
