@@ -27,17 +27,16 @@ make html
 ## Compile documentation
 On a Debian or derivative:
 
-..  code-block:: bash
-
-  sudo apt-get install python-sphinx python3-sphinx-rtd-theme
-  make html
+```
+sudo apt-get install python-sphinx python3-sphinx-rtd-theme
+make html
+```
 
 ## Incentivisation paper
 
-..  code-block:: bash
-
-  make SOURCE=sw^3 latexpdf
-
+```
+make SOURCE=sw^3 latexpdf
+```
 
 ## Restructured text markup, sphinx
 
