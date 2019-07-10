@@ -1,6 +1,6 @@
 # Swarm Guide
 
-Swarm's documentation in sphinx, hosted on read the docs:
+This is the sources of Swarm's documentation, written in sphinx, hosted on read the docs:
 http://swarm-guide.readthedocs.io
 
 ## Building the source
