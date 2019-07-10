@@ -3,6 +3,10 @@ Swarm for DAPP-Developers
 ******************************
 
 Everything what you need to start building your DAPP's on Swarm.
+Swarm is in active development and it is untested in the wild, so use it at your own risk. 
+To interact with Swarm, you will need to use the command line. 
+If you are not comfortable using it, it might be worth to familiarise yourself `here <http://linuxcommand.org/lc3_lts0010.php>`_ first.
+
 
 Public gateways
 ===============
