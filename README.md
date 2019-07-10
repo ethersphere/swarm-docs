@@ -16,6 +16,13 @@ After building the source you will find `index.html` in `./build/html/` folder.
 
 After you have `docker` available just call `make html-docker`.
 
+If you build with docker, this would help a lot to use the following comment ot regulary update your state without the need for manuel build:
+
+Execute
+```
+watch -n 10 "sudo make html-docker"
+```
+
 ### Native with Python
 
 Execute
