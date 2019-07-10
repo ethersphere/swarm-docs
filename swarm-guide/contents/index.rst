@@ -23,15 +23,17 @@ Table of contents:
    :maxdepth: 3
 
    introduction
-   installation
-   gettingstarted
-   up-and-download
-   usage
-   pss
-   apireference
-   configuration
+   contact
+
    architecture
-   resources
+   new_client_implementation
+
+   dapp_developer
+   pss
+   goclient
+   node_operators
+  
+   .. resources
 
 
 This document is licensed under the @emph{Creative Commons Attribution License}. To
