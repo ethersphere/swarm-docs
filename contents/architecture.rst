@@ -1,8 +1,8 @@
 .. _architecture:
 
-*******************
-Swarm-Architecture
-*******************
+**********************
+Architectural Overview
+**********************
 
 This chapter is aimed at developers who want to understand the underlying concepts and design of Swarm.
 In the first part we describe the Swarm network of nodes. In the second part we explain how messaging and

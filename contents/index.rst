@@ -24,12 +24,12 @@ Table of contents:
 
    introduction
    architecture
-   new_client_implementation
-
+   swarm_specification
    dapp_developer
    pss
-   goclient
    node_operators
+   goclient
+   
   
    .. resources
 
