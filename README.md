@@ -1,42 +1,37 @@
 # Swarm Guide
 
-This is the sources of Swarm's documentation, written in sphinx, hosted on read the docs:
-http://swarm-guide.readthedocs.io
+This is the source of the documentation of [Swarm](https://ethswarm.org/), written in [Sphinx](http://www.sphinx-doc.org/). Its built version is hosted on http://swarm-guide.readthedocs.io
 
-## Building the source
+## Building the docs
 
-After building the source you will find `index.html` in `./build/html/` folder.
-
-### Requirements
-
-- GNU Make
-- Docker or Python (pip)
-
-### Using Docker
-
-After you have `docker` available just call `make html-docker`.
-
-If you build with docker, this would help a lot to use the following comment ot regulary update your state without the need for manuel build:
-
-Execute
-```
-watch -n 10 "sudo make html-docker"
-```
+The entry point will be in `./build/html/index.html`.
 
 ### Native with Python
 
-Execute
 ```
 pip install -r requirements.txt
 make html
 ```
 
-## Compile documentation
-On a Debian or derivative:
+### On a Debian or derivative:
 
 ```
 sudo apt-get install python-sphinx python3-sphinx-rtd-theme
 make html
+```
+
+### Using Docker
+
+This way you will get the necessary environment set up for you inside the docker image:
+
+`make html-docker`
+
+### Tips
+
+While editing you may want to start a process that continuously builds the docs in the background:
+
+```
+watch -n 5 "make html"
 ```
 
 ## Incentivisation paper
