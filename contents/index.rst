@@ -4,7 +4,7 @@ Swarm
 #####
 
 Storage and communication infrastructure for a sovereign digital society.
-==============
+=========================================================================
 
 ..  * extension allows for per-format preference for image format
 
@@ -25,7 +25,6 @@ Swarm is using existing Smart-Contract platforms (e.g. Ethereum) to implement th
    :alt: Swarm storage and message routing
    :width: 500
    :align: center
-|
 
 Implementations of Swarm
 ========================
@@ -37,6 +36,18 @@ Implementations of Swarm
 +------------------------+------------------------+----------------------------+--------------------------------------------+
 |Swarm Nim-Client        | nim                    |Status.im                   | Development is planned to start Q1 2020    |
 +------------------------+------------------------+----------------------------+--------------------------------------------+
+
+Public Swarm Networks
+=====================
+
++---------------+------------------------+------------------------+------------------------------+----------------------------+
+| Network ID    |Network Name            | Type of Network        | Maintained by                | Gateways                   |
++===============+========================+========================+==============================+============================+
+| Network ID #1 | EF-Test-Network        | Pubic Test-Network     | Swarm Core-Team / EF Dev OPS | https://swarm-gateways.net |
++---------------+------------------------+------------------------+------------------------------+----------------------------+
+
+The Ethereum Foundation operates a Swarm testnet that can be used to test out functionality in a similar manner to the Ethereum testnetwork.
+Everyone can join the network by running the Swarm client.
 
 .. toctree::
    :numbered:

@@ -1,5 +1,5 @@
 Feeds 
-========================
+=====
 
 .. note::
   Feeds, previously known as *Mutable Resource Updates*, is an experimental feature, available since Swarm POC3. It is under active development, so expect things to change.

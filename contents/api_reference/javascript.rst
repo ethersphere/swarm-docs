@@ -1,5 +1,5 @@
 JavaScript
-========================
+----------
 Swarm currently supports a Javascript API through a few packages:
 
 erebos

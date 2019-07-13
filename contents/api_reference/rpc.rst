@@ -1,5 +1,5 @@
 RPC
-========================
+---
 
 Swarm exposes an IPC API under the ``bzz`` namespace.
 

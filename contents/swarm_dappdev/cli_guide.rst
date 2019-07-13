@@ -1,5 +1,5 @@
-Using CLI
-=====================
+CLI - Command Line Interface
+============================
 
 .. _swarmup:
 
@@ -30,7 +30,7 @@ You can encrypt your file using the ``--encrypt`` flag. See the :ref:`Encryption
 
 
 Suppressing automatic manifest creation
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+---------------------------------------
 You may wish to prevent a manifest from being created alongside with your content and only upload the raw content. You might want to include it in a custom index, or handle it as a data-blob known and used only by a certain application that knows its MIME type. For this you can set ``--manifest=false``:
 
 .. code-block:: none
@@ -86,7 +86,7 @@ For example, you can use one of the public gateways as a proxy, in which case yo
 
 
 Uploading a directory
------------------------
+---------------------
 
 Uploading directories is achieved with the ``--recursive`` flag.
 
@@ -98,7 +98,7 @@ Uploading directories is achieved with the ``--recursive`` flag.
 The returned hash refers to a root manifest referencing all the files in the directory.
 
 Directory with default entry
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+----------------------------
 
 It is possible to declare a default entry in a manifest. In the example above, if ``index.html`` is declared as the default, then a request for a resource with an empty path will show the contents of the file ``/index.html``
 
