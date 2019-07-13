@@ -15,7 +15,7 @@ Storage and communication infrastructure for a sovereign digital society.
    :alt: swarm-logo
    :align: left
 
-Swarm is a censorship resistant, permissionles, decentrelized storage- and communication infrastructure. 
+Swarm is a censorship resistant, permissionless, decentrelised storage- and communication infrastructure.
 
 This base-layer infrastructure provides these services by contributing resources to each other. These contributions are accurately accounted for on a peer to peer basis, allowing nodes to trade resource for resource, but offering monetary compensation to nodes consuming less than they serve.
 

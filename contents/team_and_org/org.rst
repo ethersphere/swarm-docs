@@ -11,4 +11,4 @@ The following organisations employ employees or pay contractors to work on Swarm
 
  - `IOV Labs <https://iovlabs.org/>`_ Contributes with substaintial resources since the IOV and Swarm Partnership in June 2019.
 
- - Private Sponsors - Swarm is partially supported through private investors. e.g. E-Point (Budapest).
+ - Private Sponsors - Swarm is partially supported through private sponsors. e.g. E-Point (Budapest).
