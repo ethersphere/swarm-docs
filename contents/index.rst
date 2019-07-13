@@ -18,6 +18,7 @@ Storage and communication infrastructure for a sovereign digital society.
 Swarm is a censorship resistant, permissionles, decentrelized storage- and communication infrastructure. 
 
 This base-layer infrastructure provides these services by contributing resources to each other. These contributions are accurately accounted for on a peer to peer basis, allowing nodes to trade resource for resource, but offering monetary compensation to nodes consuming less than they serve.
+
 Swarm is using existing Smart-Contract platforms (e.g. Ethereum) to implement the financial incentivisation.
 
 .. image:: img/swarm-intro.svg
@@ -26,7 +27,16 @@ Swarm is using existing Smart-Contract platforms (e.g. Ethereum) to implement th
    :align: center
 |
 
-Table of contents:
+Implementations of Swarm
+========================
+
++------------------------+------------------------+----------------------------+--------------------------------------------+
+|Client-Name             |Programming Language    |Maintained by               | Notes                                      |
++========================+========================+============================+============================================+
+|Swarm Go-Client         | golang                 |Swarm Core-Team             |                                            | 
++------------------------+------------------------+----------------------------+--------------------------------------------+
+|Swarm Nim-Client        | nim                    |Status.im                   | Development is planned to start Q1 2020    |
++------------------------+------------------------+----------------------------+--------------------------------------------+
 
 .. toctree::
    :numbered:

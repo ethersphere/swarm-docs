@@ -2,22 +2,8 @@
 Communication Channels
 ============================
 
-Everything you need to know to stay up to date.
-
-`Swarm Website<http://swarm.ethereum.org>`_
-It is accessible via Swarm at `theswarm.eth`. The page can be accessed through the public gateway on https://swarm.ethereum.org or https://swarm-gateways.net/bzz:/theswarm.eth/
-
-Chat - Mattermost
-register yourself to join the swarm community in real-time communication 
- - https://beehive.ethswarm.org/
-
-Social Media
-------------
-
-Twitter: @ethswarm
-
-Research Forum
-------------
-
-If you want to discuss in a structured way about research and development which is related to swarm please join the 
-- https://swarmresear.ch/
+ - `Swarm Website <http://swarm.ethereum.org>`_ - The Swarm Website is served from Swarm itself (using the Swarm gateway https://swarm-gateways.net/bzz:/theswarm.eth/)
+ - Community Chat - `Mattermost <https://beehive.ethswarm.org/>`_
+ - Twitter `@ethswarm <https://twitter.com/ethswarm>`_
+ - `reddit channel <https://www.reddit.com/r/ethswarm/>`_
+ - `Research Forum <https://swarmresear.ch/>`_ - Structured discussions about research and development
