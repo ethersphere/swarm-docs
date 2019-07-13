@@ -21,11 +21,6 @@ This base-layer infrastructure provides these services by contributing resources
 
 Swarm is using existing Smart-Contract platforms (e.g. Ethereum) to implement the financial incentivisation.
 
-.. image:: img/swarm-intro.svg
-   :alt: Swarm storage and message routing
-   :width: 500
-   :align: center
-
 Implementations of Swarm
 ========================
 
