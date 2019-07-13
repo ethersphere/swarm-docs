@@ -1,7 +1,12 @@
 
 
-Welcome to the Swarm documentation!
-===================================
+Swarm
+#####
+
+Storage and communication infrastructure for a sovereign digital society.
+==============
+
+..  * extension allows for per-format preference for image format
 
 ..  image:: img/swarm.png
    :height: 300px
@@ -10,10 +15,15 @@ Welcome to the Swarm documentation!
    :alt: swarm-logo
    :align: left
 
-Swarm is a distributed storage platform and content distribution network, a native base layer service of the Ethereum **web3** stack. 
+Swarm is a censorship resistant, permissionles, decentrelized storage- and communication infrastructure. 
 
-This documentation was created with curious end-users, third web enterpreneurs and developers in mind. It should make you thoroughly educated about Swarm within a reasonable amount of time.
+This base-layer infrastructure provides these services by contributing resources to each other. These contributions are accurately accounted for on a peer to peer basis, allowing nodes to trade resource for resource, but offering monetary compensation to nodes consuming less than they serve.
+Swarm is using existing Smart-Contract platforms (e.g. Ethereum) to implement the financial incentivisation.
 
+.. image:: img/swarm-intro.svg
+   :alt: Swarm storage and message routing
+   :width: 500
+   :align: center
 |
 
 Table of contents:
@@ -21,6 +31,7 @@ Table of contents:
 .. toctree::
    :numbered:
    :maxdepth: 3
+   :hidden:
 
    introduction
    architecture

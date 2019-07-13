@@ -53,3 +53,9 @@ make SOURCE=sw^3 latexpdf
     * `js API <http://www.sphinx-doc.org/en/stable/domains.html#the-javascript-domain>`_
     * `http API <http://pythonhosted.org/sphinxcontrib-httpdomain>`_
     * `go <https://pypi.python.org/pypi/sphinxcontrib-golangdomain>`_
+
+
+## Licences
+
+This document is licensed under the @emph{Creative Commons Attribution License}. To
+view a copy of this license, visit http://creativecommons.org/licenses/by/2.0/
