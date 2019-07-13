@@ -1,5 +1,5 @@
 Feeds 
-=====
+-----
 
 .. note::
   Feeds, previously known as *Mutable Resource Updates*, is an experimental feature, available since Swarm POC3. It is under active development, so expect things to change.
@@ -52,10 +52,10 @@ Feeds API
 There  are 3 different ways of interacting with *Feeds* : HTTP API, CLI and Golang API.
 
 HTTP API
-~~~~~~~~
+--------
 
 Posting to a Feed
-.................
+^^^^^^^^^^^^^^^^^
 
 Since Feed updates need to be signed, and an update has some correlation with a previous update, it is necessary to retrieve first the Feed's current status. Thus, the first step to post an update will be to retrieve this current status in a ready-to-sign template:
 
@@ -108,7 +108,7 @@ Where:
 
 
 Reading a Feed
-..............
+^^^^^^^^^^^^^^
 
 To retrieve a Feed's last update:
 
@@ -133,7 +133,7 @@ Add an addtional ``time`` parameter. The last update before that ``time`` (unix 
 ``GET /bzz-feed:/<MANIFEST OR ENS NAME>?time=<T>``
 
 Creating a Feed Manifest
-........................
+^^^^^^^^^^^^^^^^^^^^^^^^
 
 To create a ``Feed manifest`` using the HTTP API:
 
@@ -145,10 +145,10 @@ This will create a manifest referencing the provided Feed.
   This API call will be deprecated in the near future.
 
 Go API
-~~~~~~~~
+------
 
 Query object
-.................
+^^^^^^^^^^^^
 
 The ``Query`` object allows you to build a query to browse a particular ``Feed``.
 
@@ -159,14 +159,14 @@ You can also use ``feed.NewQuery()`` instead, if you want to build a ``Query`` t
 Advanced usage of ``Query`` includes hinting the lookup algorithm for faster lookups. The default hint ``lookup.NoClue`` will have your node track Feeds you query frequently and handle hints automatically.
 
 Request object
-.................
+^^^^^^^^^^^^^^
 
 The ``Request`` object makes it easy to construct and sign a request to Swarm to update a particular Feed. It contains methods to sign and add data. We can  manually build the ``Request`` object, or fetch a valid "template" to use for the update.
 
 A ``Request`` can also be serialized to JSON in case you need your application to delegate signatures, such as having a browser sign a Feed update request.
 
 Posting to a Feed
-.................
+^^^^^^^^^^^^^^^^^
 
 1. Retrieve a ``Request`` object or build one from scratch. To retrieve a ready-to-sign one: 
 
@@ -183,7 +183,7 @@ Posting to a Feed
   func (c *Client) UpdateFeed(request *feed.Request, createManifest bool) (io.ReadCloser, error) 
 
 Reading a Feed
-..............
+^^^^^^^^^^^^^^
 
 To retrieve a Feed update, use `client.QueryFeed()`. ``QueryFeed`` returns a byte stream with the raw content of the Feed update.  
 
@@ -198,7 +198,7 @@ points to that address.
 You only need to provide either ``manifestAddressOrDomain`` or ``Query`` to ``QueryFeed()``. Set to ``""`` or ``nil`` respectively.
 
 Creating a Feed Manifest
-........................
+^^^^^^^^^^^^^^^^^^^^^^^^
 
 Swarm client (package swarm/api/client) has the following method:
 
@@ -211,7 +211,7 @@ Swarm client (package swarm/api/client) has the following method:
 Returns the resulting ``Feed manifest address`` that you can set in an ENS Resolver (setContent) or reference future updates using ``Client.UpdateFeed()``
 
 Example Go code
-...............
+^^^^^^^^^^^^^^^
 
 .. code-block:: go
 
@@ -245,14 +245,14 @@ Example Go code
   }
 
 Command-Line
-~~~~~~~~~~~~~~~~
+------------
 
 The CLI API allows us to go through how Feeds work using practical examples. You can look up CL usage by typing ``swarm feed`` into your CLI.
 
 In the CLI examples, we will create and update feeds using the bzzapi on a running local Swarm node that listens by default on port 8500. 
 
 Creating a Feed Manifest
-........................
+^^^^^^^^^^^^^^^^^^^^^^^^
 
 The Swarm CLI allows creating Feed Manifests directly from the console.
 
@@ -297,7 +297,7 @@ is equivalent to
 
 
 Posting to a Feed
-.................
+^^^^^^^^^^^^^^^^^
 
 To update a Feed with the CLI, use ``feed update``. The **update** argument has to be in ``hex``. If you want to update your *test* feed with the update *hello*, you can refer to it by name:
 
@@ -318,7 +318,7 @@ or manifest.
   $ swarm --bzzapi http://localhost:8500 feed update --manifest <manifest hash> 0x68656c6c6f203
 
 Reading Feed status
-...................
+^^^^^^^^^^^^^^^^^^^
 
 You can read the feed object using ``feed info``. Again, you can use the feed name, the topic, or the manifest hash. Below, we use the name.
 
@@ -327,7 +327,7 @@ You can read the feed object using ``feed info``. Again, you can use the feed na
   $ swarm --bzzapi http://localhost:8500 feed info --name test
 
 Reading Feed Updates
-.....................  
+^^^^^^^^^^^^^^^^^^^^
 
 Although the Swarm CLI doesn't have the functionality to retrieve feed updates, we can use ``curl`` and the HTTP api to retrieve them. Again, you can use the feed name, topic, or manifest hash. To return the update ``hello`` for your ``test`` feed, do this:
 
@@ -337,7 +337,7 @@ Although the Swarm CLI doesn't have the functionality to retrieve feed updates, 
 
 
 Computing Feed Signatures
--------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
 1. computing the digest:
 
@@ -357,7 +357,7 @@ The digest is computed concatenating the following:
 4. Convert to hex string and put in the ``signature`` field above
 
 JavaScript example
-~~~~~~~~~~~~~~~~~~
+------------------
 
 .. code-block:: javascript
 

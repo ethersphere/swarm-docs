@@ -1,6 +1,6 @@
-******************************
+********************************
 Swarm for Go-Client Contributors
-******************************
+********************************
 
 All what you need to know to contribute to the Swarm Go-Client implementation.
 

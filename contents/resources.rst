@@ -2,10 +2,7 @@
 Resources
 *******************
 
-Homepage
---------
-
-the *Swarm homepage* is accessible via Swarm at `theswarm.eth`. The page can be accessed through the public gateway on https://swarm.ethereum.org or https://swarm-gateways.net/bzz:/theswarm.eth/
+This sections contains a subset of the past talks and contributions of the Swarm team.
 
 Blogposts
 ---------------
