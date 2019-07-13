@@ -1,5 +1,5 @@
 Access Control 
-===============
+--------------
 
 Swarm supports restricting access to content through several access control strategies:
 
@@ -18,7 +18,7 @@ Swarm supports restricting access to content through several access control stra
 .. important:: When accessing content which is restricted to certain EC keys - the node which exposes the HTTP proxy that is queried must be started with the granted private key as its ``bzzaccount`` CLI parameter.
 
 Password protection 
--------------------
+^^^^^^^^^^^^^^^^^^^
 
 The simplest type of credential is a passphrase. In typical use cases, the
 passphrase is distributed by off-band means, with adequate security measures. 
@@ -88,7 +88,7 @@ You can retrieve the content in three ways:
   > testfile
 
 Selective access using EC keys
--------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 A more sophisticated type of credential is an `Elliptic Curve <https://en.wikipedia.org/wiki/Elliptic-curve_cryptography>`_
 private key, identical to those used throughout Ethereum for accessing accounts. 
@@ -146,7 +146,7 @@ The returned hash ``4b964a75ab19db960c274058695ca4ae21b8e19f03ddf1be482ba3ad3c5b
 As with the ``pk`` strategy - the only way to fetch the access controlled content in this case would be to request the hash through one of the nodes that were granted access and/or posses the granted private key (and that the requesting node has been started with the appropriate ``bzzaccount`` that is associated with the relevant key) - either the local node that was used to upload the content or one of the nodes which were granted access through their public keys.
 
 HTTP usage
-----------
+^^^^^^^^^^
 
 Accessing restricted content on Swarm through the HTTP API is, as mentioned, limited to your local node
 due to security considerations.
@@ -172,7 +172,7 @@ the node was started with (see the ``--bzzaccount`` flag). If the node's key is 
 decrypted and displayed, otherwise - an ``HTTP 401 Unauthorized`` error will be returned by the node.
 
 Access control in the CLI: example usage
------------------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. tabs::
 

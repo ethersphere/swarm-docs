@@ -1,5 +1,5 @@
 Manifests
-===============
+---------
 
 .. _swarm-manifest:
 

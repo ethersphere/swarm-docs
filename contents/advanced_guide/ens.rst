@@ -1,7 +1,7 @@
 .. _Ethereum Name Service:
 
 Using ENS names
-================
+---------------
 
 .. note:: In order to `resolve` ENS names, your Swarm node has to be connected to an Ethereum blockchain (mainnet, or testnet). See `Getting Started <./gettingstarted.html#connect-ens>`_ for instructions. This section explains how you can register your content to your ENS name.
 

@@ -1,23 +1,11 @@
-*******************
+************************
 Swarm for Node-Operators
-*******************
+************************
 
-This section will give you all required information to run your swarm node or deploy a seperate private or public swarm (test) network.
-
-List of Public Swarm Networks
-========================
-
-+---------------+------------------------+------------------------+------------------------------+----------------------------+
-| Network ID    |Network Name            | Type of Network        | Maintained by                | Gateways                   |
-+===============+========================+========================+==============================+============================+
-| Network ID #1 | EF-Test-Network        | Pubic Test-Network     | Swarm Core-Team / EF Dev OPS | https://swarm-gateways.net |
-+---------------+------------------------+------------------------+------------------------------+----------------------------+
-
-The Ethereum Foundation operates a Swarm testnet that can be used to test out functionality in a similar manner to the Ethereum testnetwork.
-Everyone can join the network by running the Swarm client node.
+This section is about how to run your swarm node, or deploy a seperate private or public swarm network.
 
 Installation and Updates
-==================================
+========================
 
 Swarm runs on all major platforms (Linux, macOS, Windows, Raspberry Pi, Android, iOS).
 

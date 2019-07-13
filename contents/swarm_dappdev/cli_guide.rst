@@ -1,10 +1,10 @@
-CLI - Command Line Interface
-============================
+Using the CLI - Command Line Interface
+--------------------------------------
 
 .. _swarmup:
 
 Uploading a file to your local Swarm node
-------------------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. note:: Once a file is uploaded to your local Swarm node, your node will `sync` the chunks of data with other nodes on the network. Thus, the file will eventually be available on the network even when your original node goes offline.
 
@@ -30,7 +30,7 @@ You can encrypt your file using the ``--encrypt`` flag. See the :ref:`Encryption
 
 
 Suppressing automatic manifest creation
----------------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 You may wish to prevent a manifest from being created alongside with your content and only upload the raw content. You might want to include it in a custom index, or handle it as a data-blob known and used only by a certain application that knows its MIME type. For this you can set ``--manifest=false``:
 
 .. code-block:: none
@@ -44,7 +44,7 @@ In the context, the hash ``7149075b7f485411e5cc7bb2d9b7c86b3f9f80fb16a3ba84f5dc6
 
 
 Downloading a single file
-----------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
 To download single files, use the ``swarm down`` command.
 Single files can be downloaded in the following different manners. The following examples assume ``<hash>`` resolves into a single-file manifest:
@@ -73,7 +73,7 @@ Downloading a single file from a multi-entry manifest can be done with (``<hash>
 ..If you try to download from a multi-entry manifest without specifying the file, you will get a `got too many matches for this path` error. You will need to specify a `--recursive` flag (see below).
 
 Uploading to a remote Swarm node
------------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 You can upload to a remote Swarm node using the ``--bzzapi`` flag.
 For example, you can use one of the public gateways as a proxy, in which case you can upload to Swarm without even running a node.
 
@@ -86,7 +86,7 @@ For example, you can use one of the public gateways as a proxy, in which case yo
 
 
 Uploading a directory
----------------------
+^^^^^^^^^^^^^^^^^^^^^
 
 Uploading directories is achieved with the ``--recursive`` flag.
 
@@ -98,7 +98,7 @@ Uploading directories is achieved with the ``--recursive`` flag.
 The returned hash refers to a root manifest referencing all the files in the directory.
 
 Directory with default entry
-----------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 It is possible to declare a default entry in a manifest. In the example above, if ``index.html`` is declared as the default, then a request for a resource with an empty path will show the contents of the file ``/index.html``
 
@@ -128,7 +128,7 @@ This is especially useful when the hash (in this case ``ef6fc0747d1fbaf86d769b3e
 .. note:: You can toggle automatic default entry detection with the ``SWARM_AUTO_DEFAULTPATH`` environment variable. You can do so by a simple ``$ export SWARM_AUTO_DEFAULTPATH=true``. This will tell Swarm to automatically look for ``<uploaded directory>/index.html`` file and set it as the default manifest entry (in the case it exists).  
 
 Downloading a directory
---------------------------
+^^^^^^^^^^^^^^^^^^^^^^^
 
 To download a directory, use the ``swarm down --recursive`` command.
 Directories can be downloaded in the following different manners. The following examples assume <hash> resolves into a multi-entry manifest:
@@ -147,7 +147,7 @@ Similarly as with a single file, you can also specify a custom proxy with ``--bz
 .. important :: Watch out for the order of arguments in directory upload/download: it's ``swarm --recursive up`` and ``swarm down --recursive``.
 
 Adding entries to a manifest
--------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 The command for modifying manifests is ``swarm manifest``.
 
 To add an entry to a manifest, use the command:
@@ -169,7 +169,7 @@ To modify the hash of an entry in a manifest, use the command:
   $ swarm manifest update <manifest-hash> <path> <new-hash>
 
 Reference table
------------------
+^^^^^^^^^^^^^^^
 
 +------------------------------------------+------------------------------------------------------------------------+
 | **upload**                               | ``swarm up <file>``                                                    |
@@ -204,7 +204,7 @@ Reference table
 +------------------------------------------+------------------------------------------------------------------------+
 
 Up- and downloading in the CLI: example usage
-----------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. tabs::
 
@@ -326,3 +326,4 @@ Up- and downloading in the CLI: example usage
       > <new dir hash 2>
 
     We can check the manifest under <new dir hash 2> to see that the file is back there.
+    

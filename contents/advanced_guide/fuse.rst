@@ -1,6 +1,6 @@
 
 FUSE
-======================
+----
 
 
 Another way of interacting with Swarm is by mounting it as a local filesystem using `FUSE <https://en.wikipedia.org/wiki/Filesystem_in_Userspace>`_ (Filesystem in Userspace). There are three IPC API's which help in doing this.
@@ -9,7 +9,7 @@ Another way of interacting with Swarm is by mounting it as a local filesystem us
 
 
 Installing FUSE
-----------------
+^^^^^^^^^^^^^^^
 
 1. Linux (Ubuntu)
 
@@ -32,14 +32,14 @@ Installing FUSE
 
 
 CLI Usage
------------
+^^^^^^^^^
 
 The Swarm CLI now integrates commands to make FUSE usage easier and streamlined.
 
 .. note:: When using FUSE from the CLI, we assume you are running a local Swarm node on your machine. The FUSE commands attach to the running node through `bzzd.ipc`
 
 Mount
-^^^^^^^^
+^^^^^
 
 One use case to mount a Swarm hash via FUSE is a file sharing feature accessible via your local file system.
 Files uploaded to Swarm are then transparently accessible via your local file system, just as if they were stored locally.

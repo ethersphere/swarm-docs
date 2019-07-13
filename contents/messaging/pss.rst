@@ -1,3 +1,4 @@
+
 Swarm Messaging for DAPP-Developers 
 ===================================
 
@@ -6,7 +7,7 @@ The pss API is exposed through a JSON RPC interface described in the `API Refere
 here we explain the basic concepts and features.
 
 Messaging-Protocol (PSS) Basics
--------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 With ``pss`` you can send messages to any node in the Swarm network. The messages are routed in the same manner as retrieve requests for chunks. Instead of chunk hash reference, ``pss`` messages specify a destination in the overlay address space independently of the message payload. This destination can describe a *specific node* if it is a complete overlay address or a *neighbourhood* if it is partially specified one. Up to the destination, the message is relayed through devp2p peer connections using :dfn:`forwarding kademlia` (passing messages via semi-permanent peer-to-peer TCP connections between relaying nodes using kademlia routing). Within the destination neighbourhood the message is broadcast using gossip.
 
@@ -19,7 +20,7 @@ The message payload is dispatched to *message handlers* by the recipient nodes a
   nor message delivery (e.g. messages to offline nodes will not be cached and replayed) at the moment.
 
 Privacy features
-------------------
+^^^^^^^^^^^^^^^^
 
 Thanks to end-to-end encryption, pss caters for private communication.
 
@@ -30,10 +31,10 @@ Using partial addressing, ``pss`` offers a sliding scale of recipient anonymity:
 Forward secrecy is provided if you use the `Handshakes` module.
 
 PSS Usage
-===========================
+---------
 
 Registering a recipient
---------------------------
+^^^^^^^^^^^^^^^^^^^^^^^
 
 Intended recipients first need to be registered with the node. This registration includes the following data:
 
@@ -48,7 +49,7 @@ Intended recipients first need to be registered with the node. This registration
 After you associate an encryption key with an address they will be checked against any message that comes through (when sending or receiving) given it matches the topic and the destination of the message.
 
 Sending a message
-------------------
+^^^^^^^^^^^^^^^^^
 
 There are a few prerequisites for sending a message over ``pss``:
 
@@ -73,7 +74,7 @@ After you associate an encryption key with a destination they will be checked ag
   When using the internal encryption methods, you MUST associate keys (whether symmetric or asymmetric) with an address space AND a topic before you will be able to send anything.
 
 Sending a raw message
-----------------------
+^^^^^^^^^^^^^^^^^^^^^
 
 It is also possible to send a message without using the builtin encryption. In this case no recipient registration is made, but the message is sent directly, with the following input data:
 
@@ -82,7 +83,7 @@ It is also possible to send a message without using the builtin encryption. In t
 2. ``Address``- the Swarm overlay address to use for the routing.
 
 Receiving messages
---------------------
+^^^^^^^^^^^^^^^^^^
 
 You can subscribe to incoming messages using a topic. Since subscription needs push notifications, the supported RPC transport interfaces are websockets and IPC.
 
@@ -90,18 +91,13 @@ You can subscribe to incoming messages using a topic. Since subscription needs p
   ``pss`` does not guarantee message ordering (`Best-effort delivery <https://en.wikipedia.org/wiki/Best-effort_delivery>`_)
   nor message delivery (e.g. messages to offline nodes will not be cached and replayed) at the moment.
   
-Advanced features
-==================
-
-.. note:: This functionalities are optional features in pss. They are compiled in by default, but can be omitted by providing the appropriate build tags.
-
 Handshakes
------------
+^^^^^^^^^^
 
 ``pss`` provides a convenience implementation of Diffie-Hellman handshakes using ephemeral symmetric keys. Peers keep separate sets of keys for a limited amount of incoming and outgoing communications, and create and exchange new keys when the keys expire.
 
 
 Protocols
------------
+^^^^^^^^^
 
 A framework is also in place for making ``devp2p`` protocols available using ``pss`` connections. This feature is only available using the internal golang API, read more in the GoDocs or the codes.

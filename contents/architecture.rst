@@ -151,6 +151,8 @@ Structural components and key processes
 Storage module
 --------------
 
+.. important:: Keep in mind that Swarm, without persistance guarantees, allows for :dfn:`upload and disappear` which means that any node can just upload content to the Swarm and then is allowed to go offline. As long as nodes do not drop out or become unavailable, the content will still be accessible due to the 'synchronization' procedure in which nodes continuously pass along available data between each other.
+
 :dfn:`LocalStore`
   Provides persistent storage on each node. Provides indexes, iterators and metric storage to other components.
 

@@ -1,7 +1,7 @@
 .. _Encryption:
 
 Encryption
-===========
+----------
 
 Introduced in POC 0.3, symmetric encryption is now readily available to be used with the ``swarm up`` upload command.
 The encryption mechanism is meant to protect your information and make the chunked data unreadable to any handling Swarm node.

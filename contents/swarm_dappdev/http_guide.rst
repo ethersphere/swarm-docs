@@ -1,10 +1,8 @@
 Uploading and downloading
-=======================
-
-..  contents::
+=========================
 
 Introduction
-==================================
+------------
 .. note:: This guide assumes you've installed the Swarm client and have a running node that listens by default on port 8500. See `Getting Started <./gettingstarted.html>`_ for details.
 
 Arguably, uploading and downloading content is the raison d'être of Swarm. Uploading content consists of "uploading" content to your local Swarm node, followed by your local Swarm node "syncing" the resulting chunks of data with its peers in the network. Meanwhile, downloading content consists of your local Swarm node querying its peers in the network for the relevant chunks of data and then reassembling the content locally.
@@ -12,7 +10,7 @@ Arguably, uploading and downloading content is the raison d'être of Swarm. Uplo
 Uploading and downloading data can be done through the ``swarm`` command line interface (CLI) on the terminal or via the HTTP interface on `http://localhost:8500 <http://localhost:8500>`_.
 
 Using HTTP
-======================
+----------
 
 Swarm offers an HTTP API. Thus, a simple way to upload and download files to/from Swarm is through this API.
 We can use the ``curl`` `tool <https://curl.haxx.se/docs/httpscripting.html>`_ to exemplify how to interact with this API.
@@ -50,7 +48,7 @@ And that's it.
 .. note:: If you omit the trailing slash from the url then the request will result in a HTTP redirect. The semantically correct way to access the root path of a Swarm manifest is using the trailing slash.
 
 Tar stream upload
-------------------
+^^^^^^^^^^^^^^^^^
 
 Tar is a traditional unix/linux file format for packing a directory structure into a single file. Swarm provides a convenient way of using this format to make it possible to perform recursive uploads using the HTTP API.
 
@@ -88,7 +86,7 @@ GET requests work the same as before with the added ability to download multiple
 
 
 Multipart form upload
----------------------
+^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: none
 
@@ -103,7 +101,7 @@ Multipart form upload
 
 
 Add files to an existing manifest using multipart form
-------------------------------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: none
 
@@ -118,7 +116,7 @@ Add files to an existing manifest using multipart form
 
 
 Upload files using a simple HTML form
--------------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: html
 
@@ -130,7 +128,7 @@ Upload files using a simple HTML form
 
 
 Listing files
--------------
+^^^^^^^^^^^^^
 
 .. note:: The ``jq`` command mentioned below is a separate application that can be used to pretty-print the json data retrieved from the ``curl`` request
 
