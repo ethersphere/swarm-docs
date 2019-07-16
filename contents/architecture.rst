@@ -4,9 +4,6 @@
 Architectural Overview
 **********************
 
-This overview describes how the `SWIPs <https://github.com/ethersphere/SWIPs/blob/master/SWIPs/swip-0.md>`_ relate to each other and form a working system.
-
-
 Preface
 =============
 
