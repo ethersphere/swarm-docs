@@ -1,13 +1,16 @@
 
-************
+.. raw:: html
+
+  <div style="border: 1px solid black; padding: 15px; font-size: 1.2em; margin-bottom: 40px; font-weight:bold; background-color: lightgrey">
+  Storage and communication infrastructure for a sovereign digital society. 
+  </div>
+
+
+
 Introduction
 ************
 
-Swarm
-=====
 
-Storage and communication infrastructure for a sovereign digital society.
-=========================================================================
 
 ..  * extension allows for per-format preference for image format
 
@@ -18,7 +21,7 @@ Storage and communication infrastructure for a sovereign digital society.
    :alt: swarm-logo
    :align: left
 
-Swarm is a censorship resistant, permissionless, decentrelised storage- and communication infrastructure.
+Swarm is a censorship resistant, permissionless, decentralised storage and communication infrastructure.
 
 This base-layer infrastructure provides these services by contributing resources to each other. These contributions are accurately accounted for on a peer to peer basis, allowing nodes to trade resource for resource, but offering monetary compensation to nodes consuming less than they serve.
 
@@ -26,7 +29,10 @@ Swarm is using existing Smart-Contract platforms (e.g. Ethereum) to implement th
 
 .. raw:: html
 
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/VgTZV471WFM?start=192" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <iframe style="margin-bottom: 40px" width="560" height="315" src="https://www.youtube.com/embed/VgTZV471WFM?start=192" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+
+
 
 Implementations of Swarm
 ========================

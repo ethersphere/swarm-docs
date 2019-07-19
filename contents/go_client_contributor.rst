@@ -2,7 +2,7 @@
 Swarm for Go-Client Contributors
 ********************************
 
-All what you need to know to contribute to the Swarm Go-Client implementation.
+All you need to know to contribute to the Swarm Go-Client implementation.
 
 Source code is located at https://github.com/ethersphere/swarm/.
 
@@ -111,7 +111,7 @@ Communication layer
 
 
 
-Networksimulation-Framework
+Simulation Framework
 ================================
 
-Find everything you need to run Swarm Networksimulations for testing and debugging.
+Find everything you need to run Swarm network simulations for testing and debugging.
