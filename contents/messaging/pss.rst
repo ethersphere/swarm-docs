@@ -90,12 +90,6 @@ You can subscribe to incoming messages using a topic. Since subscription needs p
 .. important::
   ``pss`` does not guarantee message ordering (`Best-effort delivery <https://en.wikipedia.org/wiki/Best-effort_delivery>`_)
   nor message delivery (e.g. messages to offline nodes will not be cached and replayed) at the moment.
-  
-Handshakes
-^^^^^^^^^^
-
-``pss`` provides a convenience implementation of Diffie-Hellman handshakes using ephemeral symmetric keys. Peers keep separate sets of keys for a limited amount of incoming and outgoing communications, and create and exchange new keys when the keys expire.
-
 
 Protocols
 ^^^^^^^^^
