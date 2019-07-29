@@ -42,7 +42,7 @@ Swarm Communication Track
 +------------------------+---------------------+-----------------------------------------------------+
 |Name                    |Organisation         |Responsibilities                                     |
 +========================+=====================+=====================================================+
-|Louis Holbrook          | Ethereum Foundation | Go Developer / DevOps                               |
+|Louis Holbrook          | Swarm               | Track-Lead from Swarm side, Go Developer            |
 +------------------------+---------------------+-----------------------------------------------------+
 |Oskar Thorén            | Status.im           | Project Lead from Status on the Communication Track |
 +------------------------+---------------------+-----------------------------------------------------+

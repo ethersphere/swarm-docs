@@ -35,10 +35,6 @@ Pull requests should by default commit on the `master` branch.
 
 Prospective contributors please read the `Contributing` section from our readme: https://github.com/ethersphere/swarm#contributing.
 
-The Swarm Go-Client Development Process
-================================
-[TODO] User-Stories / Epics / Sprint explaination.
-
 High level component description
 ================================
 

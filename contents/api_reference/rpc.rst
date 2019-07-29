@@ -51,30 +51,6 @@ All parameters are hex-encoded bytes or strings unless otherwise noted.
 ``pss.GetAsymmetricAddressHint(topic, publickey)``
   Return the Swarm address associated with the peer registered with the given asymmetric key and topic combination. If a match is found it returns the address data in hex format.
 
-.. note:: The following methods are used to control the optional pss handshake module. This is an advanced feature, and not required for sending and receiving messages using pss. 
-
-``pss.addHandshake(topic)``
-  Activate handshake functionality on the specified topic. The method has no return value.
-
-``pss.removeHandshake(topic)``
-  Remove handshake functionality on the specified topic. The method has no return value.
-
-``pss.handshake(publickey, topic, bool block, bool flush)``
-  Instantiate handshake with peer, refreshing symmetric encryption keys. If parameter 3 is false the handshake will happen asynchronously. If parameter 4 is true, it will force expiry of all existing keys. The method returns a list of symmetric key ids created by the handshake. If the handshake is asynchronous, however, returned array will be empty.
-
-``pss.getHandshakeKeys(publickey, topic, bool incoming, bool outgoing)``
-  Returns the set of valid symmetric encryption keys for a specified peer and topic. If the incoming and outgoing parameters are set, the keys valid for the respective communcations directions are included.
-
-``pss.getHandshakeKeyCapacity(symkeyid)``
-  Returns the number of messages (uint16) a symmetric handshake key is valid for.
-
-``pss.getHandshakePublicKey(symkeyid)``
-  Returns the public key associated with the specified symmetric handshake key.
-
-``pss.releaseHandshakeKey(publickey, topic, symkeyid, bool instant)`` 
-  Invalidate the specified symmetric handshake key. Normally, the key will be kept for a grace period to allow decryption of messages not yet received at the time of release. If the instant parameter is set, this grace period is omitted, and the key removed instantaneously. This method has no return value.
-
-
 .. uncommentthisChequebook IPC API
 .. uncommentthis------------------------------
 
