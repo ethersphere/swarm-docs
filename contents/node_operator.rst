@@ -642,7 +642,7 @@ General configuration parameters
    "n/a","--store.size value","SWARM_STORE_CAPACITY","5000000","Number of chunks (5M is roughly 20-25GB) (default 5000000)]"
    "n/a","--store.cache.size value","SWARM_STORE_CACHE_CAPACITY","5000","Number of recent chunks cached in memory (default 5000)"            
    "n/a","--sync-update-delay value","SWARM_ENV_SYNC_UPDATE_DELAY","","Duration for sync subscriptions update after no new peers are added (default 15s)"            
-   "SwapApi","--swap-api","SWARM_SWAP_API","","URL of the Ethereum API provider to use to settle SWAP payments"
+   "BackendURL","--backend-url","SWARM_BACKEND_URL","","URL of the Ethereum API provider to use to settle SWAP payments"
    "SwapEnabled","--swap","SWARM_SWAP_ENABLE","false","Enable SWAP"
    "SyncDisabled","--nosync","SWARM_ENV_SYNC_DISABLE","false","Disable Swarm node synchronization"
    "n/a","--verbosity value","n/a","3","Logging verbosity: 0=silent, 1=error, 2=warn, 3=info, 4=debug, 5=detail"
