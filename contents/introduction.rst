@@ -51,7 +51,7 @@ Public Swarm Networks
 +---------------+------------------------+------------------------+------------------------------+----------------------------+
 | Network ID    |Network Name            | Type of Network        | Maintained by                | Gateways                   |
 +===============+========================+========================+==============================+============================+
-| Network ID #1 | EF-Test-Network        | Pubic Test-Network     | Swarm Core-Team / EF Dev OPS | https://swarm-gateways.net |
+| Network ID #4 | EF-Test-Network        | Pubic Test-Network     | Swarm Core-Team / EF Dev OPS | https://swarm-gateways.net |
 +---------------+------------------------+------------------------+------------------------------+----------------------------+
 
 The Ethereum Foundation operates a Swarm testnet that can be used to test out functionality in a similar manner to the Ethereum testnetwork.

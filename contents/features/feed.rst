@@ -42,17 +42,17 @@ Users can post to any topic. If you know the user's address and agree on a parti
 Feeds are not created, only updated. If a particular Feed (user, topic combination) has never posted to, trying to fetch updates will yield nothing.
 
 Feed Manifests
---------------
+^^^^^^^^^^^^^^
 
 A Feed Manifest is simply a JSON object that contains the ``Topic`` and ``User`` of a particular Feed (i.e., a serialized ``Feed`` object). Uploading this JSON object to Swarm in the regular way will return the immutable hash of this object. We can then store this immutable hash in an ENS Resolver so that we can have a ENS domain that "follows" the Feed described in the manifest.
 
 Feeds API
----------
+^^^^^^^^^
 
 There  are 3 different ways of interacting with *Feeds* : HTTP API, CLI and Golang API.
 
 HTTP API
---------
+^^^^^^^^
 
 Posting to a Feed
 ^^^^^^^^^^^^^^^^^
@@ -245,7 +245,7 @@ Example Go code
   }
 
 Command-Line
-------------
+^^^^^^^^^^^^
 
 The CLI API allows us to go through how Feeds work using practical examples. You can look up CL usage by typing ``swarm feed`` into your CLI.
 
