@@ -21,7 +21,7 @@ To upload a single file to your node, run this:
 
 .. code-block:: none
 
-  $ curl -H "Content-Type: text/plain" --data "some-data" http://localhost:8500/bzz:/
+  $ curl -X POST -H "Content-Type: text/plain" --data "some-data" http://localhost:8500/bzz:/
 
 Once the file is uploaded, you will receive a hex string which will look similar to this:
 
@@ -63,7 +63,7 @@ Tar is a traditional unix/linux file format for packing a directory structure in
   tar cf files.tar .
 
   # upload the tar archive to Swarm to create a manifest
-  $ curl -H "Content-Type: application/x-tar" --data-binary @files.tar http://localhost:8500/bzz:/
+  $ curl -X POST -H "Content-Type: application/x-tar" --data-binary @files.tar http://localhost:8500/bzz:/
   > 1e0e21894d731271e50ea2cecf60801fdc8d0b23ae33b9e808e5789346e3355e
 
 You can then download the files using:
