@@ -14,24 +14,10 @@ Swarm was written in golang and requires the go-ethereum client **geth** to run.
 ..  note::
   The swarm package has not been extensively tested on platforms other than Linux and macOS.
 
-Installing Swarm on Ubuntu via PPA
+Download pre-compiled Swarm binaries
 ==================================
 
-The simplest way to install Swarm on **Ubuntu distributions** is via the built in launchpad PPAs (Personal Package Archives). We provide a single PPA repository that contains our stable releases for Ubuntu versions trusty, xenial, bionic and cosmic.
-
-To enable our launchpad repository please run:
-
-.. code-block:: shell
-
-  $ sudo apt-get install software-properties-common
-  $ sudo add-apt-repository -y ppa:ethereum/ethereum
-
-After that you can install the stable version of Swarm:
-
-.. code-block:: shell
-
-  $ sudo apt-get update
-  $ sudo apt-get install ethereum-swarm
+Pre-compiled binaries for Linux, macOS and Windows are available to download via our `official homepage <https://swarm-gateways.net/bzz:/swarm.eth/downloads/>`_.
 
 Setting up Swarm in Docker
 =============================
@@ -246,7 +232,7 @@ Using this account, connect to Swarm with
 
 .. important::
 
-  **Remember your password.** There is no *forgot my password* option for ``swarm`` and ``geth``.  
+  **Remember your password.** There is no *forgot my password* option for ``swarm`` and ``geth``.
 
 Verifying that your local Swarm node is running
 -----------------------------------------------
@@ -268,7 +254,7 @@ The easiest way to access Swarm through the command line, or through the `Geth J
 
         $ swarm --bzzaccount $BZZKEY
 
-      And, in a new terminal window:    
+      And, in a new terminal window:
 
       .. code-block:: none
 
@@ -280,7 +266,7 @@ The easiest way to access Swarm through the command line, or through the `Geth J
 
         $ swarm --bzzaccount $BZZKEY
 
-      And, in a new terminal window:    
+      And, in a new terminal window:
 
       .. code-block:: none
 
@@ -308,7 +294,7 @@ You can use Swarm with CLI flags and environment variables. See a full list in t
 How do I enable ENS name resolution?
 =====================================
 
-The `Ethereum Name Service <http://ens.readthedocs.io/en/latest/introduction.html>`_ (ENS) is the Ethereum equivalent of DNS in the classic web. It is based on a suite of smart contracts running on the *Ethereum mainnet*. 
+The `Ethereum Name Service <http://ens.readthedocs.io/en/latest/introduction.html>`_ (ENS) is the Ethereum equivalent of DNS in the classic web. It is based on a suite of smart contracts running on the *Ethereum mainnet*.
 
 In order to use **ENS** to resolve names to swarm content hashes, ``swarm`` has to connect to a ``geth`` instance that is connected to the *Ethereum mainnet*. This is done using the ``--ens-api`` flag.
 
@@ -640,8 +626,8 @@ General configuration parameters
    "n/a","--stdin","","n/a","Reads data to be uploaded from stdin"
    "n/a","--store.path value","SWARM_STORE_PATH","<$GETH_ENV_DIR>/swarm/bzz-<$BZZ_KEY>/chunks","Path to leveldb chunk DB"
    "n/a","--store.size value","SWARM_STORE_CAPACITY","5000000","Number of chunks (5M is roughly 20-25GB) (default 5000000)]"
-   "n/a","--store.cache.size value","SWARM_STORE_CACHE_CAPACITY","5000","Number of recent chunks cached in memory (default 5000)"            
-   "n/a","--sync-update-delay value","SWARM_ENV_SYNC_UPDATE_DELAY","","Duration for sync subscriptions update after no new peers are added (default 15s)"            
+   "n/a","--store.cache.size value","SWARM_STORE_CACHE_CAPACITY","5000","Number of recent chunks cached in memory (default 5000)"
+   "n/a","--sync-update-delay value","SWARM_ENV_SYNC_UPDATE_DELAY","","Duration for sync subscriptions update after no new peers are added (default 15s)"
    "BackendURL","--backend-url","SWARM_BACKEND_URL","","URL of the Ethereum API provider to use to settle SWAP payments"
    "SwapEnabled","--swap","SWARM_SWAP_ENABLE","false","Enable SWAP"
    "SyncDisabled","--nosync","SWARM_ENV_SYNC_DISABLE","false","Disable Swarm node synchronization"
