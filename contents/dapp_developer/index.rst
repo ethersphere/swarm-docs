@@ -35,6 +35,7 @@ We conclude by summarizing the various URL schemes that provide simple HTTP endp
 .. include:: ../features/act.rst
 .. include:: ../features/fuse.rst
 .. include:: ../features/pin.rst
+.. include:: ../features/tag.rst
 .. include:: ../features/bzz.rst
 
 .. include:: ../messaging/pss.rst

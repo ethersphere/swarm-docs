@@ -27,7 +27,7 @@ returns a readme.md file if the manifest at the given hash address contains such
     $ curl http://localhost:8500/bzz-raw:/c4c81dbce3835846e47a83df549e4cad399c6a81cbf83234274b87d49f5f9020/readme.md
     ## Hello Swarm!
 
-    Swarm is awesome%
+    Swarm is awesome
 
 If the manifest does not contain an file at ``readme.md`` itself, but it does contain multiple entries to which the URL could be resolved, e.g. in the example above, the manifest has entries for ``readme.md.1`` and ``readme.md.2``, the API returns an HTTP response "300 Multiple Choices", indicating that the request could not be unambiguously resolved. A list of available entries is returned via HTTP or JSON.
 
@@ -191,7 +191,7 @@ The same as the generic scheme but there is no ENS domain resolution, the domain
     $ curl http://localhost:8500/bzz-immutable:/679bde3ccb6fb911db96a0ea1586c04899c6c0cc6d3426e9ee361137b270a463/readme.md.1
     ## Hello Swarm!
 
-    Swarm is awesome%
+    Swarm is awesome
     $ curl -H "Accept:application/json" http://localhost:8500/bzz-immutable:/theswarm.eth/ | jq .
     {
         "Msg": "cannot resolve theswarm.eth: immutable address not a content hash: \"theswarm.eth\"",
