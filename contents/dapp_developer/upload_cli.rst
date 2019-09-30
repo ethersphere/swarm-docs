@@ -8,12 +8,24 @@ Uploading a file to your local Swarm node
 
 .. note:: Once a file is uploaded to your local Swarm node, your node will `sync` the chunks of data with other nodes on the network. Thus, the file will eventually be available on the network even when your original node goes offline.
 
+.. important:: According to your Swarm node's configuration different syncing mode will be used. If your Swarm node is configured to operate in push-sync mode only - your origin address will be leaked for the proof of custody receipts
+
 The basic command for uploading to your local node is ``swarm up FILE``. For example, let's create a file called example.md and issue the following command to upload the file example.md file to your local Swarm node.
 
 .. code-block:: none
   
   $ echo "this is an example" > example.md
   $ swarm up example.md
+    Swarm Hash: 730c96f6de2b5b3b961b3cf1ca0916efe2543a13a6da31e1083c61b08adc3602
+    Tag UID: 672245080
+    Upload status:
+    Syncing 23 chunks       12s [--------------------------------------------------------------] 0 %
+
+In order to produce machine-readable output of the ``swarm up`` command, use the ``--no-track`` flag after the ``up`` keyword as follows:
+
+.. code-block:: none
+  
+  $ swarm up --no-track example.md
   > d1f25a870a7bb7e5d526a7623338e4e9b8399e76df8b634020d11d969594f24a
 
 The hash returned is the hash of a :ref:`swarm manifest <swarm-manifest>`. This manifest is a JSON file that contains the ``example.md`` file as its only entry. Both the primary content and the manifest are uploaded by default.
