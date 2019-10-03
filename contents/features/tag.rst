@@ -12,7 +12,7 @@ CLI
 ^^^^
 
 The tag API can will displayed through the command line interface through the ``swarm up`` command.
-When uploading a file, using the ``--progress`` flag, the client will periodically use the tags API to retreive the status of the upload:
+When uploading a file, using the ``--progress`` flag, the client will periodically use the tags API to retrieve the status of the upload:
 
 .. code-block:: none
 
