@@ -13,20 +13,21 @@ Uploading a file to your local Swarm node
 The basic command for uploading to your local node is ``swarm up FILE``. For example, let's create a file called example.md and issue the following command to upload the file example.md file to your local Swarm node.
 
 .. code-block:: none
-  
+
   $ echo "this is an example" > example.md
   $ swarm up example.md
-    Swarm Hash: 730c96f6de2b5b3b961b3cf1ca0916efe2543a13a6da31e1083c61b08adc3602
+  > d1f25a870a7bb7e5d526a7623338e4e9b8399e76df8b634020d11d969594f24a
+
+In order to track progress of your upload you can use the ``--progress`` flag:
+
+.. code-block:: none
+
+  $ swarm up --progress example.md
+    Swarm Hash: d1f25a870a7bb7e5d526a7623338e4e9b8399e76df8b634020d11d969594f24a
     Tag UID: 672245080
     Upload status:
     Syncing 23 chunks       12s [--------------------------------------------------------------] 0 %
 
-In order to produce machine-readable output of the ``swarm up`` command, use the ``--no-track`` flag after the ``up`` keyword as follows:
-
-.. code-block:: none
-  
-  $ swarm up --no-track example.md
-  > d1f25a870a7bb7e5d526a7623338e4e9b8399e76df8b634020d11d969594f24a
 
 The hash returned is the hash of a :ref:`swarm manifest <swarm-manifest>`. This manifest is a JSON file that contains the ``example.md`` file as its only entry. Both the primary content and the manifest are uploaded by default.
 
@@ -137,7 +138,7 @@ This is especially useful when the hash (in this case ``ef6fc0747d1fbaf86d769b3e
 
   http://localhost:8500/bzz:/mysite.eth/
 
-.. note:: You can toggle automatic default entry detection with the ``SWARM_AUTO_DEFAULTPATH`` environment variable. You can do so by a simple ``$ export SWARM_AUTO_DEFAULTPATH=true``. This will tell Swarm to automatically look for ``<uploaded directory>/index.html`` file and set it as the default manifest entry (in the case it exists).  
+.. note:: You can toggle automatic default entry detection with the ``SWARM_AUTO_DEFAULTPATH`` environment variable. You can do so by a simple ``$ export SWARM_AUTO_DEFAULTPATH=true``. This will tell Swarm to automatically look for ``<uploaded directory>/index.html`` file and set it as the default manifest entry (in the case it exists).
 
 Downloading a directory
 ^^^^^^^^^^^^^^^^^^^^^^^
@@ -189,7 +190,7 @@ Reference table
 | ~ dir                                    | ``swarm --recursive up <dir>``                                         |
 +------------------------------------------+------------------------------------------------------------------------+
 | ~ dir w/ default entry (here: index.html)| ``swarm --defaultpath <dir>/index.html --recursive up <dir>``          |
-+------------------------------------------+------------------------------------------------------------------------+ 
++------------------------------------------+------------------------------------------------------------------------+
 | ~ w/o manifest                           | ``swarm --manifest=false up``                                          |
 +------------------------------------------+------------------------------------------------------------------------+
 | ~ to remote node                         | ``swarm --bzzapi https://swarm-gateways.net up``                       |
@@ -289,7 +290,7 @@ Up- and downloading in the CLI: example usage
 
     Let's create a directory with a dummy file, and upload the directory to swarm.
 
-    .. code-block:: none 
+    .. code-block:: none
 
       $ mkdir dir
       $ echo "this is a test" > dir/dummyfile.md
@@ -298,8 +299,8 @@ Up- and downloading in the CLI: example usage
 
     We can look at the manifest using ``bzz-raw`` and the HTTP API.
 
-    .. code-block:: none 
-    
+    .. code-block:: none
+
       $ curl http://localhost:8500/bzz-raw:/<dir hash>/
 
     It will look something like this:
@@ -338,4 +339,3 @@ Up- and downloading in the CLI: example usage
       > <new dir hash 2>
 
     We can check the manifest under <new dir hash 2> to see that the file is back there.
-    

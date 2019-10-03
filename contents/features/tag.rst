@@ -12,27 +12,17 @@ CLI
 ^^^^
 
 The tag API can will displayed through the command line interface through the ``swarm up`` command.
-When uploading a file, the status will be shown by default with a simple progress bar. This uses tags under the hood through the HTTP server:
+When uploading a file, using the ``--progress`` flag, the client will periodically use the tags API to retrieve the status of the upload:
 
 .. code-block:: none
-  
+
   $ echo "this is an example" > example.md
-  $ swarm up example.md
+  $ swarm up --progress example.md
     Swarm Hash: 730c96f6de2b5b3b961b3cf1ca0916efe2543a13a6da31e1083c61b08adc3602
     Tag UID: 672245080
     Upload status:
     Syncing 23 chunks       0s [==============================================================] 100 %
     Done! Your file is now retrievable from other Swarm nodes
-
-In order to produce machine-readable output of the ``swarm up`` command, use the ``--no-track`` flag after the ``up`` keyword as follows:
-
-.. code-block:: none
-  
-  $ echo "this is an example" > example.md
-  $ swarm up --no-track example.md
-    730c96f6de2b5b3b961b3cf1ca0916efe2543a13a6da31e1083c61b08adc3602
-
-.. important:: The Swarm hash that was returned from the ``swarm up`` command does not infer your Swarm node has finished syncing the content to the network. You will have to wait until your content is synced until it is accessible from other Swarm nodes
 
 
 HTTP
@@ -85,5 +75,3 @@ Using the tag UID:
     "Synced": 0,
     "StartedAt": "2019-09-30T12:20:11.176316707+05:30"
    }
-
-
