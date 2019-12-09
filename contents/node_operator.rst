@@ -635,7 +635,7 @@ General configuration parameters
    "SwapDepositAmount","--swap-deposit-amount","SWARM_SWAP_DEPOSIT_AMOUNT","0","Deposit amount for swap chequebook"
    "SwapSkipDeposit", "swap-skip-deposit", "SWARM_SWAP_SKIP_DEPOSIT", "false", "Don't deposit during boot sequence"
    "SwapLogPath","--swap-audit-logpath","SWARM_SWAP_LOG_PATH","n/a","Write execution logs of swap audit to the given directory"
-   "SwapChequebookFactory", "swap-chequebook-factory", "SWARM_SWAP_CHEQUEBOOK_FACTORY_ADDR", "defined per blockchain network", "SWAP chequebook factory contract address"
+   "SwapChequebookFactory", "swap-chequebook-factory", "SWARM_SWAP_CHEQUEBOOK_FACTORY_ADDR", "ropsten: 0x878Ccb2e3c2973767e431bAec86D1EFd809480d5", "SWAP chequebook factory contract address (default value defined per blockchain network)"
    "Contract","--swap-chequebook","SWARM_CHEQUEBOOK_ADDR","0x0","Swap chequebook contract address"
    "n/a","--verbosity value","n/a","3","Logging verbosity: 0=silent, 1=error, 2=warn, 3=info, 4=debug, 5=detail"
    "n/a","--ws","n/a","false","Enable the WS-RPC server"
