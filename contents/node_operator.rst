@@ -633,7 +633,7 @@ General configuration parameters
    "SwapPaymentThreshold","--swap-payment-threshold","SWARM_SWAP_PAYMENT_THRESHOLD","1000000","honey amount at which payment is triggered"
    "SwapDisconnectThreshold","--swap-disconnect-threshold","SWARM_SWAP_DISCONNECT_THRESHOLD","1500000","honey amount at which a peer disconnects"
    "SwapDepositAmount","--swap-deposit-amount","SWARM_SWAP_DEPOSIT_AMOUNT","0","Deposit amount for swap chequebook"
-   "SwapSkipDeposit", "swap-skip-deposit", "SWARM_SWAP_SKIP_DEPOSIT", "false", "Don't deposit during boot sequence"
+   "SwapSkipDeposit", "swap-skip-deposit", "SWARM_SWAP_SKIP_DEPOSIT", "false", "on't deposit during boot sequence"
    "SwapLogPath","--swap-audit-logpath","SWARM_SWAP_LOG_PATH","n/a","Write execution logs of swap audit to the given directory"
    "SwapChequebookFactory", "swap-chequebook-factory", "SWARM_SWAP_CHEQUEBOOK_FACTORY_ADDR", "defined per blockchain network", "SWAP chequebook factory contract address"
    "Contract","--swap-chequebook","SWARM_CHEQUEBOOK_ADDR","0x0","Swap chequebook contract address"
