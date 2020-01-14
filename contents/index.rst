@@ -8,6 +8,7 @@
 
    introduction
    architecture
+   incentivization
    swarm_specification
    dapp_developer/index
    node_operator
