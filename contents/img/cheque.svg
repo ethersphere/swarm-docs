@@ -48,7 +48,7 @@
   </font>
  </defs>
  <defs class="TextShapeIndex">
-  <g ooo:slide="id1" ooo:id-list="id3 id4 id5 id6 id7 id8 id9 id10 id11 id12 id13 id14 id15 id16"/>
+  <g ooo:slide="id1" ooo:id-list="id3 id4 id5 id6 id7 id8 id9 id10 id11 id12 id13 id14 id15"/>
  </defs>
  <defs class="EmbeddedBulletChars">
   <g id="bullet-char-template-57356" transform="scale(0.00048828125,-0.00048828125)">
@@ -169,26 +169,19 @@
       </g>
       <g class="com.sun.star.drawing.ConnectorShape">
        <g id="id13">
-        <rect class="BoundingBox" stroke="none" fill="none" x="9840" y="7350" width="301" height="13605"/>
-        <path fill="none" stroke="rgb(52,101,164)" d="M 9990,20953 L 9990,7780"/>
-        <path fill="rgb(52,101,164)" stroke="none" d="M 9990,7350 L 9840,7800 10140,7800 9990,7350 Z"/>
-       </g>
-      </g>
-      <g class="com.sun.star.drawing.ConnectorShape">
-       <g id="id14">
         <rect class="BoundingBox" stroke="none" fill="none" x="12402" y="5866" width="3451" height="16549"/>
         <path fill="none" stroke="rgb(52,101,164)" d="M 12403,22413 L 15851,22413 15851,6016 12833,6016"/>
         <path fill="rgb(52,101,164)" stroke="none" d="M 12403,6016 L 12853,6166 12853,5866 12403,6016 Z"/>
        </g>
       </g>
       <g class="com.sun.star.drawing.TextShape">
-       <g id="id15">
+       <g id="id14">
         <rect class="BoundingBox" stroke="none" fill="none" x="10090" y="13608" width="1773" height="963"/>
         <text class="TextShape"><tspan class="TextParagraph" font-family="Liberation Sans, sans-serif" font-size="635px" font-weight="700"><tspan class="TextPosition" x="10340" y="14309"><tspan fill="rgb(0,0,0)" stroke="none">YES</tspan></tspan></tspan></text>
        </g>
       </g>
       <g class="com.sun.star.drawing.TextShape">
-       <g id="id16">
+       <g id="id15">
         <rect class="BoundingBox" stroke="none" fill="none" x="5090" y="10208" width="1456" height="963"/>
         <text class="TextShape"><tspan class="TextParagraph" font-family="Liberation Sans, sans-serif" font-size="635px" font-weight="700"><tspan class="TextPosition" x="5340" y="10909"><tspan fill="rgb(0,0,0)" stroke="none">NO</tspan></tspan></tspan></text>
        </g>
