@@ -4,6 +4,10 @@
 Incentives system
 **********************
 
+.. important::
+  Currently, running incentivized nodes is optional. Please refer to chapter  `6.8 <https://swarm-guide.readthedocs.io/en/latest/node_operator.html#connect-to-the-swap-enabled-testnet>`_ for information on how to enable incenvization on your node (currently testnet only). When mainnet is released, enabled incentives will be the default mode.
+
+ 
 Cryptoeconomics
 ================
 Cryptoeconomics is usually (and somewhat obviously) understood as the intersection of cryptography with economy [`Cryptoeconomics <https://en.wikiversity.org/wiki/Cryptoeconomics>`_].
@@ -102,11 +106,44 @@ Currently, the node tries to cash in a cheque right away when it receives it via
 
 To prevent fraudulent creation of contract addresses for the sake of stealing funds via the protocol, incentivized nodes need to contact an audited factory contract address when creating the new chequebook. For every blockchain, one factory should be deployed. For Ethereum networks, Swarm will provide the network address (and the deployment of the factory). The factory address needs to be configured via command line parameter for incentivized nodes (`swap-chequebook-factory`).
 
+.. important::
+  A public incentivized Swarm testnet is currently operational. For information on how to connect to it, please refer to chapter `6.8 <https://swarm-guide.readthedocs.io/en/latest/node_operator.html#connect-to-the-swap-enabled-testnet>`_. The testnet is experimental and funds can be lost at all times. Use only test tokens. The release of the public incentivized mainnet will be announced when launched.
+
+ 
+Smart contracts
+---------------
+The smart contract code is open source and there is a separate repo for it: `<https://github.com/ethersphere/swap-swear-and-swindle>`_.
+
+Metrics
+-------
+There is some instrumentation for observing SWAP performance based on the Swarm node's metrics setup. All metrics can be switched on via the `-metrics` flag. Specific metrics for SWAP are:
+
+ * Number of emitted cheques  ``swap.cheques.emitted.num``
+ * Number of received cheques ``swap.cheques.received.num``
+ * Amount of emitted cheques  ``swap.cheques.emitted.honey``
+ * Amount of received cheques ``swap.cheques.received.honey``
+ * Amount of cashed cheques   ``swap.cheques.cashed.honey``
+ * Number of bounced cheques  ``swap.cheques.cashed.bounced``
+ * Number of errors in cheques processing ``swap.cheques.cashed.errors``
+
+
+At a lower level, there are more metrics:
+ * Amount of bytes credited   ``account.bytes.credit``
+ * Amount of bytes debited    ``account.bytes.debit``
+ * Amount of accounted units credited     ``account.balance.credit``
+ * Amount of accounted units debited      ``account.balance.debit``
+ * Amount of accounted messages credited  ``account.msg.credit``
+ * Amount of accounted messages debited   ``account.msg.debit``
+ * Number of disconnected peers due to accounting errors ``account.peerdrops``, ``account.selfdrops``
+ 
+For more information regarding the metrics system, refer to the chapter `Metrics reporting <https://swarm-guide.readthedocs.io/en/latest/node_operator.html#metrics-reporting>`_. 
+
+
 Honey Token
 ===========
 Swarm introduces its own token: **Honey**, which is an ERC20 compatible token. The rationale is to allow a homogeneous operation inside the Swarm network in terms of accounting and settlement, externalizing value fluctuations if multiple blockchains are considered. 
 
-For details of emission and token design we refer to the Book of Swarm. At this point it is sufficient to point out that for incentivized nodes to work, the prefunding of the chequebook contract for nodes needs to be done with Honey tokens. 
+For details of emission and token design we have to refer to upcoming documentation which will be published soon. For now we only want to point out that for incentivized nodes to work, the prefunding of the chequebook contract for nodes needs to be done with Honey tokens. 
 
 
 PricedMessage
