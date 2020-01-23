@@ -421,17 +421,18 @@ The Swarm project now runs a SWAP-enabled (incentivized) testnet. It uses the sa
   The testnet is highly experimental and may be updated continuously until we release a mainnet version. All tokens used on this testnet are fictitious. Do NOT use this testnet with real value tokens. Funds can be lost.
 
  
-The first public incentives-enabled Swarm network runs on the ropsten network. 
-It runs with network id **5**
+The first public incentives-enabled Swarm network runs on the Ropsten network. 
+It runs with BZZ network id **5**.
 
 Prerequisites
 -----------------
-* Create an account on **ropsten**
-* Fund your newly created account with test coins
+1. Create an account on **Ropsten** and get Ropsten Ethers (to pay transaction fees from a Ropsten Faucet).
+2. Start Swarm with ``--swap-skip-deposit`` flag and note the address of your newly deployed chequebook.
+3. Fill in the address of the chequebook `here: <https://ropsten.etherscan.io/address/0x49BF80bDEE2684580966e476aEe0DC3D773fFaf5#writeContract>`_.
 
 Network setup
 -------------
-We provide on the public swap-enabled network currently 30 nodes in a kubernetes cluster. 
+Currently we provide 30 nodes in a kubernetes cluster on the public swap-enabled network. 
 
 Bootnodes
 --------------
@@ -442,31 +443,31 @@ The addresses are
    .. code-block:: none
 
       enode://7f4d606c91d50d91fd09cb44f8b3d8033f1ca87e977a881e91d77ff6af98b6a52245ba9aeba13a39024ae8bdf3afa421fd018571ae37928c065d7a62503f17a6@3.122.203.99:40301
-      enode://7f4d606c91d50d91fd09cb44f8b3d8033f1ca87e977a881e91d77ff6af98b6a52245ba9aeba13a39024ae8bdf3afa421fd018571ae37928c065d7a62503f17a6@3.122.203.99:40301
+      enode://3d58e0cf0a057e71388dd15719cb8f7c94f732dd4f3e5f7a6e3f2185db68ed10ac352080b81811d17bf3f65873d9e8b2b4f30320549b162b596dbce904700e8a@52.35.212.179:40301
 
-Add these addresses with the `--bootnodes` when starting your node.
+Add these addresses with the `--bootnodes` when starting your node (see example below).
 
 
 Run your own swap-enabled node and connect to the cluster
 ---------------------------------------------------------
 
-All SWAP-related configuration option start with the prefix `swap`. Check the configuration chapter below to consult available options.
-To enable a node to run with the incentivized layer switched on, add the `--swap` flag. However, the `--swap-backend-url` should also be provided. This flag tells the node to which blockchain it will connect and through which provider (e.g. a `geth` node or via `infura`). 
+All SWAP-related configuration options start with the prefix `swap`. Check the configuration chapter below to consult available options.
+To enable a node to run with the incentivized layer switched on, add the `--swap` flag. However, the `--swap-backend-url` also has to be provided. This flag tells the node to which blockchain it will connect and through which provider (e.g. a `geth` node or via `infura`). 
 
 **Get Tokens**
-Getting tokens via the [faucet](https://ropsten.etherscan.io/address/0x49bf80bdee2684580966e476aee0dc3d773ffaf5#writeContract) is only possible *after* your start Swarm. To get tokens, first start Swarm, note down the address of the chequebook and call the `drip` function via the interface of etherscan, with the address of your chequebook as argument.
+Getting tokens via the [faucet](https://ropsten.etherscan.io/address/0x49bf80bdee2684580966e476aee0dc3d773ffaf5#writeContract) is only possible *after* your start Swarm. To get tokens, first start Swarm, note down the address of the chequebook and call the `drip` function via the interface of etherscan, with the address of your chequebook as argument. Add the `swap-deposit-amount` flag in this case and set it to zero.
 
 Note: the current faucet only allows to call the drip function one time per deployed chequebook contract. 
 
 **Start Swarm**
-Note: replace the `bzzkeyhex` with the private key of your funded `bzz-account` and replace the `--datadir` flag with your desired data directory for Swarm.
+An example of how to start the SWAP-enabled Swarm node (other configuration options for the Swarm binary apply here too: keystore, datadirectory, and all the other options. Refer to the configuration chapters below):
 
    .. code-block:: none
 
       swarm --swap --swap-backend-url=https://ropsten.infura.io/v3/4f7e7287d52447ab8865dbdcf7c203e1 \ 
          --swap-skip-deposit --ws --wsaddr=0.0.0.0 --wsorigins=* --wsapi=admin,net,debug,bzz,stream,accounting,swap \
          --bzznetworkid 5 --bzzkeyhex 0C03CAE29D0D25A0DCF254E2AFAE7A8C137F887748AF21C53DBBF163CA367509 --verbosity 3 \
-         --bootnodes "enode://7f4d606c91d50d91fd09cb44f8b3d8033f1ca87e977a881e91d77ff6af98b6a52245ba9aeba13a39024ae8bdf3afa421fd018571ae37928c065d7a62503f17a6@3.122.203.99:40301,enode://7f4d606c91d50d91fd09cb44f8b3d8033f1ca87e977a881e91d77ff6af98b6a52245ba9aeba13a39024ae8bdf3afa421fd018571ae37928c065d7a62503f17a6@3.122.203.99:40301"
+         --bootnodes "enode://7f4d606c91d50d91fd09cb44f8b3d8033f1ca87e977a881e91d77ff6af98b6a52245ba9aeba13a39024ae8bdf3afa421fd018571ae37928c065d7a62503f17a6@3.122.203.99:40301,enode://3d58e0cf0a057e71388dd15719cb8f7c94f732dd4f3e5f7a6e3f2185db68ed10ac352080b81811d17bf3f65873d9e8b2b4f30320549b162b596dbce904700e8a@52.35.212.179:40301"
 
 **Check balance on your local node**
 
