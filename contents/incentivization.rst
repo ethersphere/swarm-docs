@@ -55,7 +55,7 @@ In the above example, A requested data from B, which B then delivers to A (could
 
 If the balance tilts too much to either side as a result of unequal consumption or high variance in data usage, SWAP triggers a settlement process (see :ref:`Settlement with cheques`).
 
-Due to the distributed nature of Swarm nodes, entries in the local databases do not happen simultaneously, and there is no notion of transactions nor confirmations; in normal operation, both nodes account for the message with the correspondent node at the moment of the action (for the sending peer, at the moment of sending, for the receiving peer, at the moment of receiving). 
+Due to the distributed nature of Swarm nodes, entries in the local databases do not happen simultaneously, and there is no notion of transactions nor confirmations; in normal operation, we assume that peers credit and debit roughly the same amounts to each other's balances over time. Of course, a small variance in balance may exist, but it is expected to be 0 in the long-run. 
 
 If a message is being sent, if we would account for it before sending, then a failure in sending would require a complex rollback (or an imbalance). If we send first and then account, then it would not be possible to actually check if there are enough funds. Receiving a message incurs in the same challenge. To address this, Swarm first does a read operation on the database to check if there are enough funds. If positive, the requested operation (send/receive) is performed, and finally if the operation succeeded, the accounting entry is persisted.
 
@@ -76,6 +76,8 @@ We advise against changing the payment threshold to a value above the default va
 Fraud risks
 -----------
 Of course, the design with individual peer databases means that nodes can alter their database and pretend to have different balances to other nodes. The simplicity of this mutual accounting though effectively significantly limits fraud, as if node A modifies its entry with B, it has only a local effect, as it can not trigger B to send it a cheque or to force it to do any action. Normal behavior is to disconnect a node in this case. However, we want to make it clear that a node can lose funds up to the disconnect threshold amount due to freeriders.
+
+Another possibility is that a node does not initiate a settlement after he crosses the payment threshold with a peer.
 
 .. note::
 

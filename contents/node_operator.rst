@@ -455,7 +455,7 @@ All SWAP-related configuration options start with the prefix `swap`. Check the c
 To enable a node to run with the incentivized layer switched on, add the `--swap` flag. However, the `--swap-backend-url` also has to be provided. This flag tells the node to which blockchain it will connect and through which provider (e.g. a `geth` node or via `infura`). 
 
 **Get Tokens**
-Getting tokens via the [faucet](https://ropsten.etherscan.io/address/0x49bf80bdee2684580966e476aee0dc3d773ffaf5#writeContract) is only possible *after* your start Swarm. To get tokens, first start Swarm, note down the address of the chequebook and call the `drip` function via the interface of etherscan, with the address of your chequebook as argument. Add the `swap-deposit-amount` flag in this case and set it to zero.
+Getting tokens via the [faucet](https://ropsten.etherscan.io/address/0x49bf80bdee2684580966e476aee0dc3d773ffaf5#writeContract) is only possible *after* your start Swarm. To get tokens, first start Swarm with ``swap-skip-deposit``, note down the address of the chequebook and call the `drip` function via the interface of etherscan, with the address of your chequebook as argument. Add the `swap-deposit-amount` flag in this case and set it to zero.
 
 Note: the current faucet only allows to call the drip function one time per deployed chequebook contract. 
 
@@ -504,10 +504,6 @@ The balances (remember that the node maintains an independent balance with each 
 Running a SWAP-enabled node on an alternative blockchain
 =========================================================
 If you want to run Swarm with a different blockchain platform (for example, RIF Storage runs a Swarm network on their own RSK network, check [https://www.rifos.org/blog/rif-storage-testnet-launch], or you may want to run experiments and tests within your own development environment, say using `ganache`), you need to deploy the factory contract and provide its address to the options via `-swap-chequebook-factory` 
-
-
-//TODO: Add details of how to deploy honey ERC20 contract, how to fund addresses etc.
-
 
 Alternative modes
 =================
