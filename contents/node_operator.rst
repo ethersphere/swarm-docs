@@ -412,6 +412,98 @@ If the external node is running on IP 12.34.56.78 port 8545, the command would b
 
 You can also use ``https``. But keep in mind that Swarm *does not validate the certificate*.
 
+Connect to the SWAP-enabled testnet
+===================================
+The Swarm project now runs a SWAP-enabled (incentivized) testnet. It uses the same binary as the normal network node, but has incentivization switched on. 
+
+.. important::
+
+  The testnet is highly experimental and may be updated continuously until we release a mainnet version. All tokens used on this testnet are fictitious. Do NOT use this testnet with real value tokens. Funds can be lost.
+
+ 
+The first public incentives-enabled Swarm network runs on the Ropsten network. 
+It runs with BZZ network id **5**.
+
+Prerequisites
+-----------------
+1. Create an account on **Ropsten** and get Ropsten Ethers (to pay transaction fees from a Ropsten Faucet).
+2. Start Swarm with ``--swap-skip-deposit`` flag and note the address of your newly deployed chequebook.
+3. Fill in the address of the chequebook `here: <https://ropsten.etherscan.io/address/0x49BF80bDEE2684580966e476aEe0DC3D773fFaf5#writeContract>`_.
+
+Network setup
+-------------
+Currently we provide 30 nodes in a kubernetes cluster on the public swap-enabled network. 
+
+Bootnodes
+--------------
+
+The bootnodes for the public swap-enabled Swarm cluster run in a separate VMs. 
+The addresses are 
+
+   .. code-block:: none
+
+      enode://7f4d606c91d50d91fd09cb44f8b3d8033f1ca87e977a881e91d77ff6af98b6a52245ba9aeba13a39024ae8bdf3afa421fd018571ae37928c065d7a62503f17a6@3.122.203.99:40301
+      enode://3d58e0cf0a057e71388dd15719cb8f7c94f732dd4f3e5f7a6e3f2185db68ed10ac352080b81811d17bf3f65873d9e8b2b4f30320549b162b596dbce904700e8a@52.35.212.179:40301
+
+Add these addresses with the `--bootnodes` when starting your node (see example below).
+
+
+Run your own swap-enabled node and connect to the cluster
+---------------------------------------------------------
+
+All SWAP-related configuration options start with the prefix `swap`. Check the configuration chapter below to consult available options.
+To enable a node to run with the incentivized layer switched on, add the `--swap` flag. However, the `--swap-backend-url` also has to be provided. This flag tells the node to which blockchain it will connect and through which provider (e.g. a `geth` node or via `infura`). 
+
+**Get Tokens**
+Getting tokens via the [faucet](https://ropsten.etherscan.io/address/0x49bf80bdee2684580966e476aee0dc3d773ffaf5#writeContract) is only possible *after* your start Swarm. To get tokens, first start Swarm with ``swap-skip-deposit``, note down the address of the chequebook and call the `drip` function via the interface of etherscan, with the address of your chequebook as argument. Add the `swap-deposit-amount` flag in this case and set it to zero.
+
+Note: the current faucet only allows to call the drip function one time per deployed chequebook contract. 
+
+**Start Swarm**
+An example of how to start the SWAP-enabled Swarm node (other configuration options for the Swarm binary apply here too: keystore, datadirectory, and all the other options. Refer to the configuration chapters below):
+
+   .. code-block:: none
+
+      swarm --swap --swap-backend-url=https://ropsten.infura.io/v3/4f7e7287d52447ab8865dbdcf7c203e1 \ 
+         --swap-skip-deposit --ws --wsaddr=0.0.0.0 --wsorigins=* --wsapi=admin,net,debug,bzz,stream,accounting,swap \
+         --bzznetworkid 5 --bzzkeyhex 0C03CAE29D0D25A0DCF254E2AFAE7A8C137F887748AF21C53DBBF163CA367509 --verbosity 3 \
+         --bootnodes "enode://7f4d606c91d50d91fd09cb44f8b3d8033f1ca87e977a881e91d77ff6af98b6a52245ba9aeba13a39024ae8bdf3afa421fd018571ae37928c065d7a62503f17a6@3.122.203.99:40301,enode://3d58e0cf0a057e71388dd15719cb8f7c94f732dd4f3e5f7a6e3f2185db68ed10ac352080b81811d17bf3f65873d9e8b2b4f30320549b162b596dbce904700e8a@52.35.212.179:40301"
+
+**Check balance on your local node**
+
+The balances (remember that the node maintains an independent balance with each peer it had interactions with) can be queried via RPC. In the above snippet, we started the binary with the `--ws` flag(s), which allows the node to be queried via Websockets. Here is an example of how this can be done via JSON RPC (the values here are from an example, your node may return totally different values):
+
+   .. code-block:: none
+   
+      >$ echo '{"jsonrpc":"2.0","method":"swap_balances","params":[], "id":104}' | websocat ws://localhost:8546/ -n --one-message --origin localhost | jq
+        {
+          "jsonrpc": "2.0",
+          "id": 104,
+          "result": {
+            "10e14c08a7c873adb30516807c138781da76d284dbb7f12d27d95919f9da3d24": 0,
+            "1913db38b3a9d8cf2a5110f4ab1fbd0b882f729063e456e76c874bf3bda49788": -488096051628,
+            "292fb3f158a8313c0606df126bef393c0d49f1879f35a813e07fc370a95f318c": -81349341938,
+            "2cf4f38451678a6276ab1ad7039f91c7ebe99beca2342132d80566148157702f": -744251831714,
+            "4069823dc97610784f237c5189bb0047fa44fdb58050408186e76dfc678117e4": 0,
+            "50b3e7aecb9348770b28fe846e6ccd4a65dc6a7e6fad7f32f386226fca0fbb05": -732144077442,
+            "5e2e42c0a2476cd3a5df0ba0f361a077202d0a05d8885940f5731f11bd06e314": -81349341938,
+            "817a6498af5f83c8b9bd7991523696ac82af0b19c68dd20c44dee128b04c24b4": -569445393566,
+            "8449ac2043f5eb12b859bb909ae7632fc2c64da8f5c5b0e24726bfc2b3b73683": 0,
+            "8e14175898416068388ee88ac1b51b03c64c0f32ffd02bcfc5c40dc38a8273f4": -162698683876,
+            "9e2d5a87d089d32996ccc650e29caf6827dd31349ae779d643438eb6a64bae57": 0,
+            "ac370a71c55dbae1eda0c41406f36db04967230f5a6d53a8ca00a96d560b25e9": -650794735504,
+            "b0b4283f1b00d9b12f9b57639175505d1e2db46ff553d393c6b79fbaa1eb5877": 0,
+            "c13d2f0b212b2b2b7f4414be742ed361d63725fa571c7b04c562b980242372e2": 0,
+            "c3faaf2ff61edbe4bece896467aa517989c82bcddcc9e4a0b7cc91ef991adc82": -1233143154257,
+            "d196803f49ac650598a606a3417b19c80d234e71a79c98881b9bb75359aebe6b": 0,
+            "e75b3b14877058c9f4d6884fb0be474f9d42864aa0b430fac62c46d3058ba38d": -4636912490466,
+            "ed57d9d24f898731b928466ad05aeedeb698a82ad5e7f4a86a217b37a1190bbc": -416804432270
+          }
+        }
+
+Running a SWAP-enabled node on an alternative blockchain
+=========================================================
+If you want to run Swarm with a different blockchain platform (for example, RIF Storage runs a Swarm network on their own RSK network, check [https://www.rifos.org/blog/rif-storage-testnet-launch], or you may want to run experiments and tests within your own development environment, say using `ganache`), you need to deploy the factory contract and provide its address to the options via `-swap-chequebook-factory` 
 
 Alternative modes
 =================
@@ -628,14 +720,14 @@ General configuration parameters
    "n/a","--store.cache.size value","SWARM_STORE_CACHE_CAPACITY","5000","Number of recent chunks cached in memory (default 5000)"
    "n/a","--sync-update-delay value","SWARM_ENV_SYNC_UPDATE_DELAY","","Duration for sync subscriptions update after no new peers are added (default 15s)"
    "SyncDisabled","--nosync","SWARM_ENV_SYNC_DISABLE","false","Disable Swarm node synchronization"
-   "SwapBackendURL","--swap-backend-url","SWARM_SWAP_BACKEND_URL","","URL of the Ethereum API provider to use to settle SWAP payments"
-   "SwapEnabled","--swap","SWARM_SWAP_ENABLE","false","Enable SWAP"
-   "SwapPaymentThreshold","--swap-payment-threshold","SWARM_SWAP_PAYMENT_THRESHOLD","1000000","honey amount at which payment is triggered"
-   "SwapDisconnectThreshold","--swap-disconnect-threshold","SWARM_SWAP_DISCONNECT_THRESHOLD","1500000","honey amount at which a peer disconnects"
-   "SwapDepositAmount","--swap-deposit-amount","SWARM_SWAP_DEPOSIT_AMOUNT","0","Deposit amount for swap chequebook"
+   "SwapBackendURL","--swap-backend-url","SWARM_SWAP_BACKEND_URL","","URL of the Ethereum API provider (access to the blockchain) to use to settle SWAP payments"
+   "SwapEnabled","--swap","SWARM_SWAP_ENABLE","false","Enable SWAP. If present, the node starts with accounting enabled. Only works if the backend URL is provided as well."
+   "SwapPaymentThreshold","--swap-payment-threshold","SWARM_SWAP_PAYMENT_THRESHOLD","1000000","Honey amount at which payment is triggered"
+   "SwapDisconnectThreshold","--swap-disconnect-threshold","SWARM_SWAP_DISCONNECT_THRESHOLD","1500000","Honey amount at which a peer disconnects"
+   "SwapDepositAmount","--swap-deposit-amount","SWARM_SWAP_DEPOSIT_AMOUNT","0","Deposit amount in Honey for swap chequebook"
    "SwapSkipDeposit", "swap-skip-deposit", "SWARM_SWAP_SKIP_DEPOSIT", "false", "Don't deposit during boot sequence"
    "SwapLogPath","--swap-audit-logpath","SWARM_SWAP_LOG_PATH","n/a","Write execution logs of swap audit to the given directory"
-   "SwapChequebookFactory", "swap-chequebook-factory", "SWARM_SWAP_CHEQUEBOOK_FACTORY_ADDR", "ropsten: 0x878Ccb2e3c2973767e431bAec86D1EFd809480d5", "SWAP chequebook factory contract address (default value defined per blockchain network)"
+   "SwapChequebookFactory", "swap-chequebook-factory", "SWARM_SWAP_CHEQUEBOOK_FACTORY_ADDR", "ropsten: 0x878Ccb2e3c2973767e431bAec86D1EFd809480d5", "SWAP chequebook factory contract address (default value defined per blockchain network). Prevents fraudulent contract address creation."
    "Contract","--swap-chequebook","SWARM_CHEQUEBOOK_ADDR","0x0","Swap chequebook contract address"
    "n/a","--verbosity value","n/a","3","Logging verbosity: 0=silent, 1=error, 2=warn, 3=info, 4=debug, 5=detail"
    "n/a","--ws","n/a","false","Enable the WS-RPC server"
