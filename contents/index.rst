@@ -13,7 +13,8 @@
    dapp_developer/index
    node_operator
    go_client_contributor
-   team_and_org
-   
+
+   .. team_and_org
+
    .. TODO: weed out the trash and add it back in
    .. resources
