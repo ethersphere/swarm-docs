@@ -2,7 +2,7 @@
 .. raw:: html
 
   <div style="border: 1px solid black; padding: 15px; font-size: 1.2em; margin-bottom: 40px; font-weight:bold; background-color: lightgrey">
-  Storage and communication infrastructure for a sovereign digital society. 
+  Storage and communication infrastructure for a sovereign digital society.
   </div>
 
 
@@ -40,7 +40,7 @@ Implementations of Swarm
 +------------------------+------------------------+----------------------------+--------------------------------------------+
 |Client-Name             |Programming Language    |Maintained by               | Notes                                      |
 +========================+========================+============================+============================================+
-|Swarm Go-Client         | golang                 |Swarm Core-Team             |                                            | 
+|Swarm Go-Client         | golang                 |Swarm Core-Team             |                                            |
 +------------------------+------------------------+----------------------------+--------------------------------------------+
 |Swarm Nim-Client        | nim                    |Status.im                   | Development is planned to start Q1 2020    |
 +------------------------+------------------------+----------------------------+--------------------------------------------+
@@ -60,7 +60,4 @@ Everyone can join the network by running the Swarm client.
 Development status
 ==================
 
-Uploaded content is **not guaranteed to persist on the testnet** until storage insurance is implemented (see `Roadmap <https://github.com/orgs/ethersphere/projects/8>`_ for more details). All participating nodes should consider participation a voluntary service with no formal obligation whatsoever and should be expected to delete content at their will. Therefore, users should **under no circumstances regard Swarm as safe storage** until the incentive system is functional.
-
-
-
+Uploaded content is **not guaranteed to persist on the testnet** until storage insurance is implemented. All participating nodes should consider participation a voluntary service with no formal obligation whatsoever and should be expected to delete content at their will. Therefore, users should **under no circumstances regard Swarm as safe storage** until the incentive system is functional.
