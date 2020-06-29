@@ -2,7 +2,7 @@
 Swarm for Node-Operators
 ************************
 
-This section is about how to run your swarm node, or deploy a seperate private or public swarm network.
+This section is about how to run your swarm node, or deploy a separate private or public swarm network.
 
 Installation and Updates
 ========================
