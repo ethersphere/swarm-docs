@@ -1,3 +1,18 @@
+.. important::
+  **New Bee client**
+
+  In the effort to release a production-ready version of Swarm, the Swarm dev team has migrated their effort to build the new `Bee client <https://github.com/ethersphere/bee>`_, a brand-new implementation of Swarm. The main reason for this switch was the availability of a more mature networking layer (`libp2p <https://docs.libp2p.io/>`_) and the secondary reason being that the insight gained from developing Swarm taught us many lessons which can be implemented best from scratch. While Bee is currently not exposing all features you got used to in Swarm, the development is happening at lightspeed and soon, it will surpass Swarm in functionality and stability!
+
+  Please refer to `Swarm webpage <https://swarm.ethereum.org/>`_ for more information about the state of Bee client and to `Bee documentation <https://swarm-gateways.net/bzz:/docs.swarm.eth/h>`_ for documentation.
+
+  **Old Swarm client**
+
+  Old Swarm client, described by this documentation, can still be used until the network exists, however no maintenance or upgrades are planned for it.
+
+  **Compatibility of Bee with the first Swarm**
+
+  Ethereum Swarm Bee is the second official Ethereum Swarm implementation. No compatibility on the network layer with the first Ethereum Swarm implementation can be provided, mainly because the change in underlying network protocol from devp2p to libp2p. This means that a Bee node cannot join first Swarm network and vice versa. Migrating data is possible, please refer to `Bee documentation <https://swarm-gateways.net/bzz:/docs.swarm.eth/>`_.
+
 
 .. raw:: html
 
