@@ -1,3 +1,11 @@
+# OBSOLETE
+
+This repo holds the documentation for the now obsolete swarm
+client. Current development is happening in the [bee
+repo](https://github.com/ethersphere/bee), and the new documentation
+can be found in the [bee-docs
+repo](https://github.com/ethersphere/bee-docs).
+
 # Swarm Guide
 
 This is the source of the documentation of [Swarm](https://ethswarm.org/), written in [Sphinx](http://www.sphinx-doc.org/). Its built version is hosted on http://swarm-guide.readthedocs.io
